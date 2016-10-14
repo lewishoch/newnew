@@ -98,6 +98,42 @@ public class MerchantAccountDaoImpl implements MerchantAccountDao {
 		
 		return ms;
 	}
+	
+	public List<MerchantAccount> findMerchantsByStatus(int status) {
+		List<MerchantAccount> ms = new ArrayList<MerchantAccount>();
+		
+		String sql = "select uuid, status, user_name un, password psd, created_dt_gmt cre_dt, last_modified_dt_gmt last_mod_dt from merch_account where status=?";
+		Connection con = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		
+		con = DBUtil.createConnection();
+		try {
+			pst = con.prepareStatement(sql);
+			pst.setInt(1,status);
+			rs = pst.executeQuery();
+			
+			while (rs.next()) {
+				MerchantAccount m = new MerchantAccount();
+				
+				m.setUuid(rs.getLong("uuid"));
+				m.setStatus(rs.getInt("status"));
+				m.setUname(rs.getString("un"));
+				m.setPsd(rs.getString("psd"));
+				m.setCreDt(rs.getDate("cre_dt"));
+				m.setCreDt(rs.getDate("last_mod_dt"));
+				
+				ms.add(m);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBUtil.free(con, pst, null);
+		}
+		
+		return ms;
+	}
 
 	@Override
 	public MerchantAccount loadMerchant(String userName) {

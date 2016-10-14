@@ -8,6 +8,7 @@ public interface MerchantAccountDao {
 	public boolean addMerchant(MerchantAccount m);
 	public boolean updateMerchant(MerchantAccount m);
 	public List<MerchantAccount> findAllMerchants(int status);
+	public List<MerchantAccount> findMerchantsByStatus(int status);
 	public MerchantAccount loadMerchant(String userName);
 	public MerchantAccount loadMerchant(long uuid);
 }
