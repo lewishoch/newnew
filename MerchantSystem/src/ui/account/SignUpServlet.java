@@ -8,10 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import po.MerchantAccount;
 import po.MerchantProfile;
-import service.MerchantManager;
+import service.MerchantAccountManager;
 import service.MerchantProfileManager;
-import service.impl.MerchantManagerImpl;
+import service.impl.MerchantAccountManagerImpl;
 import service.impl.MerchantProfileManagerImpl;
 import jms.producer.JMSProducer;
 import jms.producer.impl.PtpProducer;
@@ -23,7 +24,7 @@ import jms.producer.impl.PtpProducer;
  */
 public class SignUpServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private final MerchantManager mm = new MerchantManagerImpl();
+	private final MerchantAccountManager mm = new MerchantAccountManagerImpl();
 	private final MerchantProfileManager mpm = new MerchantProfileManagerImpl();
 	private final JMSProducer jmsProjecter = PtpProducer.getInstance();
 	/**
@@ -36,7 +37,7 @@ public class SignUpServlet extends HttpServlet {
 		boolean isSuccess = false;
 		
 		MerchantProfile merchantProfile = null;
-		Merchant merchant = null;
+		MerchantAccount merchant = null;
 
 		try {
 			// merchant info
@@ -50,6 +51,8 @@ public class SignUpServlet extends HttpServlet {
 			String shopName = (String)request.getParameter("shopName");
 			String address = (String)request.getParameter("address");
 			String telno = (String)request.getParameter("telno");
+			// read upload file here
+			// String path = uploadFile();
 
 			System.out.println(mname);
 			System.out.println(age);
@@ -59,17 +62,19 @@ public class SignUpServlet extends HttpServlet {
 			System.out.println(telno);
 			
 			// create po
-			merchant = new Merchant();
+			merchant = new MerchantAccount();
 			merchant.setUname(uname);
 			merchant.setPsd(password);
 			
 			merchantProfile = new MerchantProfile();
 			merchantProfile.setmAge(age);
 			merchantProfile.setmGender(gender);
-			merchantProfile.setsName(mname);
+			merchantProfile.setmName(mname);
+			
 			merchantProfile.setsName(shopName);
 			merchantProfile.setsAddr(address);
 			merchantProfile.setsTel(telno);
+			//merchantProfile.setsLogoPath(sLogoPath);
 			
 			
 		} catch (NumberFormatException e) {
@@ -80,8 +85,8 @@ public class SignUpServlet extends HttpServlet {
 		}
 
 		// query db find all user
-		isValidAccount = mm.loadMerchant(merchant.getUname())!=null;
-		
+		isValidAccount = mm.loadMerchantAccount(merchant.getUname())!=null;
+		isValidShop = mpm.loadMerchantProfile(merchantProfile.getmName())!=null;
 		
 		//request.getRequestDispatcher("listAllUsers").forward(request,response);
 		
@@ -90,6 +95,8 @@ public class SignUpServlet extends HttpServlet {
 		
 		if(isValidAccount && isValidShop){
 			// db insert
+			mm.addMerchant(merchant);
+			mpm.addMerchantProfile(merchantProfile);
 			isSuccess = true;
 			
 			if(isSuccess){
@@ -110,7 +117,8 @@ public class SignUpServlet extends HttpServlet {
 		
 	}
 	
-	private boolean uploadFile(){
-		return false;
+	// do upload and return path
+	private String uploadFile(){
+		return "";
 	}
 }

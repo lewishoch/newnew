@@ -29,13 +29,13 @@ public class ControlServlet extends HttpServlet {
 		if(sen!=null){
 			try{
 				String merchant_name = ((MerchantAccount)sen.getAttribute("merchant")).getUname();
-				MerchantAccount merchant = mm.loadMerchantAccount(merchant_name);
-				
+				MerchantAccount merchantAccount = mm.loadMerchantAccount(merchant_name);
 				MerchantProfile merchantProfile = mpm.loadMerchantProfile(merchant_name);
+				
 				request.setAttribute("merchantProfile", merchantProfile);
 				
 				// check merchant is accpeted
-				if(merchant.getStatus()==0){
+				if(merchantAccount.getStatus()==0){
 					// put...
 					System.out.println("control");
 					// redirect to control.jsp
@@ -43,7 +43,7 @@ public class ControlServlet extends HttpServlet {
 				}
 				else{
 					System.out.println("status");
-					
+					request.setAttribute("status", merchantAccount.getStatus());
 					
 					// redirect to status.jsp
 					request.getRequestDispatcher("status.jsp").forward(request,response);
