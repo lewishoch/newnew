@@ -62,7 +62,18 @@ public class MerchantAccountDaoImplTest {
 	
 	@Test
 	public void testFindAllMerchants() {
-		List<MerchantAccount> ms = mad.findAllMerchants(0);
+		List<MerchantAccount> ms = mad.findAllMerchants();
+		Assert.assertTrue(!ms.isEmpty());
+		
+		System.out.println("All merchants:");
+		for (MerchantAccount m: ms) {
+			System.out.println(m.getUuid()+"..."+m.getStatus()+"..."+m.getUname()+"..."+m.getPsd()+"..."+m.getCreDt()+"..."+m.getLastModDt());
+		}
+	}
+	
+	@Test
+	public void testFindMerchantsByStatus() {
+		List<MerchantAccount> ms = mad.findMerchantsByStatus(0);
 		Assert.assertTrue(!ms.isEmpty());
 		
 		System.out.println("Accepted merchants:");
@@ -70,7 +81,7 @@ public class MerchantAccountDaoImplTest {
 			System.out.println(m.getUuid()+"..."+m.getStatus()+"..."+m.getUname()+"..."+m.getPsd()+"..."+m.getCreDt()+"..."+m.getLastModDt());
 		}
 		
-		List<MerchantAccount> ms1 = mad.findAllMerchants(1);
+		List<MerchantAccount> ms1 = mad.findMerchantsByStatus(1);
 		Assert.assertTrue(!ms1.isEmpty());
 		
 		System.out.println("Pending merchants:");
