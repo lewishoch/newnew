@@ -61,11 +61,12 @@ public class SignUpServlet extends HttpServlet {
 			// db insert
 			isSuccess = true;
 			
-			if(isSuccess);
-			else ;
+			if(isSuccess){
+				sendMsg("hello");
+			}
 		}
 		
-		request.getRequestDispatcher("controlServlet").forward(request, response);
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
 	private void sendMsg(String msg){
