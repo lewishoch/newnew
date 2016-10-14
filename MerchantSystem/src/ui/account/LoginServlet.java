@@ -33,7 +33,7 @@ public class LoginServlet extends HttpServlet {
 		if(merchant!=null && merchant.getPsd().equals(password)){
 			sen.setAttribute("merchant", merchant);
 			System.out.println("success");
-			request.getRequestDispatcher("control").forward(request,response);
+			response.sendRedirect("control");
 		}
 		else{
 			// else

@@ -9,8 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import po.Merchant;
+import po.MerchantProfile;
 import service.MerchantManager;
+import service.MerchantProfileManager;
 import service.impl.MerchantManagerImpl;
+import service.impl.MerchantProfileManagerImpl;
 
 /**
  * Servlet implementation class ControlServlet
@@ -18,6 +21,7 @@ import service.impl.MerchantManagerImpl;
 public class ControlServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MerchantManager mm = new MerchantManagerImpl(); 
+	private MerchantProfileManager mpm = new MerchantProfileManagerImpl(); 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sen = request.getSession(false);
@@ -26,7 +30,9 @@ public class ControlServlet extends HttpServlet {
 			try{
 				String merchant_name = ((Merchant)sen.getAttribute("merchant")).getUname();
 				Merchant merchant = mm.loadMerchant(merchant_name);
-				request.setAttribute("merchant", merchant);
+				
+				MerchantProfile merchantProfile = mpm.loadMerchantProfile(merchant_name);
+				request.setAttribute("merchantProfile", merchantProfile);
 				
 				// check merchant is accpeted
 				if(merchant.getStatus()==0){
@@ -37,6 +43,7 @@ public class ControlServlet extends HttpServlet {
 				}
 				else{
 					System.out.println("status");
+					
 					
 					// redirect to status.jsp
 					request.getRequestDispatcher("status.jsp").forward(request,response);
@@ -55,4 +62,7 @@ public class ControlServlet extends HttpServlet {
 		}
 	}
 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request,response);
+	}
 }

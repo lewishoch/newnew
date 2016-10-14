@@ -9,7 +9,7 @@ import dao.MerchantProfileDao;
 import po.MerchantProfile;
 import util.DBUtil;
 
-public class MerchantProdileDaoImpl implements MerchantProfileDao {
+public class MerchantProfileDaoImpl implements MerchantProfileDao {
 
 	public boolean addMerchantProfile(MerchantProfile mp) {
 		String sql = "insert into merchant_profile(merchant_uuid,merch_name,merch_age,merch_gender,shop_name,shop_addr,shop_tel_no,shop_logo_path,created_dt_gmt,last_modified_dt_gmt,account_uuid) values (merchant_profile_seq.nextval,?,?,?,?,?,?,?,?,?,?)";
@@ -141,7 +141,5 @@ public class MerchantProdileDaoImpl implements MerchantProfileDao {
 		
 		return mp;
 	}
-
-	
 
 }
