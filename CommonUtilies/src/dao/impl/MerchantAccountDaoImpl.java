@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import dao.MerchantAccountDao;
@@ -80,8 +81,8 @@ public class MerchantAccountDaoImpl implements MerchantAccountDao {
 				m.setStatus(rs.getInt("status"));
 				m.setUname(rs.getString("un"));
 				m.setPsd(rs.getString("psd"));
-				m.setCreDt(rs.getDate("cre_dt"));
-				m.setCreDt(rs.getDate("last_mod_dt"));
+				m.setCreDt(new Date(rs.getTimestamp("cre_dt").getTime()));
+				m.setLastModDt(new Date(rs.getTimestamp("last_mod_dt").getTime()));
 				
 				ms.add(m);
 			}
@@ -116,8 +117,8 @@ public class MerchantAccountDaoImpl implements MerchantAccountDao {
 				m.setStatus(rs.getInt("status"));
 				m.setUname(rs.getString("un"));
 				m.setPsd(rs.getString("psd"));
-				m.setCreDt(rs.getDate("cre_dt"));
-				m.setCreDt(rs.getDate("last_mod_dt"));
+				m.setCreDt(new Date(rs.getTimestamp("cre_dt").getTime()));
+				m.setLastModDt(new Date(rs.getTimestamp("last_mod_dt").getTime()));
 				
 				ms.add(m);
 			}
@@ -151,8 +152,8 @@ public class MerchantAccountDaoImpl implements MerchantAccountDao {
 				m.setStatus(rs.getInt("status"));
 				m.setUname(rs.getString("un"));
 				m.setPsd(rs.getString("psd"));
-				m.setCreDt(rs.getDate("cre_dt"));
-				m.setCreDt(rs.getDate("last_mod_dt"));
+				m.setCreDt(new Date(rs.getTimestamp("cre_dt").getTime()));
+				m.setLastModDt(new Date(rs.getTimestamp("last_mod_dt").getTime()));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -184,8 +185,8 @@ public class MerchantAccountDaoImpl implements MerchantAccountDao {
 				m.setStatus(rs.getInt("status"));
 				m.setUname(rs.getString("un"));
 				m.setPsd(rs.getString("psd"));
-				m.setCreDt(rs.getDate("cre_dt"));
-				m.setCreDt(rs.getDate("last_mod_dt"));
+				m.setCreDt(new Date(rs.getTimestamp("cre_dt").getTime()));
+				m.setLastModDt(new Date(rs.getTimestamp("last_mod_dt").getTime()));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
