@@ -87,7 +87,7 @@ public class MerchantDaoImpl implements MerchantDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			DBUtil.free(con, pst, null);
+			DBUtil.free(con, pst, rs);
 		}
 		
 		return ms;
@@ -95,7 +95,7 @@ public class MerchantDaoImpl implements MerchantDao {
 
 	public Merchant loadMerchant(String userName) {
 		Merchant m = null;
-		String sql = "select uuid, status, user_name un, password psd, created_dt_gmt cre_dt, last_modified_dt_gmt last_mod_dt from merch_account where user_name=?";
+		String sql = "select * from merch_account where user_name=?";
 		Connection con = null;
 		PreparedStatement pst = null;
 		ResultSet rs = null;
@@ -109,18 +109,18 @@ public class MerchantDaoImpl implements MerchantDao {
 			if (rs.next()) {
 				m = new Merchant();
 				
-				m.setUuid(rs.getLong("uuid"));
+				m.setUuid(rs.getLong("account_uuid"));
 				m.setStatus(rs.getInt("status"));
-				m.setUname(rs.getString("un"));
-				m.setPsd(rs.getString("psd"));
-				m.setCreDt(rs.getDate("cre_dt"));
-				m.setCreDt(rs.getDate("last_mod_dt"));
+				m.setUname(rs.getString("user_name"));
+				m.setPsd(rs.getString("password"));
+				m.setCreDt(rs.getDate("created_dt_gmt"));
+				m.setCreDt(rs.getDate("last_modified_dt_gmt"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			DBUtil.free(con, pst, null);
+			DBUtil.free(con, pst, rs);
 		}
 		
 		return m;

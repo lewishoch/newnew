@@ -19,37 +19,40 @@ public class ControlServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MerchantManager mm = new MerchantManagerImpl(); 
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession sen = request.getSession();
+		HttpSession sen = request.getSession(false);
+		
 		if(sen!=null){
 			try{
-				Merchant merchant = mm.loadMerchant((String)sen.getAttribute("merchantName"));
+				String merchant_name = ((Merchant)sen.getAttribute("merchant")).getUname();
+				Merchant merchant = mm.loadMerchant(merchant_name);
+				request.setAttribute("merchant", merchant);
+				
 				// check merchant is accpeted
 				if(merchant.getStatus()==0){
 					// put...
-					
+					System.out.println("control");
 					// redirect to control.jsp
 					request.getRequestDispatcher("control.jsp").forward(request,response);
 				}
 				else{
+					System.out.println("status");
+					
 					// redirect to status.jsp
 					request.getRequestDispatcher("status.jsp").forward(request,response);
 				}
 			}
 			catch(Exception e){
+				e.printStackTrace();
+				System.out.println("logout1");
 				response.sendRedirect("logout");
 			}
 		}
-		else
+		else{
+			System.out.println("logout2");
 			// redirect to logout
 			response.sendRedirect("logout");
+		}
 	}
 
 }

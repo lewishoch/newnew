@@ -10,12 +10,12 @@
 <body>
 <div id="account_control">
 	<form action="logout" method="post">
-		<label>Welcome, ${account.name}!</label>
+		<label>Welcome, ${merchant.uname}!</label>
 		<input type="submit" value="Logout"/>
 	</form>
 </div>
 <div id="content">
-	<label>Your current status is: ${account.status }.</label>
+	<label>Your current status is: ${merchant.status }.</label>
 </div>
 </body>
 </html>
