@@ -15,6 +15,7 @@
 	</div>
 <div id="content">
 	<div id="shop">
+	1
 	</div>
 	<div id="dish">
 		

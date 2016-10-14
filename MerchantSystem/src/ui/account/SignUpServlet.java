@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import po.Merchant;
 import po.MerchantProfile;
+import service.MerchantManager;
+import service.MerchantProfileManager;
+import service.impl.MerchantManagerImpl;
+import service.impl.MerchantProfileManagerImpl;
 import jms.producer.JMSProducer;
 import jms.producer.impl.PtpProducer;
 
@@ -20,7 +24,9 @@ import jms.producer.impl.PtpProducer;
  */
 public class SignUpServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final JMSProducer jmsProjecter = PtpProducer.getInstance();
+	private final MerchantManager mm = new MerchantManagerImpl();
+	private final MerchantProfileManager mpm = new MerchantProfileManagerImpl();
+	private final JMSProducer jmsProjecter = PtpProducer.getInstance();
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -30,26 +36,52 @@ public class SignUpServlet extends HttpServlet {
 		boolean isValidShop = false;
 		boolean isSuccess = false;
 		
-		// account info
-		String mname = (String)request.getParameter("mname");
-		int age = Integer.parseInt(request.getParameter("age"));
-		String gender = (String)request.getParameter("gender");
+		MerchantProfile merchantProfile = null;
+		Merchant merchant = null;
 
-		// shop info
-		String shopName = (String)request.getParameter("shopName");
-		String address = (String)request.getParameter("address");
-		String telno = (String)request.getParameter("telno");
+		try {
+			// merchant info
+			String uname = (String)request.getParameter("uname");
+			String password = (String)request.getParameter("password");
+			
+			// merchant profile info
+			String mname = (String)request.getParameter("mname");
+			int age = Integer.parseInt(request.getParameter("age"));
+			String gender = (String)request.getParameter("gender");
+			String shopName = (String)request.getParameter("shopName");
+			String address = (String)request.getParameter("address");
+			String telno = (String)request.getParameter("telno");
 
-		// create po
-		MerchantProfile merchant = new MerchantProfile();
-		merchant.setmAge(age);
-		merchant.setmGender(gender);
-		merchant.setsName(mname);
-		merchant.setsName(shopName);
-		merchant.setsAddr(address);
-		merchant.setsTel(telno);
+			System.out.println(mname);
+			System.out.println(age);
+			System.out.println(gender);
+			System.out.println(shopName);
+			System.out.println(address);
+			System.out.println(telno);
+			
+			// create po
+			merchant = new Merchant();
+			merchant.setUname(uname);
+			merchant.setPsd(password);
+			
+			merchantProfile = new MerchantProfile();
+			merchantProfile.setmAge(age);
+			merchantProfile.setmGender(gender);
+			merchantProfile.setsName(mname);
+			merchantProfile.setsName(shopName);
+			merchantProfile.setsAddr(address);
+			merchantProfile.setsTel(telno);
+			
+			
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			// failed in validation
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 
 		// query db find all user
+		isValidAccount = mm.loadMerchant(merchant.getUname())!=null;
 		
 		
 		//request.getRequestDispatcher("listAllUsers").forward(request,response);
