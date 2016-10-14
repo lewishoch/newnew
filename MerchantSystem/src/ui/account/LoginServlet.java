@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import po.Merchant;
-import service.MerchantManager;
-import service.impl.MerchantManagerImpl;
+import po.MerchantAccount;
+import service.MerchantAccountManager;
+import service.impl.MerchantAccountManagerImpl;
 
 /**
  * Servlet implementation class LoginServlet
  */
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private MerchantManager mm = new MerchantManagerImpl();
+	private MerchantAccountManager mm = new MerchantAccountManagerImpl();
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -27,7 +27,7 @@ public class LoginServlet extends HttpServlet {
 		String uname = (String)request.getParameter("uname");
 		String password = (String)request.getParameter("password");
 		
-		Merchant merchant = mm.loadMerchant(uname);
+		MerchantAccount merchant = mm.loadMerchantAccount(uname);
 		
 		// check if valid
 		if(merchant!=null && merchant.getPsd().equals(password)){

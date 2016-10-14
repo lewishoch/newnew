@@ -13,7 +13,7 @@ public class MerchantProfileManagerImpl implements MerchantProfileManager{
 	}
 
 	public boolean updateMerchant(MerchantProfile mp) {
-		return dao.updateMerchant(mp);
+		return dao.updateMerchantProfile(mp);
 	}
 
 	public MerchantProfile loadMerchantProfile(String merchantName) {
