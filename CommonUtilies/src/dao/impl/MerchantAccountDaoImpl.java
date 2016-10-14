@@ -63,7 +63,6 @@ public class MerchantAccountDaoImpl implements MerchantAccountDao {
 	}
 
 	@Override
-	public List<MerchantAccount> findAllMerchants(int status) {
 		List<MerchantAccount> ms = new ArrayList<MerchantAccount>();
 		
 		String sql = "select account_uuid, status, user_name un, password psd, created_dt_gmt cre_dt, last_modified_dt_gmt last_mod_dt from merch_account where status=?";
