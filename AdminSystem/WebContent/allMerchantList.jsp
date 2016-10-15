@@ -15,7 +15,8 @@
 </head>
 <body>
 <h1>Accepted Merchants</h1>
-<br />
+<a href="index.html">back to home</a>
+<br /><br />
 <table class="table table-striped">
 	<tr><th>Merchant ID</th><th>Merchant Name</th><th>Merchant Status</th><th>Freeze Operation</th><th>Unfreeze Operation</th></tr>
 	<c:forEach var="m" items="${maList}">
