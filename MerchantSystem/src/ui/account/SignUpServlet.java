@@ -24,6 +24,7 @@ import service.MerchantAccountManager;
 import service.MerchantProfileManager;
 import service.impl.MerchantAccountManagerImpl;
 import service.impl.MerchantProfileManagerImpl;
+import util.UploadImage;
 import jms.producer.JMSProducer;
 import jms.producer.impl.PtpProducer;
 
@@ -48,7 +49,7 @@ public class SignUpServlet extends HttpServlet {
 
 		Map map = new HashMap();
 		
-		String path = this.getServletContext().getRealPath("/temp");
+		String path = this.getServletContext().getRealPath("/temp/img/logo");
 		File f = new File(path);
 		
 		DiskFileItemFactory factory = new DiskFileItemFactory(10240,f );
@@ -97,7 +98,7 @@ public class SignUpServlet extends HttpServlet {
 				merchantProfile.setsAddr((String)map.get("address"));
 				merchantProfile.setsTel((String)map.get("telno"));
 				merchantProfile.setsLogoPath(path);
-				merchantProfile.setsLogoPath(uploadFile(fileItem, uname));
+				merchantProfile.setsLogoPath(UploadImage.uploadLogo(fileItem, uname, this.getServletContext()));
 			}
 		}
 		catch(FileUploadException e){
@@ -138,39 +139,5 @@ public class SignUpServlet extends HttpServlet {
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 	
-	// do upload and return path
-	private String uploadFile(FileItem fi, String userName) throws Exception{
-		
-		String fileRealPath = null;
-		String fileRelativePath = null;
-		
-		try {
-			String fileName = fi.getName();
-			int index = fileName.lastIndexOf(".");
-			if(index <= 0)
-				throw new IOException();
-			String extension = fileName.substring(index+1);
-			fileRealPath = this.getServletContext().getRealPath("/img/logo/" + userName + "." + extension);
-			fileRelativePath = this.getServletContext().getContextPath() + "/img/logo/" + userName + "." + extension;
-			
-			
-			InputStream in = fi.getInputStream();
-			byte[] bs = new byte[in.available()];
-			in.read(bs);
-			File storeFile = new File(fileRealPath);
-			fi.write(storeFile);
-			
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-			throw e;
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw e;
-		}
-		
-		
-		System.out.println(fileRelativePath);
-		return fileRelativePath;
-	}
+	
 }

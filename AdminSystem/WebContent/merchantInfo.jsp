@@ -24,8 +24,6 @@
 	<li class="list-group-item">shop address: ${mp.sAddr }</li>
 	<li class="list-group-item">shop phone number: ${mp.sTel }</li>
 	<li class="list-group-item">created date: ${mp.creDt }</li>
-	<li class="list-group-item"> ${mp.sLogoPath }</li>
-	
 </ul>
 </body>
 </html>
