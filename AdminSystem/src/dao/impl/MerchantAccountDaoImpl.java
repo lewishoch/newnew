@@ -86,7 +86,7 @@ public class MerchantAccountDaoImpl implements MerchantAccountDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			DBUtil.free(con, pst, null);
+			DBUtil.free(con, pst, rs);
 		}
 		
 		return ms;
@@ -118,13 +118,15 @@ public class MerchantAccountDaoImpl implements MerchantAccountDao {
 				
 				ms.add(m);
 			}
+			
+			System.out.println(ms.size());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			DBUtil.free(con, pst, null);
+			DBUtil.free(con, pst, rs);
 		}
-		
+			
 		return ms;
 	}
 
@@ -155,7 +157,7 @@ public class MerchantAccountDaoImpl implements MerchantAccountDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			DBUtil.free(con, pst, null);
+			DBUtil.free(con, pst, rs);
 		}
 		
 		return m;
@@ -188,7 +190,7 @@ public class MerchantAccountDaoImpl implements MerchantAccountDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			DBUtil.free(con, pst, null);
+			DBUtil.free(con, pst, rs);
 		}
 		
 		return m;

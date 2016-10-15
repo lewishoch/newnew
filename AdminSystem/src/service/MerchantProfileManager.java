@@ -3,5 +3,5 @@ package service;
 import po.MerchantProfile;
 
 public interface MerchantProfileManager {
-	public MerchantProfile loadMerchProfile(long account_uuid);
+	public MerchantProfile loadMerchProfileByAccountUuid(long account_uuid);
 }

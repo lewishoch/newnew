@@ -29,4 +29,14 @@
     <servlet-name>ShowMerchantServlet</servlet-name>
     <url-pattern>/showMerchant</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>acceptMerchantServlet</display-name>
+    <servlet-name>acceptMerchantServlet</servlet-name>
+    <servlet-class>ui.acceptMerchantServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>acceptMerchantServlet</servlet-name>
+    <url-pattern>/acceptMerchant</url-pattern>
+  </servlet-mapping>
 </web-app>
