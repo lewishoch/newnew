@@ -23,7 +23,7 @@
 	<c:forEach var="m" items="${maList}">
 		<tr>
 			<td>${m.uuid }</td>
-			<td><a href="#" >${m.uname }</a></td>
+			<td><a href="showMerchant?uuid=${m.uuid}" >${m.uname }</a></td>
 			<td>${m.status }</td>
 			<td><a href="#" class="btn btn-primary">Accept</a></td>
 			<td><a href="#" class="btn btn-success">Reject</a></td>
