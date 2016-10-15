@@ -40,8 +40,8 @@
 		<tr>
 		 <!--  <td><a href="loadMerchant?uuid=${m.uuid}" >${m.sName}</a></td>-->
 		<td><a href="loadMerchant?sName=${m.sName}" >${m.sName}</a></td>
-		<td>${m.sAddr}</td>
 		<td>${m.sTel}</td>
+		<td>${m.sAddr}</td>
 		</tr>
 		</c:forEach>
 		
