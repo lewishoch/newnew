@@ -9,8 +9,9 @@
 <body>
 <h1>Merchant Info</h1>
 <ul>
-	<li>shop name: ${user.uname }</li>
-	<li>user age: ${user.age }</li>
+	<li>merchant name: ${mp.mName }</li>
+	<li>merchant age: ${mp.mAge }</li>
+	<li>merchant gender: ${mp.mGender }</li>
 	<li><a href="deleteUser?id=${user.id }">delete</a></li>
 </ul>
 </body>

@@ -9,7 +9,7 @@ public class MerchantProfile {
 	private String mGender;
 	private String sName;
 	private String sAddr;
-	private int sTel;
+	private String sTel;
 	private String sLogoPath;
 	private Date creDt;
 	private Date lastModDt;
@@ -50,10 +50,10 @@ public class MerchantProfile {
 	public void setsAddr(String sAddr) {
 		this.sAddr = sAddr;
 	}
-	public int getsTel() {
+	public String getsTel() {
 		return sTel;
 	}
-	public void setsTel(int sTel) {
+	public void setsTel(String sTel) {
 		this.sTel = sTel;
 	}
 	public String getsLogoPath() {

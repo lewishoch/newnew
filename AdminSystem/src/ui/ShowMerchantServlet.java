@@ -20,8 +20,10 @@ public class ShowMerchantServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		long account_uuid = Long.parseLong(request.getParameter("uuid"));
+		
 		MerchantProfile mp = mpm.loadMerchProfile(account_uuid);
-		request.setAttribute("mProfile", mp);
+		System.out.println(mp.getsName());
+		request.setAttribute("mp", mp);
 		request.getRequestDispatcher("merchantInfo.jsp").forward(request, response);
 	}
 
