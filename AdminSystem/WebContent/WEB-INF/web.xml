@@ -19,4 +19,14 @@
     <servlet-name>ListPendingMerchantServlet</servlet-name>
     <url-pattern>/listPendingMerchant</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ShowMerchantServlet</display-name>
+    <servlet-name>ShowMerchantServlet</servlet-name>
+    <servlet-class>ui.ShowMerchantServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowMerchantServlet</servlet-name>
+    <url-pattern>/showMerchant</url-pattern>
+  </servlet-mapping>
 </web-app>

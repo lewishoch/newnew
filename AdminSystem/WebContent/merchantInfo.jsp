@@ -4,14 +4,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title></title>
+<title>Insert title here</title>
 </head>
 <body>
-<div id="account_control">
-	<form action="logout" method="post">
-		<label>Welcome, ${merchantAccount.uname}!</label>
-		<input type="submit" value="Logout"/>
-	</form>
-</div>
+<h1>Merchant Info</h1>
+<ul>
+	<li>shop name: ${user.uname }</li>
+	<li>user age: ${user.age }</li>
+	<li><a href="deleteUser?id=${user.id }">delete</a></li>
+</ul>
 </body>
 </html>

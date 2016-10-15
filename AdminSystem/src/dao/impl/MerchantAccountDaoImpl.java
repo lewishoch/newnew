@@ -58,10 +58,10 @@ public class MerchantAccountDaoImpl implements MerchantAccountDao {
 		}
 	}
 
-	public List<MerchantAccount> findAllMerchants(int status) {
+	public List<MerchantAccount> findAllMerchants() {
 		List<MerchantAccount> ms = new ArrayList<MerchantAccount>();
 		
-		String sql = "select uuid, status, user_name un, password psd, created_dt_gmt cre_dt, last_modified_dt_gmt last_mod_dt from merch_account";
+		String sql = "select account_uuid, status, user_name un, password psd, created_dt_gmt cre_dt, last_modified_dt_gmt last_mod_dt from merch_account";
 		Connection con = null;
 		PreparedStatement pst = null;
 		ResultSet rs = null;
@@ -74,7 +74,7 @@ public class MerchantAccountDaoImpl implements MerchantAccountDao {
 			while (rs.next()) {
 				MerchantAccount m = new MerchantAccount();
 				
-				m.setUuid(rs.getLong("uuid"));
+				m.setUuid(rs.getLong("account_uuid"));
 				m.setStatus(rs.getInt("status"));
 				m.setUname(rs.getString("un"));
 				m.setPsd(rs.getString("psd"));
@@ -87,7 +87,43 @@ public class MerchantAccountDaoImpl implements MerchantAccountDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			DBUtil.free(con, pst, null);
+			DBUtil.free(con, pst, rs);
+		}
+		
+		return ms;
+	}
+	
+	public List<MerchantAccount> findMerchantsByStatus(int status) {
+		List<MerchantAccount> ms = new ArrayList<MerchantAccount>();
+		
+		String sql = "select account_uuid, status, user_name un, password psd, created_dt_gmt cre_dt, last_modified_dt_gmt last_mod_dt from merch_account where status=?";
+		Connection con = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		
+		con = DBUtil.createConnection();
+		try {
+			pst = con.prepareStatement(sql);
+			pst.setInt(1,status);
+			rs = pst.executeQuery();
+			
+			while (rs.next()) {
+				MerchantAccount m = new MerchantAccount();
+				
+				m.setUuid(rs.getLong("account_uuid"));
+				m.setStatus(rs.getInt("status"));
+				m.setUname(rs.getString("un"));
+				m.setPsd(rs.getString("psd"));
+				m.setCreDt(rs.getDate("cre_dt"));
+				m.setCreDt(rs.getDate("last_mod_dt"));
+				
+				ms.add(m);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DBUtil.free(con, pst, rs);
 		}
 		
 		return ms;
@@ -95,7 +131,7 @@ public class MerchantAccountDaoImpl implements MerchantAccountDao {
 
 	public MerchantAccount loadMerchant(String userName) {
 		MerchantAccount m = null;
-		String sql = "select uuid, status, user_name un, password psd, created_dt_gmt cre_dt, last_modified_dt_gmt last_mod_dt from merch_account where user_name=?";
+		String sql = "select account_uuid, status, user_name un, password psd, created_dt_gmt cre_dt, last_modified_dt_gmt last_mod_dt from merch_account where user_name=?";
 		Connection con = null;
 		PreparedStatement pst = null;
 		ResultSet rs = null;
@@ -109,7 +145,7 @@ public class MerchantAccountDaoImpl implements MerchantAccountDao {
 			if (rs.next()) {
 				m = new MerchantAccount();
 				
-				m.setUuid(rs.getLong("uuid"));
+				m.setUuid(rs.getLong("account_uuid"));
 				m.setStatus(rs.getInt("status"));
 				m.setUname(rs.getString("un"));
 				m.setPsd(rs.getString("psd"));
@@ -120,7 +156,7 @@ public class MerchantAccountDaoImpl implements MerchantAccountDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			DBUtil.free(con, pst, null);
+			DBUtil.free(con, pst, rs);
 		}
 		
 		return m;
@@ -128,7 +164,7 @@ public class MerchantAccountDaoImpl implements MerchantAccountDao {
 	
 	public MerchantAccount loadMerchant(long uuid) {
 		MerchantAccount m = null;
-		String sql = "select uuid, status, user_name un, password psd, created_dt_gmt cre_dt, last_modified_dt_gmt last_mod_dt from merch_account where uuid=?";
+		String sql = "select account_uuid, status, user_name un, password psd, created_dt_gmt cre_dt, last_modified_dt_gmt last_mod_dt from merch_account where uuid=?";
 		Connection con = null;
 		PreparedStatement pst = null;
 		ResultSet rs = null;
@@ -142,7 +178,7 @@ public class MerchantAccountDaoImpl implements MerchantAccountDao {
 			if (rs.next()) {
 				m = new MerchantAccount();
 				
-				m.setUuid(rs.getLong("uuid"));
+				m.setUuid(rs.getLong("account_uuid"));
 				m.setStatus(rs.getInt("status"));
 				m.setUname(rs.getString("un"));
 				m.setPsd(rs.getString("psd"));
@@ -153,7 +189,7 @@ public class MerchantAccountDaoImpl implements MerchantAccountDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			DBUtil.free(con, pst, null);
+			DBUtil.free(con, pst, rs);
 		}
 		
 		return m;

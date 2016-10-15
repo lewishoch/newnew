@@ -15,7 +15,7 @@
 <title>Merchant Info</title>
 </head>
 <body>
-<h1>Merchant Info</h1>
+<h1>Merchant Information</h1>
 <ul class="list-unstyled">
 	<li>Merchant ID: ${merchant.uuid }
 	<li>Merchant Name: ${merchant.mName }</li>
