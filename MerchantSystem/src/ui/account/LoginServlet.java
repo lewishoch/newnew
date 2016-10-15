@@ -31,14 +31,16 @@ public class LoginServlet extends HttpServlet {
 		if(merchantAccount==null) System.out.println("null");
 		// check if valid
 		if(merchantAccount!=null && merchantAccount.getPsd().equals(password)){
-			sen.setAttribute("merchantAccount", merchantAccount);
+			sen.setAttribute("isLogin", true);
+			sen.setAttribute("uuid", merchantAccount.getUuid());
 			System.out.println("success");
 			response.sendRedirect("control");
 		}
 		else{
 			// else
 			System.out.println("fail");
-			request.setAttribute("loginMsg", "Wrong user name or password.");
+			request.setAttribute("msgType", "errorMsg");
+			request.setAttribute("Msg", "Wrong user name or password.");
 			response.sendRedirect("index.jsp");
 		}
 	}

@@ -36,6 +36,7 @@ public class AddDishServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sen = request.getSession(false);
 		
+
 		if(sen!=null && SessionLogin.sessionLogin(sen))
 		{
 			Map map = new HashMap();
@@ -75,6 +76,7 @@ public class AddDishServlet extends HttpServlet {
 					}	
 				}
 
+
 			
 				Dish d = new Dish();
 				d.setMerchantUuid(mid);
@@ -88,11 +90,7 @@ public class AddDishServlet extends HttpServlet {
 				e.printStackTrace();
 			
 			}
-			
-			
-			
-			
-			
+					
 			response.sendRedirect("control");
 		}
 		else
