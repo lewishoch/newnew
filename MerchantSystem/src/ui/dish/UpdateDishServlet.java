@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import service.DishManager;
 import service.impl.DishManagerImpl;
+import ui.common.SessionLogin;
 
 /**
  * Servlet implementation class UpdateDishServlet
@@ -22,12 +23,12 @@ public class UpdateDishServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sen = request.getSession(false);
 		
-		if(sen!=null){
+		if(sen !=null && SessionLogin.sessionLogin(sen)){
 			int did = Integer.parseInt(request.getParameter("did"));
 			dm.deleteDish(did);
 		}
 		else
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("logout");
 	}
 
 }
