@@ -96,7 +96,7 @@ public class UpdateProfileServlet extends HttpServlet {
 					merchantProfile.setsLogoPath(relativePath);
 					
 					mpm.updateMerchant(merchantProfile);
-					jmsProducer.sendMsg("profile updated.");
+					//jmsProducer.sendMsg("profile updated.");
 					request.setAttribute("msgType", "succMsg");
 					request.setAttribute("msg", "Update successed.");
 					
