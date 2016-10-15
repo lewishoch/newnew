@@ -12,23 +12,21 @@ import service.MerchantAccountManager;
 import service.impl.MerchantAccountManagerImpl;
 
 /**
- * Servlet implementation class rejectMerchantServlet
+ * Servlet implementation class UnfreezeMerchantServlet
  */
-public class rejectMerchantServlet extends HttpServlet {
+public class UnfreezeMerchantServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MerchantAccountManager mam = new MerchantAccountManagerImpl();
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		long uuid = Long.parseLong(request.getParameter("uuid"));
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		long uuid = Long.parseLong(req.getParameter("uuid"));
 //		System.out.println(uuid);
 		MerchantAccount ma = mam.loadMerchAccount(uuid);
-		ma.setStatus(AccountStatusProtocol.REJECTED);
+		ma.setStatus(AccountStatusProtocol.ACCEPTED);
 		mam.updateMerchAccount(ma);
-//		request.getRequestDispatcher("listPendingMerchant").forward(request, response);
-		response.sendRedirect("listPendingMerchant");
+//		req.getRequestDispatcher("listPendingMerchant").forward(req, resp);
+		resp.sendRedirect("listAllMerchants");
 	}
 
 }
