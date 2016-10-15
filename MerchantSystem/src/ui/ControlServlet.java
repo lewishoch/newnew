@@ -19,7 +19,7 @@ import service.impl.DishManagerImpl;
 import service.impl.MerchantAccountManagerImpl;
 import service.impl.MerchantProfileManagerImpl;
 import ui.common.SessionLogin;
-import util.AccountStatusProtocal;
+import protocol.AccountStatusProtocol;
 
 /**
  * Servlet implementation class ControlServlet
@@ -54,7 +54,7 @@ public class ControlServlet extends HttpServlet {
 				}
 				else{
 					System.out.println("status");
-					request.setAttribute("status", AccountStatusProtocal.getStatusName(merchantAccount.getStatus()));
+					request.setAttribute("status", AccountStatusProtocol.getStatusName(merchantAccount.getStatus()));
 					
 					// redirect to status.jsp
 					request.getRequestDispatcher("status.jsp").forward(request,response);

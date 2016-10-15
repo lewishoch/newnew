@@ -1,6 +1,6 @@
-package util;
+package protocol;
 
-public class AccountStatusProtocal {
+public class AccountStatusProtocol {
 	public static final int INVALID = -1;
 	public static final int ACCEPTED = 0;
 	public static final int PENDING = 1;

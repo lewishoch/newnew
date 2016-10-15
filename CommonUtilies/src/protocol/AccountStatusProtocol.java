@@ -1,23 +1,31 @@
 package protocol;
 
 public class AccountStatusProtocol {
-	// Status Type
+	public static final int INVALID = -1;
 	public static final int ACCEPTED = 0;
-	public static final int PENDING = 2;
-	public static final int REJECTED = 3;
-	public static final int FROZEN = 4;
+	public static final int PENDING = 1;
+	public static final int REJECTED = 2;
+	public static final int FROZON = 3;
 	
-	public static String getStatus(int statusNum) {
-		switch (statusNum) {
-		case ACCEPTED:
-			return "accepted";
-		case PENDING:
-			return "pending";
-		case REJECTED:
-			return "rejected";
-		case FROZEN:
-			return "frozen";
+	public static String getStatusName(int statusCode){
+		switch(statusCode){
+			case ACCEPTED: return "ACCEPTED";
+			case PENDING:  return "PENDING";
+			case REJECTED: return "REJECTED";
+			case FROZON:   return "FROZON";
+			
+			default: return "INVALID";
 		}
-		return "invalid status";
+	}
+	
+	public static int getStatusCode(String statusName){
+		switch(statusName.toUpperCase()){
+			case "ACCEPTED": return ACCEPTED;
+			case "PENDING":  return PENDING;
+			case "REJECTED": return REJECTED;
+			case "FROZON":   return FROZON;
+		
+			default: return INVALID;
+		}
 	}
 }
