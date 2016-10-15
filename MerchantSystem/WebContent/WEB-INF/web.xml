@@ -99,4 +99,14 @@
     <servlet-name>EditDishServlet</servlet-name>
     <url-pattern>/editDish</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateProfileServlet</display-name>
+    <servlet-name>UpdateProfileServlet</servlet-name>
+    <servlet-class>ui.shop.UpdateProfileServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateProfileServlet</servlet-name>
+    <url-pattern>/updateProfile</url-pattern>
+  </servlet-mapping>
 </web-app>
