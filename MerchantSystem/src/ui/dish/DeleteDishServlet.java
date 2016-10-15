@@ -41,7 +41,7 @@ public class DeleteDishServlet extends HttpServlet {
 				request.setAttribute("msg", "Failed to remove the record.");
 			}
 
-			response.sendRedirect("control");
+			request.getRequestDispatcher("control").forward(request, response);
 		}
 		else
 			response.sendRedirect("logout");
