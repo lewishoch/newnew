@@ -68,7 +68,7 @@ public class UploadImage {
 
 		    for (int i = 0; i < listOfFiles.length; i++) {
 		      if (listOfFiles[i].isFile()) {
-		        System.out.println("File " + listOfFiles[i].getName());
+		    	  listOfFiles[i].delete();
 		      } 
 		    }
 	}
