@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import service.DishManager;
 import service.impl.DishManagerImpl;
+import ui.common.SessionLogin;
 
 public class DeleteDishServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -26,12 +27,13 @@ public class DeleteDishServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sen = request.getSession(false);
 		
-		if(sen!=null){
+		if(sen!=null && SessionLogin.sessionLogin(sen)){
 			int did = Integer.parseInt(request.getParameter("did"));
 			dm.deleteDish(did);
+			response.sendRedirect("config");
 		}
 		else
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("logout");
 	}
 
 }

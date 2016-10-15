@@ -11,10 +11,8 @@ import javax.servlet.http.HttpSession;
 import po.Dish;
 import service.DishManager;
 import service.impl.DishManagerImpl;
+import ui.common.SessionLogin;
 
-/**
- * Servlet implementation class UpdateDishServlet
- */
 public class UpdateDishServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -23,7 +21,7 @@ public class UpdateDishServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sen = request.getSession(false);
 		
-		if(sen!=null){
+		if(sen!=null && SessionLogin.sessionLogin(sen)){
 			long mid = Long.parseLong(request.getParameter("mid"));
 			long did = Long.parseLong(request.getParameter("did"));
 			String dname = request.getParameter("dname");
@@ -36,9 +34,11 @@ public class UpdateDishServlet extends HttpServlet {
 			d.setDishFolderPath(dpath);
 			
 			dm.updateDish(d);
+			
+			response.sendRedirect("config");
 		}
 		else
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("logout");
 	}
 
 }
