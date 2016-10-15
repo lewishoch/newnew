@@ -173,7 +173,8 @@ public class SignUpServlet extends HttpServlet {
 	// do upload and return path
 	private String uploadFile(FileItem fi, String userName) throws Exception{
 		
-		String filePath = null;
+		String fileRealPath = null;
+		String fileRelativePath = null;
 		
 		try {
 			String fileName = fi.getName();
@@ -181,12 +182,14 @@ public class SignUpServlet extends HttpServlet {
 			if(index <= 0)
 				throw new IOException();
 			String extension = fileName.substring(index+1);
-			filePath = this.getServletContext().getRealPath("/img/logo/" + userName + "." + extension);
+			fileRealPath = this.getServletContext().getRealPath("/img/logo/" + userName + "." + extension);
+			fileRelativePath = this.getServletContext().getContextPath() + "/img/logo/" + userName + "." + extension;
+			
 			
 			InputStream in = fi.getInputStream();
 			byte[] bs = new byte[in.available()];
 			in.read(bs);
-			File storeFile = new File(filePath);
+			File storeFile = new File(fileRealPath);
 			fi.write(storeFile);
 			
 			
@@ -199,6 +202,7 @@ public class SignUpServlet extends HttpServlet {
 		}
 		
 		
-		return filePath;
+		System.out.println(fileRelativePath);
+		return fileRelativePath;
 	}
 }
