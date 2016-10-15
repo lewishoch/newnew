@@ -54,8 +54,6 @@ public class MerchantProfileDaoImplTest {
 		mp.setsAddr("Shop Addr Test");
 		mp.setsTel("22222222");
 		mp.setsLogoPath("Shop Logo Path Test");
-		mp.setCreDt(new java.util.Date());
-		mp.setLastModDt(new java.util.Date());
 		mp.setmAccountUuid(7);
 		mpd.addMerchantProfile(mp);
 	}
@@ -71,8 +69,6 @@ public class MerchantProfileDaoImplTest {
 		mp.setsAddr("Shop Addr Test Update");
 		mp.setsTel("22222222");
 		mp.setsLogoPath("Shop Logo Path Test Update");
-		mp.setCreDt(new java.util.Date());
-		mp.setLastModDt(new java.util.Date());
 		mp.setmAccountUuid(6);
 		mpd.updateMerchantProfile(mp);
 	}
