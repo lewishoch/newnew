@@ -27,7 +27,7 @@ public class AddDishServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sen = request.getSession(false);
 		
-		if(sen !=null && SessionLogin.sessionLogin(sen)){
+		if(sen!=null && SessionLogin.sessionLogin(sen)){
 
 			long mid = Long.parseLong(request.getParameter("mid"));
 			String dname = request.getParameter("dname");
@@ -39,6 +39,7 @@ public class AddDishServlet extends HttpServlet {
 			d.setDishFolderPath(dpath);
 			
 			dm.addDish(d);
+			response.sendRedirect("control");
 		}
 		else
 			response.sendRedirect("logout");

@@ -2,7 +2,10 @@ package ui.account;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.jms.JMSException;
 import javax.servlet.ServletException;
@@ -46,21 +49,48 @@ public class SignUpServlet extends HttpServlet {
 		MerchantProfile merchantProfile = null;
 		MerchantAccount merchant = null;
 
+		Map map = new HashMap();
+		
+		String path = this.getServletContext().getRealPath("/temp");
+		File f=new File(path);
+		
+		DiskFileItemFactory factory=new DiskFileItemFactory(10240,f );
+		
+		ServletFileUpload upload=new ServletFileUpload();
+		upload.setFileItemFactory(factory);
+		
+		List<FileItem> fis=null;
+		
 		try {
+			
+			fis = upload.parseRequest(request);
+			for(FileItem fi:fis){
+				if(fi.isFormField()){
+					String fieldname = fi.getFieldName();
+				    String fieldvalue = fi.getString();
+				    map.put(fieldname, fieldvalue);	
+				}
+				else
+				{
+					// read upload file here
+					uploadFile(fi);
+				}
+			}
 			// merchant info
-			String uname = (String)request.getParameter("uname");
-			String password = (String)request.getParameter("password");
+			String uname = (String) map.get("uname");
+			String password = (String)map.get("password");
 			
 			// merchant profile info
-			String mname = (String)request.getParameter("mname");
-			int age = Integer.parseInt(request.getParameter("age"));
-			String gender = (String)request.getParameter("gender");
-			String shopName = (String)request.getParameter("shopName");
-			String address = (String)request.getParameter("address");
-			String telno = (String)request.getParameter("telno");
-			// read upload file here
-			uploadFile(request);
+			String mname = (String)map.get("mname");
+			int age = Integer.parseInt((String)map.get("age"));
+			String gender = (String)map.get("gender");
+			String shopName = (String)map.get("shopName");
+			String address = (String)map.get("address");
+			String telno = (String)map.get("telno");
+			
 
+			System.out.println(uname);
+			System.out.println(password);
 			System.out.println(mname);
 			System.out.println(age);
 			System.out.println(gender);
@@ -84,7 +114,11 @@ public class SignUpServlet extends HttpServlet {
 			//merchantProfile.setsLogoPath(sLogoPath);
 			
 			
-		} catch (NumberFormatException e) {
+		}
+		catch(FileUploadException e){
+			e.printStackTrace();
+		}
+		catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			// failed in validation
@@ -125,36 +159,24 @@ public class SignUpServlet extends HttpServlet {
 	}
 	
 	// do upload and return path
-	private String uploadFile(HttpServletRequest request){
+	private String uploadFile(FileItem fi){
 		
-		String path=this.getServletContext().getRealPath("/temp");
-		File f=new File(path);
-		
-		DiskFileItemFactory factory=new DiskFileItemFactory(102,f );
-		
-		ServletFileUpload upload=new ServletFileUpload();
-		upload.setFileItemFactory(factory);
-		
-		List<FileItem> fis=null;
 		try {
-			fis= upload.parseRequest(request);
-		} catch (FileUploadException e) {
+			
+			InputStream in= fi.getInputStream();
+			byte[] bs=new byte[in.available()];
+			in.read(bs);
+			File storeFile = new File(this.getServletContext().getRealPath("/real/abc.jpg"));
+			fi.write(storeFile);
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		for(FileItem fi:fis){
-			
-			if(fi.isFormField()){
-				System.out.println(fi.getFieldName() +"......."+fi.getString());
-			}
-			else{
-//				InputStream in= fi.getInputStream();
-//				byte[] bs=new byte[in.available()];
-//				in.read(bs);
-				//fi.write(file);
-				System.out.println(fi.getSize());
-			}
-		}
+		
 		
 		return "";
 	}
