@@ -7,14 +7,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.MerchantAccountDao;
-import po.MerchantAccount;
+import dao.MerchantDao;
+import po.Merchant;
 import util.DBUtil;
 
-public class MerchantAccountDaoImpl implements MerchantAccountDao {
+public class MerchantDaoImpl implements MerchantDao {
 
-	public boolean addMerchant(MerchantAccount m) {
-		String sql = "insert into merch_account(account_uuid,status,user_name,password,created_dt_gmt,last_modified_dt_gmt) values (merchant_acc_seq1.nextval,?,?,?,?,?)";
+	public boolean addMerchant(Merchant m) {
+		String sql = "insert into merch_account(account_uuid,status,user_name,password,created_dt_gmt,last_modified_dt_gmt) values (merchant_seq.nextval,?,?,?,?,?)";
 		Connection con = null;
 		PreparedStatement pst = null;
 		
@@ -35,7 +35,8 @@ public class MerchantAccountDaoImpl implements MerchantAccountDao {
 		}
 	}
 
-	public boolean updateMerchant(MerchantAccount m) {
+	
+	public boolean updateMerchant(Merchant m) {
 		String sql = "update merch_account set status=?, user_name=?, password=?, created_dt_gmt=?, last_modified_dt_gmt=? where account_uuid=?";
 		Connection con = null;
 		PreparedStatement pst = null;
@@ -58,10 +59,11 @@ public class MerchantAccountDaoImpl implements MerchantAccountDao {
 		}
 	}
 
-	public List<MerchantAccount> findAllMerchants(int status) {
-		List<MerchantAccount> ms = new ArrayList<MerchantAccount>();
+
+	public List<Merchant> findAllMerchants(int status) {
+		List<Merchant> ms = new ArrayList<Merchant>();
 		
-		String sql = "select uuid, status, user_name un, password psd, created_dt_gmt cre_dt, last_modified_dt_gmt last_mod_dt from merch_account";
+		String sql = "select ACCOUNT_UUID, status, user_name un, password psd, created_dt_gmt cre_dt, last_modified_dt_gmt last_mod_dt from merch_account";
 		Connection con = null;
 		PreparedStatement pst = null;
 		ResultSet rs = null;
@@ -72,9 +74,9 @@ public class MerchantAccountDaoImpl implements MerchantAccountDao {
 			rs = pst.executeQuery();
 			
 			while (rs.next()) {
-				MerchantAccount m = new MerchantAccount();
+				Merchant m = new Merchant();
 				
-				m.setUuid(rs.getLong("uuid"));
+				m.setUuid(rs.getLong("ACCOUNT_UUID"));
 				m.setStatus(rs.getInt("status"));
 				m.setUname(rs.getString("un"));
 				m.setPsd(rs.getString("psd"));
@@ -87,14 +89,16 @@ public class MerchantAccountDaoImpl implements MerchantAccountDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			DBUtil.free(con, pst, null);
+			DBUtil.free(con, pst, rs);
 		}
 		
 		return ms;
 	}
+	
 
-	public MerchantAccount loadMerchant(String userName) {
-		MerchantAccount m = null;
+
+	public Merchant loadMerchant(String userName) {
+		Merchant m = null;
 		String sql = "select uuid, status, user_name un, password psd, created_dt_gmt cre_dt, last_modified_dt_gmt last_mod_dt from merch_account where user_name=?";
 		Connection con = null;
 		PreparedStatement pst = null;
@@ -107,7 +111,7 @@ public class MerchantAccountDaoImpl implements MerchantAccountDao {
 			rs = pst.executeQuery();
 			
 			if (rs.next()) {
-				m = new MerchantAccount();
+				m = new Merchant();
 				
 				m.setUuid(rs.getLong("uuid"));
 				m.setStatus(rs.getInt("status"));
@@ -126,8 +130,8 @@ public class MerchantAccountDaoImpl implements MerchantAccountDao {
 		return m;
 	}
 	
-	public MerchantAccount loadMerchant(long uuid) {
-		MerchantAccount m = null;
+	public Merchant loadMerchant(long uuid) {
+		Merchant m = null;
 		String sql = "select uuid, status, user_name un, password psd, created_dt_gmt cre_dt, last_modified_dt_gmt last_mod_dt from merch_account where uuid=?";
 		Connection con = null;
 		PreparedStatement pst = null;
@@ -140,7 +144,7 @@ public class MerchantAccountDaoImpl implements MerchantAccountDao {
 			rs = pst.executeQuery();
 			
 			if (rs.next()) {
-				m = new MerchantAccount();
+				m = new Merchant();
 				
 				m.setUuid(rs.getLong("uuid"));
 				m.setStatus(rs.getInt("status"));
@@ -157,6 +161,12 @@ public class MerchantAccountDaoImpl implements MerchantAccountDao {
 		}
 		
 		return m;
+	}
+
+
+	public List<Merchant> findAllArpprovedMerchants(int status) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

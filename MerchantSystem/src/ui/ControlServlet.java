@@ -8,11 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import po.Merchant;
+import po.MerchantAccount;
 import po.MerchantProfile;
-import service.MerchantManager;
+import service.MerchantAccountManager;
 import service.MerchantProfileManager;
-import service.impl.MerchantManagerImpl;
+import service.impl.MerchantAccountManagerImpl;
 import service.impl.MerchantProfileManagerImpl;
 
 /**
@@ -20,7 +20,7 @@ import service.impl.MerchantProfileManagerImpl;
  */
 public class ControlServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private MerchantManager mm = new MerchantManagerImpl(); 
+	private MerchantAccountManager mm = new MerchantAccountManagerImpl(); 
 	private MerchantProfileManager mpm = new MerchantProfileManagerImpl(); 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -28,14 +28,14 @@ public class ControlServlet extends HttpServlet {
 		
 		if(sen!=null){
 			try{
-				String merchant_name = ((Merchant)sen.getAttribute("merchant")).getUname();
-				Merchant merchant = mm.loadMerchant(merchant_name);
-				
+				String merchant_name = ((MerchantAccount)sen.getAttribute("merchant")).getUname();
+				MerchantAccount merchantAccount = mm.loadMerchantAccount(merchant_name);
 				MerchantProfile merchantProfile = mpm.loadMerchantProfile(merchant_name);
+				
 				request.setAttribute("merchantProfile", merchantProfile);
 				
 				// check merchant is accpeted
-				if(merchant.getStatus()==0){
+				if(merchantAccount.getStatus()==0){
 					// put...
 					System.out.println("control");
 					// redirect to control.jsp
@@ -43,7 +43,7 @@ public class ControlServlet extends HttpServlet {
 				}
 				else{
 					System.out.println("status");
-					
+					request.setAttribute("status", merchantAccount.getStatus());
 					
 					// redirect to status.jsp
 					request.getRequestDispatcher("status.jsp").forward(request,response);

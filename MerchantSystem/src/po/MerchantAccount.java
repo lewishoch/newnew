@@ -2,7 +2,7 @@ package po;
 
 import java.util.Date;
 
-public class Merchant {
+public class MerchantAccount {
 	private long uuid;
 	private int status;
 	private String uname;

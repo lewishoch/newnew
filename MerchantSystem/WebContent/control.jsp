@@ -25,6 +25,7 @@
 	</div>
 <div id="content">
 	<div id="shop">
+
 		<h1>Your Profile</h1>
 <table class="table table-striped">
 	<tr><th>Merchant Name</th><th>Merchant Age</th><th>Shop Name</th><th>Shop Address</th><th>Shop Tel Number</th><th>Edit</th></tr>
@@ -38,6 +39,7 @@
 	</tr>
 
 </table>
+
 	</div>
 	<div id="dish">
 		
