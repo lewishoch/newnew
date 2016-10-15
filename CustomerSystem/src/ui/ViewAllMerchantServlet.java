@@ -32,7 +32,7 @@ public class ViewAllMerchantServlet extends HttpServlet {
 		
 		List<MerchantProfile> mp =  md.loadAllMerchantProfile(0);
 		request.setAttribute("merchant", mp);
-		System.out.println(mp.size());
+		//System.out.println(mp.size());
 		request.getRequestDispatcher("viewMerchant.jsp").forward(request, response);
 	}
 
