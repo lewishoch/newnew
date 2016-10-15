@@ -126,10 +126,11 @@ public class SignUpServlet extends HttpServlet {
 				request.setAttribute("msg", "Sign up successed. Please sign in again.");
 			}
 			catch(JMSException e){
-				
+				e.printStackTrace();
 				System.out.println("Failed to send msg to AdminSystem.");
 			}
 			catch(Exception e){
+				e.printStackTrace();
 				System.out.println("Failed to add merchant account and merchant profile.");
 				request.setAttribute("msgType", "errorType");
 				request.setAttribute("msg", "Sign up failed. User name or Shop name already exist.");

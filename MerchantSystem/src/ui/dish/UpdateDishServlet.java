@@ -41,8 +41,7 @@ public class UpdateDishServlet extends HttpServlet {
 				request.setAttribute("msgType", "errorMsg");
 				request.setAttribute("msg", "Failed to update the record.");
 			}
-			
-			response.sendRedirect("control");
+			request.getRequestDispatcher("control").forward(request, response);
 
 		}
 		else
