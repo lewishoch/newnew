@@ -3,11 +3,11 @@ package test.dao.impl;
 import org.junit.Test;
 
 import dao.AdminAccountDao;
-import dao.impl.AdminAccountImpl;
+import dao.impl.AdminAccountDaoImpl;
 import po.AdminAccount;
 
 public class AdminAccountDaoImplTest {
-	private AdminAccountDao ud = new AdminAccountImpl();
+	private AdminAccountDao ud = new AdminAccountDaoImpl();
 	
 	@Test
 	public void testLoad()

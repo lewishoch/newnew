@@ -22,22 +22,39 @@
 	<div id="shop">
 
 		<h1>Your Profile</h1>
-<table class="table table-striped">
-	<tr><th>Merchant Name</th><th>Merchant Age</th><th>Shop Name</th><th>Shop Address</th><th>Shop Tel Number</th><th>Edit</th></tr>
-	<tr>
-		<td>${merchantProfile.mName}</td>
-		<td>${merchantProfile.mAge}</td>
-		<td>${merchantProfile.sName}</td>
-		<td>${merchantProfile.sAddr}</td>
-		<td>${merchantProfile.sTel}</td>
-		<td><a class =  "btn btn-success" href = "editUser?id=${u.id}">Edit</a></td>
-	</tr>
-
-</table>
+		<table class="table table-striped">
+			<tr><th>Merchant Name</th><th>Merchant Age</th><th>Shop Name</th><th>Shop Address</th><th>Shop Tel Number</th><th>Edit</th></tr>
+			<tr>
+				<td>${merchantProfile.mName}</td>
+				<td>${merchantProfile.mAge}</td>
+				<td>${merchantProfile.sName}</td>
+				<td>${merchantProfile.sAddr}</td>
+				<td>${merchantProfile.sTel}</td>
+				<td><a class =  "btn btn-success" href = "editUser?id=${u.id}">Edit</a></td>
+			</tr>
+		
+		</table>
 
 	</div>
+	
 	<div id="dish">
-		
+		<h1>Your Dishes</h1>
+		<table class="table table-striped">
+			<tr><th>Dish Name</th><th>Dish Photo</th><th>Delete</th><th>Edit</th></tr>
+			<c:forEach var="d" items="${dishes}">
+				<tr>
+					<td>
+						<a href="showDish?id=${d.dishId}">${d.dishName}</a>
+					</td>
+					<td>
+						<img src=${d.dishFolderPath} alt=${d.dishName} width=200 height=200>
+					</td>
+					<td><a class="btn btn-primary" href="deleteDish?id=${d.dishId}">delete</a></td>
+					<td><a class="btn btn-success" href="editDish?id=${d.dishId}">edit</a></td>
+				</tr>
+			</c:forEach>
+		</table>
+		<a class="btn btn-success" href="addUserForm.jsp">add new dish</a>
 	</div>
 </div>
 </body>
