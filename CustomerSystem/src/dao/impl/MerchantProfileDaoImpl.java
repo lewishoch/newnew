@@ -152,7 +152,7 @@ public class MerchantProfileDaoImpl implements MerchantProfileDao {
 
 	public List<MerchantProfile> loadAllMerchantProfile(int status) {
 		List<MerchantProfile> mp = new ArrayList<MerchantProfile>();
-		String sql = "select merchant_uuid, shop_name, shop_addr, shop_tel_no from merchant_profile mp, merch_account ma where mp.account_uuid = ma.account_uuid AND ma.status=0";
+		String sql = "select merchant_uuid, merch_name, merch_age, merch_gender, shop_name, shop_addr, shop_tel_no from merchant_profile mp, merch_account ma where mp.account_uuid = ma.account_uuid AND ma.status=0";
 		Connection con = null;
 		PreparedStatement pst = null;
 		ResultSet rs = null;
@@ -162,13 +162,13 @@ public class MerchantProfileDaoImpl implements MerchantProfileDao {
 			pst = con.prepareStatement(sql);
 			rs = pst.executeQuery();
 			
-			if (rs.next()) {
+			while (rs.next()) {
 				MerchantProfile m = new MerchantProfile();
 				
 				m.setUuid(rs.getLong("merchant_uuid"));
-				//mp.setmName(rs.getString("merch_name"));
-				//mp.setmAge(rs.getInt("merch_age"));
-				//mp.setmGender(rs.getString("merch_gender"));
+				m.setmName(rs.getString("merch_name"));
+				m.setmAge(rs.getInt("merch_age"));
+				m.setmGender(rs.getString("merch_gender"));
 				m.setsName(rs.getString("shop_name"));
 				m.setsAddr(rs.getString("shop_addr"));
 				m.setsTel(rs.getString("shop_tel_no"));

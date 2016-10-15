@@ -27,11 +27,11 @@ public class LoginServlet extends HttpServlet {
 		String uname = (String)request.getParameter("uname");
 		String password = (String)request.getParameter("password");
 		
-		MerchantAccount merchant = mm.loadMerchantAccount(uname);
-		
+		MerchantAccount merchantAccount = mm.loadMerchantAccount(uname);
+		if(merchantAccount==null) System.out.println("null");
 		// check if valid
-		if(merchant!=null && merchant.getPsd().equals(password)){
-			sen.setAttribute("merchant", merchant);
+		if(merchantAccount!=null && merchantAccount.getPsd().equals(password)){
+			sen.setAttribute("merchantAccount", merchantAccount);
 			System.out.println("success");
 			response.sendRedirect("control");
 		}

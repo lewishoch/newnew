@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import po.Dish;
 import service.DishManager;
 import service.impl.DishManagerImpl;
+import ui.common.SessionLogin;
 
 /**
  * Servlet implementation class UpdateDishServlet
@@ -23,22 +23,12 @@ public class UpdateDishServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sen = request.getSession(false);
 		
-		if(sen!=null){
-			long mid = Long.parseLong(request.getParameter("mid"));
-			long did = Long.parseLong(request.getParameter("did"));
-			String dname = request.getParameter("dname");
-			String dpath = request.getParameter("dpath");
-			
-			Dish d = new Dish();
-			d.setMerchantUuid(mid);
-			d.setDishId(did);
-			d.setDishName(dname);
-			d.setDishFolderPath(dpath);
-			
-			dm.updateDish(d);
+		if(sen !=null && SessionLogin.sessionLogin(sen)){
+			int did = Integer.parseInt(request.getParameter("did"));
+			dm.deleteDish(did);
 		}
 		else
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("logout");
 	}
 
 }

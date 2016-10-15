@@ -14,7 +14,7 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<title>Insert title here</title>
+<title>All Merchants Information</title>
 </head>
 <body>
 <h1>All Merchants Information</h1>
@@ -35,14 +35,16 @@
 			<th>Shop Tel</th>
 			<th>Shop Address</th>
 		</tr>
-		<tr>
+		
 		<c:forEach var="m" items="${merchant}">
+		<tr>
 		 <!--  <td><a href="loadMerchant?uuid=${m.uuid}" >${m.sName}</a></td>-->
 		<td><a href="loadMerchant?sName=${m.sName}" >${m.sName}</a></td>
 		<td>${m.sAddr}</td>
 		<td>${m.sTel}</td>
-		</c:forEach>
 		</tr>
+		</c:forEach>
+		
 		
 	</tbody>
 </table>
