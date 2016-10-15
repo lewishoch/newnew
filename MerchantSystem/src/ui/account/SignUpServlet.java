@@ -36,18 +36,15 @@ public class SignUpServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final MerchantAccountManager mm = new MerchantAccountManagerImpl();
 	private final MerchantProfileManager mpm = new MerchantProfileManagerImpl();
-	private final JMSProducer jmsProjecter = PtpProducer.getInstance();
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	private final JMSProducer jmsProducer = PtpProducer.getInstance();
+
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		boolean isValidAccount = false;
-		boolean isValidShop = false;
 		boolean isSuccess = false;
 		
 		MerchantProfile merchantProfile = null;
-		MerchantAccount merchant = null;
+		MerchantAccount merchantAccount = null;
 
 		Map map = new HashMap();
 		
@@ -73,101 +70,66 @@ public class SignUpServlet extends HttpServlet {
 				    map.put(fieldname, fieldvalue);	
 				}
 				else
-				{
 					fileItem = fi;
-				}
 			}
-			// merchant info
+			
+			// checking existing 
 			String uname = (String) map.get("uname");
-			String password = (String)map.get("password");
-			
-			// merchant profile info
 			String mname = (String)map.get("mname");
-			int age = Integer.parseInt((String)map.get("age"));
-			String gender = (String)map.get("gender");
-			String shopName = (String)map.get("shopName");
-			String address = (String)map.get("address");
-			String telno = (String)map.get("telno");
 			
-
-			System.out.println(uname);
-			System.out.println(password);
-			System.out.println(mname);
-			System.out.println(age);
-			System.out.println(gender);
-			System.out.println(shopName);
-			System.out.println(address);
-			System.out.println(telno);
+			merchantAccount = mm.loadMerchantAccount(uname);
+			merchantProfile = mpm.loadMerchantProfile(uname);
 			
-			// create po
-			merchant = new MerchantAccount();
-			merchant.setUname(uname);
-			merchant.setPsd(password);
-			
-			merchantProfile = new MerchantProfile();
-			merchantProfile.setmAge(age);
-			merchantProfile.setmGender(gender);
-			merchantProfile.setmName(mname);
-			
-			merchantProfile.setsName(shopName);
-			merchantProfile.setsAddr(address);
-			merchantProfile.setsTel(telno);
-			//merchantProfile.setsLogoPath(sLogoPath);
-			
-			// if user name not already exist --> upload file
-			
-			if(fileItem != null)
-			{
-				uploadFile(fileItem, uname);
+			if(fileItem == null || merchantAccount!=null || merchantProfile!=null)
+				isSuccess = false;
+			else{
+				// merchant account
+				merchantAccount = new MerchantAccount();
+				merchantAccount.setUname(uname);
+				merchantAccount.setPsd((String)map.get("password"));
+				
+				// merchant profile
+				merchantProfile = new MerchantProfile();
+				merchantProfile.setmName(mname);
+				merchantProfile.setmAge(Integer.parseInt((String)map.get("age")));
+				merchantProfile.setmGender((String)map.get("gender"));
+				merchantProfile.setsName((String)map.get("shopName"));
+				merchantProfile.setsAddr((String)map.get("address"));
+				merchantProfile.setsTel((String)map.get("telno"));
+				merchantProfile.setsLogoPath(path);
+				merchantProfile.setsLogoPath(uploadFile(fileItem, uname));
 			}
-			
-			
 		}
 		catch(FileUploadException e){
 			e.printStackTrace();
+			request.setAttribute("errorMsg", "Sign up failed. Shop logo failed to be uploaded.");
 		}
 		catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-			// failed in validation
-			request.getRequestDispatcher("index.jsp").forward(request, response);
+			request.setAttribute("errorMsg", "Sign up failed. Invalid field input found.");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			request.setAttribute("errorMsg", "Sign up failed. Please contact support.");
 		}
 		
-
-		// query db find all user
-		isValidAccount = mm.loadMerchantAccount(merchant.getUname())!=null;
-		isValidShop = mpm.loadMerchantProfile(merchantProfile.getmName())!=null;
-		
-		//request.getRequestDispatcher("listAllUsers").forward(request,response);
-		
-		
 		// select distinct account, shop
-		
-		if(isValidAccount && isValidShop){
-			// db insert
-			mm.addMerchant(merchant);
-			mpm.addMerchantProfile(merchantProfile);
-			isSuccess = true;
-			
-			if(isSuccess){
-				sendMsg("hello");
+		if(isSuccess){
+			try{
+				mm.addMerchant(merchantAccount);
+				mpm.addMerchantProfile(merchantProfile);
+				jmsProducer.sendMsg();
+				request.setAttribute("successMsg", "Sign up successed. Please sign in again.");
+			}
+			catch(JMSException e){
+				System.out.println("Failed to send msg to AdminSystem.");
+			}
+			catch(Exception e){
+				System.out.println("Failed to add merchant account and merchant profile.");
+				request.setAttribute("errorMsg", "Sign up failed. User name or Shop name already exist.");
 			}
 		}
 		
 		request.getRequestDispatcher("index.jsp").forward(request, response);
-	}
-
-	private void sendMsg(String msg){
-		try {
-			jmsProjecter.sendMsg(msg);
-		} catch (JMSException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 	}
 	
 	// do upload and return path
