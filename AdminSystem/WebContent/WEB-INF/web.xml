@@ -39,4 +39,14 @@
     <servlet-name>acceptMerchantServlet</servlet-name>
     <url-pattern>/acceptMerchant</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>rejectMerchantServlet</display-name>
+    <servlet-name>rejectMerchantServlet</servlet-name>
+    <servlet-class>ui.rejectMerchantServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>rejectMerchantServlet</servlet-name>
+    <url-pattern>/rejectMerchant</url-pattern>
+  </servlet-mapping>
 </web-app>
