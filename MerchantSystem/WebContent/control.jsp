@@ -23,14 +23,16 @@
 
 		<h1>Your Profile</h1>
 		<table class="table table-striped">
-			<tr><th>Merchant Name</th><th>Merchant Age</th><th>Shop Name</th><th>Shop Address</th><th>Shop Tel Number</th><th>Edit</th></tr>
+			<tr><th>Merchant Name</th><th>Merchant Gender</th><th>Merchant Age</th><th>Shop Name</th><th>Shop Address</th><th>Shop Tel Number</th><th>Shop Logo</th><th>Edit</th></tr>
 			<tr>
 				<td>${merchantProfile.mName}</td>
+				<td>${merchantProfile.mGender}</td>
 				<td>${merchantProfile.mAge}</td>
 				<td>${merchantProfile.sName}</td>
 				<td>${merchantProfile.sAddr}</td>
 				<td>${merchantProfile.sTel}</td>
-				<td><a class =  "btn btn-success" href = "editUser?id=${u.id}">Edit</a></td>
+				<td>${merchantProfile.sLogoPath}</td>
+				<td><a class =  "btn btn-success" href = "editProfile?muuid=${merchantProfile.uuid}">Edit</a></td>
 			</tr>
 		
 		</table>
