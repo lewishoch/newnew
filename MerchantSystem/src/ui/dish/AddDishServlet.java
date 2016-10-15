@@ -31,7 +31,7 @@ public class AddDishServlet extends HttpServlet {
 
 			long mid = Long.parseLong(request.getParameter("mid"));
 			String dname = request.getParameter("dname");
-			String dpath = request.getParameter("dpath");
+			String dpath = "/test";//request.getParameter("dpath");
 			
 			Dish d = new Dish();
 			d.setMerchantUuid(mid);

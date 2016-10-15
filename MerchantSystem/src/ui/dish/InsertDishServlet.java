@@ -8,29 +8,34 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import service.DishManager;
-import service.impl.DishManagerImpl;
 import ui.common.SessionLogin;
 
-public class DeleteDishServlet extends HttpServlet {
+/**
+ * Servlet implementation class TrashDishServlet
+ */
+public class InsertDishServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       
+    public InsertDishServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
-	private final DishManager dm = new DishManagerImpl();
-	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sen = request.getSession(false);
 		
 		if(sen!=null && SessionLogin.sessionLogin(sen)){
-			long did = Long.parseLong(request.getParameter("dishId"));
-			dm.deleteDish(did);
-			response.sendRedirect("control");
+		
+			long merchantId = Long.parseLong(request.getParameter("mid"));
+			request.setAttribute("mid", merchantId);
+			request.getRequestDispatcher("addDishForm.jsp").forward(request, response);
 		}
 		else
 			response.sendRedirect("logout");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		doPost(request, response);
 	}
 
 }

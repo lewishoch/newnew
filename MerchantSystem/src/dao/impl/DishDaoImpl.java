@@ -53,7 +53,7 @@ public class DishDaoImpl implements DishDao {
 
 	public boolean addDish(Dish dish) {
 		
-		String sql = "INSERT INTO DISH(DISH_ID, DISH_NAME, DISH_FOLDER_PATH, CREATED_DT_GMT, LAST_MODIFIED_DT_GMT, MERCHANT_UUID) values(dish_seq1.nextval,?,?,?,?,?)";
+		String sql = "INSERT INTO DISH(DISH_ID, DISH_NAME, DISH_FOLDER_PATH, CREATED_DT_GMT, LAST_MODIFIED_DT_GMT, MERCHANT_UUID) values(dish_seq1.nextval,?,?,systimestamp,systimestamp,?)";
 		Connection con = null;
 		PreparedStatement pst = null;
 		con = DBUtil.createConnection();
@@ -63,9 +63,7 @@ public class DishDaoImpl implements DishDao {
 	
 			pst.setString(1, dish.getDishName());
 			pst.setString(2, dish.getDishFolderPath());
-			pst.setDate(3, (java.sql.Date) dish.getCreatedDtGmt());
-			pst.setDate(4, (java.sql.Date) dish.getLastModifiedDtGmt());
-			pst.setLong(5, dish.getMerchantUuid());
+			pst.setLong(3, dish.getMerchantUuid());
 			pst.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -81,7 +79,7 @@ public class DishDaoImpl implements DishDao {
 	}
 	
 	public boolean updateDish(Dish dish) {
-		String sql = "UPDATE DISH SET DISH_NAME = ?, DISH_FOLDER_PATH = ?, CREATED_DT_GMT = ?, LAST_MODIFIED_DT_GMT = ?, MERCHANT_UUID = ? WHERE DISH_ID = ?";
+		String sql = "UPDATE DISH SET DISH_NAME = ?, DISH_FOLDER_PATH = ?, LAST_MODIFIED_DT_GMT = systimestamp, MERCHANT_UUID = ? WHERE DISH_ID = ?";
 		Connection con = null;
 		PreparedStatement pst = null;
 		con = DBUtil.createConnection();
@@ -91,10 +89,8 @@ public class DishDaoImpl implements DishDao {
 			pst = con.prepareStatement(sql);
 			pst.setString(1, dish.getDishName());
 			pst.setString(2, dish.getDishFolderPath());
-			pst.setDate(3, (java.sql.Date) dish.getCreatedDtGmt());
-			pst.setDate(4, (java.sql.Date) dish.getLastModifiedDtGmt());
-			pst.setLong(5, dish.getMerchantUuid());
-			pst.setLong(6, dish.getDishId());
+			pst.setLong(3, dish.getMerchantUuid());
+			pst.setLong(4, dish.getDishId());
 			pst.executeUpdate();
 			
 		} catch (SQLException e) {

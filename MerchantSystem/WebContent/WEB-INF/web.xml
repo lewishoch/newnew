@@ -101,6 +101,16 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>InsertDishServlet</display-name>
+    <servlet-name>InsertDishServlet</servlet-name>
+    <servlet-class>ui.dish.InsertDishServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>InsertDishServlet</servlet-name>
+    <url-pattern>/insertDish</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>UpdateProfileServlet</display-name>
     <servlet-name>UpdateProfileServlet</servlet-name>
     <servlet-class>ui.shop.UpdateProfileServlet</servlet-class>

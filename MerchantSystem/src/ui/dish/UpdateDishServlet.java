@@ -25,7 +25,7 @@ public class UpdateDishServlet extends HttpServlet {
 			long mid = Long.parseLong(request.getParameter("mid"));
 			long did = Long.parseLong(request.getParameter("did"));
 			String dname = request.getParameter("dname");
-			String dpath = request.getParameter("dpath");
+			String dpath = "/test";//request.getParameter("dpath");
 			
 			Dish d = new Dish();
 			d.setMerchantUuid(mid);

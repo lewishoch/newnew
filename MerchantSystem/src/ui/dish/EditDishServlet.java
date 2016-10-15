@@ -24,21 +24,21 @@ public class EditDishServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sen = request.getSession(false);
 		
 		if(sen!=null && SessionLogin.sessionLogin(sen)){
 		
-			int dishId = Integer.parseInt(request.getParameter("dishId"));
+			long dishId = Long.parseLong(request.getParameter("dishId"));
 			Dish d = dm.loadDish(dishId);
 			request.setAttribute("d", d);
 			request.getRequestDispatcher("updateDishForm.jsp").forward(request, response);
 		}
 		else
 			response.sendRedirect("logout");
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
 	}
 
 }
