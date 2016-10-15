@@ -14,14 +14,10 @@ public class SessionLogin {
 		if(sen == null) return false;
 		
 		try{
-			// check in case is null;
-			System.out.println("isLogin: "+sen.getAttribute("isLogin"));
-			System.out.println("uuid: "+sen.getAttribute("uuid"));
+			// check in case is null
 			boolean isLogin = (boolean)sen.getAttribute("isLogin");
-			//long uuid = Long.parseLong((String) sen.getAttribute("uuid"));
-			System.out.println("isLogin: "+sen.getAttribute("isLogin"));
-			//System.out.println("uuid: "+uuid);
-			return isLogin ;
+			long uuid = (Long) sen.getAttribute("uuid");
+			return isLogin;
 		}
 		catch(Exception e){
 			System.out.println("fail");

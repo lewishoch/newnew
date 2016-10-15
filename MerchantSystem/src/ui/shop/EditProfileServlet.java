@@ -48,7 +48,7 @@ public class EditProfileServlet extends HttpServlet {
 			
 		}
 		else
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("logout");
 	}
 
 }
