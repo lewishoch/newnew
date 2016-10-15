@@ -52,28 +52,29 @@ public class SignUpServlet extends HttpServlet {
 		Map map = new HashMap();
 		
 		String path = this.getServletContext().getRealPath("/temp");
-		File f=new File(path);
+		File f = new File(path);
 		
-		DiskFileItemFactory factory=new DiskFileItemFactory(10240,f );
+		DiskFileItemFactory factory = new DiskFileItemFactory(10240,f );
 		
-		ServletFileUpload upload=new ServletFileUpload();
+		ServletFileUpload upload = new ServletFileUpload();
 		upload.setFileItemFactory(factory);
 		
 		List<FileItem> fis=null;
 		
 		try {
-			
+			// file will store in temp folder
 			fis = upload.parseRequest(request);
+			FileItem fileItem = null;
 			for(FileItem fi:fis){
 				if(fi.isFormField()){
+					//get form values
 					String fieldname = fi.getFieldName();
 				    String fieldvalue = fi.getString();
 				    map.put(fieldname, fieldvalue);	
 				}
 				else
 				{
-					// read upload file here
-					uploadFile(fi);
+					fileItem = fi;
 				}
 			}
 			// merchant info
@@ -113,6 +114,13 @@ public class SignUpServlet extends HttpServlet {
 			merchantProfile.setsTel(telno);
 			//merchantProfile.setsLogoPath(sLogoPath);
 			
+			// if user name not already exist --> upload file
+			
+			if(fileItem != null)
+			{
+				uploadFile(fileItem, uname);
+			}
+			
 			
 		}
 		catch(FileUploadException e){
@@ -123,7 +131,11 @@ public class SignUpServlet extends HttpServlet {
 			e.printStackTrace();
 			// failed in validation
 			request.getRequestDispatcher("index.jsp").forward(request, response);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
 
 		// query db find all user
 		isValidAccount = mm.loadMerchantAccount(merchant.getUname())!=null;
@@ -159,25 +171,34 @@ public class SignUpServlet extends HttpServlet {
 	}
 	
 	// do upload and return path
-	private String uploadFile(FileItem fi){
+	private String uploadFile(FileItem fi, String userName) throws Exception{
+		
+		String filePath = null;
 		
 		try {
+			String fileName = fi.getName();
+			int index = fileName.lastIndexOf(".");
+			if(index <= 0)
+				throw new IOException();
+			String extension = fileName.substring(index+1);
+			filePath = this.getServletContext().getRealPath("/img/logo/" + userName + "." + extension);
 			
-			InputStream in= fi.getInputStream();
-			byte[] bs=new byte[in.available()];
+			InputStream in = fi.getInputStream();
+			byte[] bs = new byte[in.available()];
 			in.read(bs);
-			File storeFile = new File(this.getServletContext().getRealPath("/real/abc.jpg"));
+			File storeFile = new File(filePath);
 			fi.write(storeFile);
 			
+			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw e;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw e;
 		}
 		
 		
-		return "";
+		return filePath;
 	}
 }
