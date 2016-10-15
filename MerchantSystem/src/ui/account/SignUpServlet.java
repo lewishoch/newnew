@@ -42,7 +42,7 @@ public class SignUpServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		boolean isSuccess = false;
+		boolean isSuccess = true;
 		
 		MerchantProfile merchantProfile = null;
 		MerchantAccount merchantAccount = null;
@@ -126,10 +126,11 @@ public class SignUpServlet extends HttpServlet {
 				request.setAttribute("msg", "Sign up successed. Please sign in again.");
 			}
 			catch(JMSException e){
-				
+				e.printStackTrace();
 				System.out.println("Failed to send msg to AdminSystem.");
 			}
 			catch(Exception e){
+				e.printStackTrace();
 				System.out.println("Failed to add merchant account and merchant profile.");
 				request.setAttribute("msgType", "errorType");
 				request.setAttribute("msg", "Sign up failed. User name or Shop name already exist.");

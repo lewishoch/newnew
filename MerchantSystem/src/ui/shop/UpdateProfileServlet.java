@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import jms.producer.JMSProducer;
+import jms.producer.impl.PtpProducer;
+
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -29,7 +32,8 @@ import util.UploadImage;
  */
 public class UpdateProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
+	private final JMSProducer jmsProducer = PtpProducer.getInstance();
 	private final MerchantProfileManager mpm = new MerchantProfileManagerImpl();
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -92,15 +96,25 @@ public class UpdateProfileServlet extends HttpServlet {
 					merchantProfile.setsLogoPath(relativePath);
 					
 					mpm.updateMerchant(merchantProfile);
+					jmsProducer.sendMsg("profile updated.");
+					request.setAttribute("msgType", "succMsg");
+					request.setAttribute("msg", "Update successed.");
 					
-	
-					response.sendRedirect("control");
 				} catch (NumberFormatException e) {
 					e.printStackTrace();
+					request.setAttribute("msgType", "errorMsg");
+					request.setAttribute("msg", "Update failed. Invalid Input.");
 				} catch (FileUploadException e) {
 					e.printStackTrace();
+					request.setAttribute("msgType", "errorMsg");
+					request.setAttribute("msg", "Update failed. Failed to upload logo.");
 				} catch (Exception e) {
 					e.printStackTrace();
+					request.setAttribute("msgType", "errorMsg");
+					request.setAttribute("msg", "Update failed.");
+				}
+				finally{
+					request.getRequestDispatcher("control").forward(request, response);
 				}
 		}
 		else

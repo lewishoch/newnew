@@ -20,7 +20,6 @@ import ui.common.SessionLogin;
 public class EditProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final MerchantProfileManager mpm = new MerchantProfileManagerImpl();
-	private final JMSProducer jmsProjecter = PtpProducer.getInstance();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sen = request.getSession(false);
@@ -41,14 +40,7 @@ public class EditProfileServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession sen = request.getSession(false);
-		
-		if(SessionLogin.sessionLogin(sen)){
-			
-			
-		}
-		else
-			response.sendRedirect("logout");
+		doGet(request, response);
 	}
 
 }

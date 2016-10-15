@@ -15,11 +15,6 @@ import ui.common.SessionLogin;
  */
 public class InsertDishServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public InsertDishServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sen = request.getSession(false);

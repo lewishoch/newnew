@@ -91,7 +91,7 @@ public class AddDishServlet extends HttpServlet {
 			
 			}
 					
-			response.sendRedirect("control");
+			request.getRequestDispatcher("control").forward(request, response);
 		}
 		else
 			response.sendRedirect("logout");
