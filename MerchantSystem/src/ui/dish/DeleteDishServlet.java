@@ -22,7 +22,14 @@ public class DeleteDishServlet extends HttpServlet {
 		
 		if(SessionLogin.sessionLogin(sen)){
 			long did = Long.parseLong(request.getParameter("dishId"));
-			dm.deleteDish(did);
+			if(dm.deleteDish(did)){
+				request.setAttribute("msgType", "succMsg");
+				request.setAttribute("msg", "Record has been removed.");
+			}
+			else{
+				request.setAttribute("msgType", "errorMsg");
+				request.setAttribute("msg", "Failed to remove the record.");
+			}
 			response.sendRedirect("control");
 		}
 		else
