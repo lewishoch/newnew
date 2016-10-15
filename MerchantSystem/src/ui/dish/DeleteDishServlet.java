@@ -23,14 +23,14 @@ public class DeleteDishServlet extends HttpServlet {
 		HttpSession sen = request.getSession(false);
 		
 		if(SessionLogin.sessionLogin(sen)){
+			
 			long did = Long.parseLong(request.getParameter("dishId"));
 
-			
 			Dish d = dm.loadDish(did);
 			String path = d.getDishFolderPath();
 			
 			UploadImage.deleteImage(this.getServletContext().getRealPath(path));
-			//dm.deleteDish(did);
+			
 
 			if(dm.deleteDish(did)){
 				request.setAttribute("msgType", "succMsg");
