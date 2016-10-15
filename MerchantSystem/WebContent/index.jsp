@@ -27,27 +27,52 @@
 		}
 	}
 	
-	#msg_box {
-	    width: 100px;
+	#errorMsg {
+	    position: absolute;
+	    width: 200px;
 	    height: 100px;
 	    background-color: red;
+	    color: white;
+	    
 	    animation-name: msgAnimation;
-	    animation-duration: 4s;
+	    animation-duration: 2s;
+	    animation-delay: 4s;
 	    animation-fill-mode: forwards;  
-	    -webkit-animation-name: msgAnimation; /* Chrome, Safari, Opera */
-    	-webkit-animation-duration: 4s; /* Chrome, Safari, Opera */
-    	-webkit-animation-fill-mode: forwards;  
-    	opacity: 1;
-    	
+	    -webkit-animation-name: msgAnimation;
+	    -webkit-animation-delay: 4s;
+    	-webkit-animation-duration: 2s;
+    	-webkit-animation-fill-mode: forwards; 
+	}
+	
+	#succMsg{
+		position: absolute;
+	    width: 200px;
+	    height: 100px;
+	    background-color: green;
+	    color: white;
+	    
+	    animation-name: msgAnimation;
+	    animation-duration: 2s;
+	    animation-delay: 4s;
+	    animation-fill-mode: forwards; 
+	     
+	    -webkit-animation-name: msgAnimation;
+	    -webkit-animation-delay: 4s;
+    	-webkit-animation-duration: 2s;
+    	-webkit-animation-fill-mode: forwards;
+	}
+	
+	.centre{
+	    top: 50%;
+	    left: 50%;
+	    transform: translate(-50%,-50%);
 	}
 	
 	
 </style>
 </head>
 <body>
-<div id="msg_box">
-1234
-</div>
+
 <div id="login">
 <form action="login" method="post">
 	<label>User Name: </label><input type="text" name="uname" required/></br>
@@ -83,6 +108,9 @@
 		<input type="reset"/>
 	</div>
 </form>
+</div>
+<div id="${msgType }" class="centre">
+${msg }
 </div>
 </body>
 </html>

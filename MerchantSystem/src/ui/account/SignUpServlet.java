@@ -102,14 +102,17 @@ public class SignUpServlet extends HttpServlet {
 		}
 		catch(FileUploadException e){
 			e.printStackTrace();
-			request.setAttribute("errorMsg", "Sign up failed. Shop logo failed to be uploaded.");
+			request.setAttribute("msgType", "errorType");
+			request.setAttribute("msg", "Sign up failed. Shop logo failed to be uploaded.");
 		}
 		catch (NumberFormatException e) {
 			e.printStackTrace();
-			request.setAttribute("errorMsg", "Sign up failed. Invalid field input found.");
+			request.setAttribute("msgType", "errorType");
+			request.setAttribute("msg", "Sign up failed. Invalid field input found.");
 		} catch (Exception e) {
 			e.printStackTrace();
-			request.setAttribute("errorMsg", "Sign up failed. Please contact support.");
+			request.setAttribute("msgType", "errorType");
+			request.setAttribute("msg", "Sign up failed. Please contact support.");
 		}
 		
 		// select distinct account, shop
@@ -118,14 +121,17 @@ public class SignUpServlet extends HttpServlet {
 				mm.addMerchant(merchantAccount);
 				mpm.addMerchantProfile(merchantProfile);
 				jmsProducer.sendMsg();
-				request.setAttribute("successMsg", "Sign up successed. Please sign in again.");
+				request.setAttribute("msgType", "succMsg");
+				request.setAttribute("msg", "Sign up successed. Please sign in again.");
 			}
 			catch(JMSException e){
+				
 				System.out.println("Failed to send msg to AdminSystem.");
 			}
 			catch(Exception e){
 				System.out.println("Failed to add merchant account and merchant profile.");
-				request.setAttribute("errorMsg", "Sign up failed. User name or Shop name already exist.");
+				request.setAttribute("msgType", "errorType");
+				request.setAttribute("msg", "Sign up failed. User name or Shop name already exist.");
 			}
 		}
 		

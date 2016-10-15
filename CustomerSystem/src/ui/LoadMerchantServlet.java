@@ -36,9 +36,6 @@ public class LoadMerchantServlet extends HttpServlet {
 		request.getRequestDispatcher("MerchantInfo.jsp").forward(request, response);
 		
 		
-		//upload photo
-		//String path = new this.getServletContext().getRealPath()
-		
 	}
 
 }
