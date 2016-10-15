@@ -20,6 +20,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import po.MerchantProfile;
 import service.MerchantProfileManager;
 import service.impl.MerchantProfileManagerImpl;
+import util.UploadImage;
 
 /**
  * Servlet implementation class UpdateProfileServlet
@@ -34,7 +35,7 @@ public class UpdateProfileServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Map map = new HashMap();
-		String path = this.getServletContext().getRealPath("/temp");
+		String path = this.getServletContext().getRealPath("/temp/img/logo");
 		File f = new File(path);
 		
 		DiskFileItemFactory factory = new DiskFileItemFactory(10240,f );
@@ -71,7 +72,7 @@ public class UpdateProfileServlet extends HttpServlet {
 				if(!fileItem.getName().isEmpty())
 				{
 					System.out.println("user has update");
-					relativePath = uploadFile(fileItem, (String)map.get("mName"));
+					relativePath = UploadImage.uploadLogo(fileItem, (String)map.get("mName"), this.getServletContext());
 				}
 				
 				// /MerchantSystem/img/logo/Cheers.jpg
@@ -99,39 +100,5 @@ public class UpdateProfileServlet extends HttpServlet {
 			}
 	}
 
-	private String uploadFile(FileItem fi, String userName) throws Exception
-	{
-		String fileRealPath = null;
-		String fileRelativePath = null;
-		
-		try {
-			String fileName = fi.getName();
-			int index = fileName.lastIndexOf(".");
-			if(index <= 0)
-				throw new IOException();
-			String extension = fileName.substring(index+1);
-			fileRealPath = this.getServletContext().getRealPath("/img/logo/" + userName + "." + extension);
-			fileRelativePath = this.getServletContext().getContextPath() + "/img/logo/" + userName + "." + extension;
-			
-			
-			InputStream in = fi.getInputStream();
-			byte[] bs = new byte[in.available()];
-			in.read(bs);
-			File storeFile = new File(fileRealPath);
-			fi.write(storeFile);
-			
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-			throw e;
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw e;
-		}
-		
-		
-		System.out.println(fileRelativePath);
-		return fileRelativePath;
-		
-	}
+
 }
