@@ -19,6 +19,7 @@ import service.impl.DishManagerImpl;
 import service.impl.MerchantAccountManagerImpl;
 import service.impl.MerchantProfileManagerImpl;
 import ui.common.SessionLogin;
+import util.AccountStatusProtocal;
 
 /**
  * Servlet implementation class ControlServlet
@@ -31,7 +32,7 @@ public class ControlServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sen = request.getSession(false);
-		
+;
 		if(sen !=null && SessionLogin.sessionLogin(sen)){
 			try{
 				String merchant_name = ((MerchantAccount)sen.getAttribute("merchantAccount")).getUname();
@@ -39,6 +40,8 @@ public class ControlServlet extends HttpServlet {
 				MerchantProfile merchantProfile = mpm.loadMerchantProfile(merchant_name);
 				
 				request.setAttribute("merchantProfile", merchantProfile);
+				
+				System.out.println("--");
 				
 				// check merchant is accpeted
 				if(merchantAccount.getStatus()==0){
@@ -51,7 +54,7 @@ public class ControlServlet extends HttpServlet {
 				}
 				else{
 					System.out.println("status");
-					request.setAttribute("status", merchantAccount.getStatus());
+					request.setAttribute("status", AccountStatusProtocal.getStatusName(merchantAccount.getStatus()));
 					
 					// redirect to status.jsp
 					request.getRequestDispatcher("status.jsp").forward(request,response);
