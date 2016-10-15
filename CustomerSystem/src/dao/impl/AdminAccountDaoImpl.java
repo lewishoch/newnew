@@ -14,7 +14,7 @@ import dao.AdminAccountDao;
 import po.AdminAccount;
 import util.DBUtil;
 
-public class AdminAccountImpl implements AdminAccountDao {
+public class AdminAccountDaoImpl implements AdminAccountDao {
 
 	
 	public AdminAccount loadAdmin(String accName) {

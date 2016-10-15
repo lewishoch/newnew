@@ -1,6 +1,7 @@
 package dao.impl;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -43,24 +44,27 @@ public class MerchantProfileDaoImpl implements MerchantProfileDao {
 
 	
 	public boolean updateMerchant(MerchantProfile mp) {
-		String sql = "update merchant_profile set merchant_uuid, merch_name, merch_age, merch_gender, shop_name, shop_addr, shop_tel_no, shop_logo_path, created_dt_gmt, last_modified_dt_gmt, account_uuid";
+		String sql = "update merchant_profile set merch_name=?, merch_age=?, merch_gender=?, shop_name=?, shop_addr=?, shop_tel_no=?, shop_logo_path=?, created_dt_gmt=?, last_modified_dt_gmt=?, account_uuid=? where merchant_uuid=?";
 		Connection con = null;
 		PreparedStatement pst = null;
+		
 		
 		con = DBUtil.createConnection();
 		try {
 			pst = con.prepareStatement(sql);
-			pst.setLong(1, mp.getUuid());
-			pst.setString(2, mp.getmName());
-			pst.setInt(3, mp.getmAge());
-			pst.setString(4, mp.getmGender());
-			pst.setString(5, mp.getsName());
-			pst.setString(6, mp.getsAddr());
-			pst.setString(7, mp.getsTel());
-			pst.setString(8, mp.getsLogoPath());
-			pst.setDate(9, new java.sql.Date(mp.getCreDt().getTime()));
-			pst.setDate(10, new java.sql.Date(mp.getLastModDt().getTime()));
-			pst.setLong(11, mp.getmAccountUuid());
+			
+			pst.setString(1, mp.getmName());
+			pst.setInt(2, mp.getmAge());
+			pst.setString(3, mp.getmGender());
+			pst.setString(4, mp.getsName());
+			pst.setString(5, mp.getsAddr());
+			pst.setString(6, mp.getsTel());
+			pst.setString(7, mp.getsLogoPath());
+			pst.setDate(8, (Date) mp.getCreDt());
+			pst.setDate(9, new java.sql.Date(mp.getLastModDt().getTime()));
+			pst.setLong(10, mp.getmAccountUuid());
+			pst.setLong(11, mp.getUuid());
+			
 			pst.executeUpdate();
 			return true;
 		} catch (SQLException e) {
@@ -71,7 +75,7 @@ public class MerchantProfileDaoImpl implements MerchantProfileDao {
 	}
 
 	
-	public MerchantProfile loadMerchantProfile(String merchantName) {
+	public MerchantProfile loadMerchantProfile(String shopName) {
 		MerchantProfile mp = null;
 		String sql = "select merchant_uuid, merch_name, merch_age, merch_gender, shop_name, shop_addr, shop_tel_no, shop_logo_path, created_dt_gmt cre_dt, last_modified_dt_gmt last_mod_dt, account_uuid from merchant_profile where shop_name=?";
 		Connection con = null;
@@ -81,7 +85,7 @@ public class MerchantProfileDaoImpl implements MerchantProfileDao {
 		con = DBUtil.createConnection();
 		try {
 			pst = con.prepareStatement(sql);
-			pst.setString(1, merchantName);
+			pst.setString(1, shopName);
 			rs = pst.executeQuery();
 			
 			if (rs.next()) {
