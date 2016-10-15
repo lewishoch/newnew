@@ -1,7 +1,6 @@
 package ui.dish;
 
 import java.io.IOException;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import po.Dish;
 import service.DishManager;
 import service.impl.DishManagerImpl;
 
@@ -19,30 +19,25 @@ public class AddDishServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final DishManager dm = new DishManagerImpl();
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sen = request.getSession(false);
 		
 		if(sen!=null){
-			int mid = Integer.parseInt(request.getParameter("mid"));
-			String dname = (String)request.getParameter("dname");
+
+			long mid = Long.parseLong(request.getParameter("mid"));
+			String dname = request.getParameter("dname");
+			String dpath = request.getParameter("dpath");
 			
+			Dish d = new Dish();
+			d.setMerchantUuid(mid);
+			d.setDishName(dname);
+			d.setDishFolderPath(dpath);
 			
-			long merchantUuid;
-			long dishId;
-			String dishName;
-			String dishFolderPath;
-			Date createdDtGmt;
-			Date lastModifiedDtGmt;
+			dm.addDish(d);
 		}
 		else
 			response.sendRedirect("index.jsp");
