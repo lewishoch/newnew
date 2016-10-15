@@ -15,5 +15,5 @@ public class DishDaoImplTest {
 	
 	private DishDao ud = new DishDaoImpl();
 
-
+	
 }

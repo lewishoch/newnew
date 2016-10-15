@@ -44,6 +44,23 @@ public class MerchantProfileDaoImplTest {
 	}
 	
 	@Test
+	public void testLoadByAccountId()
+	{
+		MerchantProfile mp = mpd.loadMerchantProfileByAccountUuid(1);
+		System.out.println(mp.getUuid());
+		System.out.println(mp.getmName());
+		System.out.println(mp.getmAge());
+		System.out.println(mp.getmGender());
+		System.out.println(mp.getsName());
+		System.out.println(mp.getsAddr());
+		System.out.println(mp.getsTel());
+		System.out.println(mp.getsLogoPath());
+		System.out.println(mp.getCreDt());
+		System.out.println(mp.getLastModDt());
+		System.out.println(mp.getmAccountUuid());
+	}
+	
+	@Test
 	public void testAdd()
 	{
 		MerchantProfile mp = new MerchantProfile();
