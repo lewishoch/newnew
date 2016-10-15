@@ -41,8 +41,8 @@ public class MerchantAccountDaoImplTest {
 	{
 		MerchantAccount m = new MerchantAccount();
 		m.setStatus(1);
-		m.setUname("test6");
-		m.setPsd("test6");
+		m.setUname("Test");
+		m.setPsd("Test");
 		mad.addMerchant(m);
 	}
 	
