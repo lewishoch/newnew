@@ -1,5 +1,7 @@
 package jms.producer.impl;
 
+import java.util.Date;
+
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import javax.jms.Destination;
@@ -10,6 +12,7 @@ import javax.jms.TextMessage;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.command.ActiveMQQueue;
+import org.junit.Test;
 
 import jms.producer.JMSProducer;
 
@@ -21,7 +24,7 @@ public class PtpProducer implements JMSProducer{
 	private PtpProducer(){
 		// read properties
 		queueName = "Merchant_Q001";
-		destination = "failover://tcp://localhost:61616";
+		destination = "failover://tcp://10.222.57.12:61616";
 	}
 	
 	public static PtpProducer getInstance(){
@@ -55,6 +58,7 @@ public class PtpProducer implements JMSProducer{
 		
 	}
 	
-	
-	
+	public void sendMsg() throws JMSException{
+		sendMsg(new Date().toString());
+	}
 }
