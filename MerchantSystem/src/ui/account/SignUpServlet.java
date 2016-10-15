@@ -42,7 +42,7 @@ public class SignUpServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		boolean isSuccess = false;
+		boolean isSuccess = true;
 		
 		MerchantProfile merchantProfile = null;
 		MerchantAccount merchantAccount = null;
