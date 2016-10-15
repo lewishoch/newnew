@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import po.Dish;
 import service.DishManager;
 import service.impl.DishManagerImpl;
 import ui.common.SessionLogin;
@@ -34,7 +35,7 @@ public class UpdateDishServlet extends HttpServlet {
 			
 			dm.updateDish(d);
 			
-			response.sendRedirect("config");
+			response.sendRedirect("control");
 
 		}
 		else

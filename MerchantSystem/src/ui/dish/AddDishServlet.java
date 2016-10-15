@@ -39,7 +39,7 @@ public class AddDishServlet extends HttpServlet {
 			d.setDishFolderPath(dpath);
 			
 			dm.addDish(d);
-			response.sendRedirect("config");
+			response.sendRedirect("control");
 		}
 		else
 			response.sendRedirect("logout");

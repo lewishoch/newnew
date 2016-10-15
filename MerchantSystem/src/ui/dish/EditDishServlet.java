@@ -13,9 +13,6 @@ import service.DishManager;
 import service.impl.DishManagerImpl;
 import ui.common.SessionLogin;
 
-/**
- * Servlet implementation class EditDishServlet
- */
 public class EditDishServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	

@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import po.Dish;
 import service.DishManager;
 import service.impl.DishManagerImpl;
 import ui.common.SessionLogin;
@@ -31,7 +30,7 @@ public class DeleteDishServlet extends HttpServlet {
 		if(sen!=null && SessionLogin.sessionLogin(sen)){
 			int did = Integer.parseInt(request.getParameter("did"));
 			dm.deleteDish(did);
-			response.sendRedirect("config");
+			response.sendRedirect("control");
 		}
 		else
 			response.sendRedirect("logout");
