@@ -89,4 +89,14 @@
     <servlet-name>DeleteDishServlet</servlet-name>
     <url-pattern>/deleteDish</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EditDishServlet</display-name>
+    <servlet-name>EditDishServlet</servlet-name>
+    <servlet-class>ui.dish.EditDishServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditDishServlet</servlet-name>
+    <url-pattern>/editDish</url-pattern>
+  </servlet-mapping>
 </web-app>
