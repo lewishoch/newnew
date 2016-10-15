@@ -8,9 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import po.Dish;
 import service.DishManager;
 import service.impl.DishManagerImpl;
 import ui.common.SessionLogin;
+import util.UploadImage;
 
 public class DeleteDishServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -22,7 +24,12 @@ public class DeleteDishServlet extends HttpServlet {
 		
 		if(SessionLogin.sessionLogin(sen)){
 			long did = Long.parseLong(request.getParameter("dishId"));
-			dm.deleteDish(did);
+			
+			Dish d = dm.loadDish(did);
+			String path = d.getDishFolderPath();
+			
+			UploadImage.deleteImage(this.getServletContext().getRealPath(path));
+			//dm.deleteDish(did);
 			response.sendRedirect("control");
 		}
 		else
