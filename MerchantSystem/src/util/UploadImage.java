@@ -60,6 +60,18 @@ public class UploadImage {
 		File storeFile = new File(fileFolderPath + "/" +fi.getName());
 		fi.write(storeFile);	
 	}
+	
+	public static void deleteImage(String fileFolderPath)
+	{
+		File folder = new File(fileFolderPath);
+		File[] listOfFiles = folder.listFiles();
+
+		    for (int i = 0; i < listOfFiles.length; i++) {
+		      if (listOfFiles[i].isFile()) {
+		    	  listOfFiles[i].delete();
+		      } 
+		    }
+	}
 
 
 }

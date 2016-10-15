@@ -66,7 +66,7 @@ public class AddDishServlet extends HttpServlet {
 
 				long mid = Long.parseLong((String)map.get("mid"));
 				String dname = (String)map.get("dname");
-				String dpath = this.getServletContext().getContextPath() + "/img/dish/"+mid + "_" + dname;
+				String dpath = "/img/dish/"+mid + "_" + dname;
 				
 				for(FileItem fi:fis)
 				{
@@ -91,7 +91,7 @@ public class AddDishServlet extends HttpServlet {
 			
 			}
 					
-			response.sendRedirect("control");
+			request.getRequestDispatcher("control").forward(request, response);
 		}
 		else
 			response.sendRedirect("logout");

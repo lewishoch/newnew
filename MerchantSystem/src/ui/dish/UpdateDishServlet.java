@@ -33,9 +33,15 @@ public class UpdateDishServlet extends HttpServlet {
 			d.setDishName(dname);
 			d.setDishFolderPath(dpath);
 			
-			dm.updateDish(d);
-			
-			response.sendRedirect("control");
+			if(dm.updateDish(d)){
+				request.setAttribute("msgType", "succMsg");
+				request.setAttribute("msg", "Record has been updated.");
+			}
+			else{
+				request.setAttribute("msgType", "errorMsg");
+				request.setAttribute("msg", "Failed to update the record.");
+			}
+			request.getRequestDispatcher("control").forward(request, response);
 
 		}
 		else
