@@ -12,6 +12,8 @@ import po.Dish;
 import util.DBUtil;
 
 public class DishDaoImpl implements DishDao {
+	
+	private DishDao dd = new DishDaoImpl();
 
 	public Dish loadDish(long dishUuid) {
 		// TODO Auto-generated method stub
