@@ -50,44 +50,6 @@ public class DishDaoImpl implements DishDao {
 		
 		return dish;
 	}
-	
-	public Dish loadDish(String dishName, long merchantId) {
-		Dish dish = null;
-		
-		String sql = "SELECT DISH_ID, DISH_NAME, DISH_FOLDER_PATH, CREATED_DT_GMT, LAST_MODIFIED_DT_GMT, MERCHANT_UUID FROM DISH WHERE MERCHANT_UUID = ? AND DISH_NAME = ?";
-		Connection con = null;
-		PreparedStatement pst = null;
-		ResultSet rs = null;
-		
-		con = DBUtil.createConnection();
-		
-		try {
-			pst = con.prepareStatement(sql);
-			pst.setLong(1,merchantId);
-			pst.setString(2,dishName);
-			rs = pst.executeQuery();
-			
-			if(rs.next()) 
-			{
-				dish = new Dish();
-				dish.setDishId(rs.getLong("DISH_ID"));
-				dish.setDishName(rs.getString("DISH_NAME"));
-				dish.setDishFolderPath(rs.getString("DISH_FOLDER_PATH"));
-				dish.setCreatedDtGmt(new Date(rs.getTimestamp("CREATED_DT_GMT").getTime()));
-				dish.setLastModifiedDtGmt(new Date(rs.getTimestamp("LAST_MODIFIED_DT_GMT").getTime()));
-				dish.setMerchantUuid(rs.getLong("MERCHANT_UUID"));
-			}
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		finally{
-			DBUtil.free(con, pst, rs);
-		}
-		
-		return dish;
-	}
 
 	public boolean addDish(Dish dish) {
 		
@@ -166,7 +128,7 @@ public class DishDaoImpl implements DishDao {
 		return true;
 	}
 
-	public List<Dish> findAllDishes() {
+	public List<Dish> findAllDishes(long merchantUuid) {
 		List<Dish> dishes = new ArrayList<Dish>();
 		
 		String sql = "SELECT DISH_ID, DISH_NAME, DISH_FOLDER_PATH, CREATED_DT_GMT, LAST_MODIFIED_DT_GMT, MERCHANT_UUID FROM DISH";
