@@ -43,8 +43,6 @@ public class MerchantAccountDaoImplTest {
 		m.setStatus(1);
 		m.setUname("Test");
 		m.setPsd("Test");
-		m.setCreDt(new java.util.Date());
-		m.setLastModDt(new java.util.Date());
 		mad.addMerchant(m);
 	}
 	
@@ -53,10 +51,8 @@ public class MerchantAccountDaoImplTest {
 	{
 		MerchantAccount m = mad.loadMerchant(1);
 		m.setStatus(0);
-		m.setUname("Test Update");
-		m.setPsd("Test Update");
-		m.setCreDt(new java.util.Date());
-		m.setLastModDt(new java.util.Date());
+		m.setUname("Test Update2");
+		m.setPsd("Test Update2");
 		mad.updateMerchant(m);
 	}
 	
