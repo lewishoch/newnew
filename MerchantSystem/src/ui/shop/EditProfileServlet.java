@@ -25,7 +25,7 @@ public class EditProfileServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sen = request.getSession(false);
 		
-		if(sen!=null && SessionLogin.sessionLogin(sen)){
+		if(SessionLogin.sessionLogin(sen)){
 			
 			int id = Integer.parseInt(request.getParameter("muuid"));
 			MerchantProfile merchantProfile = mpm.loadMerchantProfile(id);
@@ -43,7 +43,7 @@ public class EditProfileServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sen = request.getSession(false);
 		
-		if(sen!=null){
+		if(SessionLogin.sessionLogin(sen)){
 			
 			
 		}

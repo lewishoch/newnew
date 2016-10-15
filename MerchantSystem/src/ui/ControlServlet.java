@@ -32,8 +32,8 @@ public class ControlServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sen = request.getSession(false);
-;
-		if(sen !=null && SessionLogin.sessionLogin(sen)){
+
+		if(SessionLogin.sessionLogin(sen)){
 			try{
 				String merchant_name = ((MerchantAccount)sen.getAttribute("merchantAccount")).getUname();
 				MerchantAccount merchantAccount = mm.loadMerchantAccount(merchant_name);

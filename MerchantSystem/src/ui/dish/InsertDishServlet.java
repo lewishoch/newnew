@@ -24,7 +24,7 @@ public class InsertDishServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sen = request.getSession(false);
 		
-		if(sen!=null && SessionLogin.sessionLogin(sen)){
+		if(SessionLogin.sessionLogin(sen)){
 		
 			long merchantId = Long.parseLong(request.getParameter("mid"));
 			request.setAttribute("mid", merchantId);

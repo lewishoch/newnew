@@ -13,12 +13,11 @@ public class SessionLogin {
 		if(sen == null) return false;
 		
 		try{
-			MerchantAccount m = (MerchantAccount) sen.getAttribute("merchantAccount");
-			String loginName = m.getUname();
-			String loginPassword = m.getPsd();
-			String matchPassword = mam.loadMerchantAccount(loginName).getPsd();
+			// check in case is null;
+			boolean isLogin = Boolean.parseBoolean((String) sen.getAttribute("isLogin"));
+			long uuid = Long.parseLong((String) sen.getAttribute("uuid"));
 			
-			return loginPassword.equals(matchPassword);
+			return isLogin; 
 		}
 		catch(Exception e){
 			return false;
