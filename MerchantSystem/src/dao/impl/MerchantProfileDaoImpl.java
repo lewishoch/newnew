@@ -13,7 +13,7 @@ import util.DBUtil;
 public class MerchantProfileDaoImpl implements MerchantProfileDao {
 	
 	public boolean addMerchantProfile(MerchantProfile mp) {
-		String sql = "insert into merchant_profile(merchant_uuid, merch_name, merch_age, merch_gender, shop_name, shop_addr, shop_tel_no, shop_logo_path, created_dt_gmt, last_modified_dt_gmt, account_uuid) values (merchant_profile_seq1.nextval,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into merchant_profile(merchant_uuid, merch_name, merch_age, merch_gender, shop_name, shop_addr, shop_tel_no, shop_logo_path, created_dt_gmt, last_modified_dt_gmt, account_uuid) values (merchant_profile_seq1.nextval,?,?,?,?,?,?,?,systimestamp,systimestamp,?)";
 		
 		Connection con = null;
 		PreparedStatement pst = null;
@@ -28,9 +28,7 @@ public class MerchantProfileDaoImpl implements MerchantProfileDao {
 			pst.setString(5, mp.getsAddr());
 			pst.setString(6, mp.getsTel());
 			pst.setString(7, mp.getsLogoPath());
-			pst.setDate(8, new java.sql.Date(mp.getCreDt().getTime()));
-			pst.setDate(9, new java.sql.Date(mp.getLastModDt().getTime()));
-			pst.setLong(10, mp.getmAccountUuid());
+			pst.setLong(8, mp.getmAccountUuid());
 			pst.executeUpdate();
 			return true;
 		} catch (SQLException e) {

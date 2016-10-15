@@ -8,9 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import po.Dish;
 import service.DishManager;
 import service.impl.DishManagerImpl;
 import ui.common.SessionLogin;
+import util.UploadImage;
 
 public class DeleteDishServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -22,6 +24,14 @@ public class DeleteDishServlet extends HttpServlet {
 		
 		if(SessionLogin.sessionLogin(sen)){
 			long did = Long.parseLong(request.getParameter("dishId"));
+
+			
+			Dish d = dm.loadDish(did);
+			String path = d.getDishFolderPath();
+			
+			UploadImage.deleteImage(this.getServletContext().getRealPath(path));
+			//dm.deleteDish(did);
+
 			if(dm.deleteDish(did)){
 				request.setAttribute("msgType", "succMsg");
 				request.setAttribute("msg", "Record has been removed.");
@@ -30,7 +40,8 @@ public class DeleteDishServlet extends HttpServlet {
 				request.setAttribute("msgType", "errorMsg");
 				request.setAttribute("msg", "Failed to remove the record.");
 			}
-			request.getRequestDispatcher("control").forward(request, response);
+
+			response.sendRedirect("control");
 		}
 		else
 			response.sendRedirect("logout");
