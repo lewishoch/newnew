@@ -18,6 +18,7 @@ import service.MerchantProfileManager;
 import service.impl.DishManagerImpl;
 import service.impl.MerchantAccountManagerImpl;
 import service.impl.MerchantProfileManagerImpl;
+import ui.common.SessionLogin;
 
 /**
  * Servlet implementation class ControlServlet
@@ -31,9 +32,9 @@ public class ControlServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sen = request.getSession(false);
 		
-		if(sen!=null){
+		if(sen !=null && SessionLogin.sessionLogin(sen)){
 			try{
-				String merchant_name = ((MerchantAccount)sen.getAttribute("merchant")).getUname();
+				String merchant_name = ((MerchantAccount)sen.getAttribute("merchantAccount")).getUname();
 				MerchantAccount merchantAccount = mm.loadMerchantAccount(merchant_name);
 				MerchantProfile merchantProfile = mpm.loadMerchantProfile(merchant_name);
 				
