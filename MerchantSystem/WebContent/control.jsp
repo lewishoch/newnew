@@ -31,7 +31,7 @@
 				<td>${merchantProfile.sName}</td>
 				<td>${merchantProfile.sAddr}</td>
 				<td>${merchantProfile.sTel}</td>
-				<td>${merchantProfile.sLogoPath}</td>
+				<td><img src="${merchantProfile.sLogoPath}" alt="shopLogo"  height="100"  ></td>
 				<td><a class =  "btn btn-success" href = "editProfile?muuid=${merchantProfile.uuid}">Edit</a></td>
 			</tr>
 		
@@ -49,14 +49,14 @@
 						<a href="showDish?id=${d.dishId}">${d.dishName}</a>
 					</td>
 					<td>
-						<img src=${d.dishFolderPath} alt=${d.dishName} width=200 height=200>
+						<img src=${d.dishFolderPath} alt=${d.dishName} width=200 height=200/>
 					</td>
-					<td><a class="btn btn-primary" href="deleteDish?id=${d.dishId}">delete</a></td>
-					<td><a class="btn btn-success" href="editDish?id=${d.dishId}">edit</a></td>
+					<td><a class="btn btn-primary" href="deleteDish?dishId=${d.dishId}">Delete</a></td>
+					<td><a class="btn btn-success" href="editDish?dishId=${d.dishId}">Edit</a></td>
 				</tr>
 			</c:forEach>
 		</table>
-		<a class="btn btn-success" href="addUserForm.jsp">add new dish</a>
+		<a class="btn btn-success" href="insertDish?mid=${merchantProfile.uuid}">Add New Dish</a>
 	</div>
 </div>
 </body>

@@ -5,5 +5,5 @@ import javax.jms.JMSException;
 public interface JMSProducer {
 
 	public void sendMsg(String msg) throws JMSException;
-
+	public void sendMsg() throws JMSException;
 }
