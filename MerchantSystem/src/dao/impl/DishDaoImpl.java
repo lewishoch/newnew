@@ -164,6 +164,42 @@ public class DishDaoImpl implements DishDao {
 		
 		return dishes;
 	}
+	
+	public List<Dish> findAllDishesforShop(String shopName) {
+		List<Dish> dishes = new ArrayList<Dish>();
+		
+		String sql = "SELECT DISH_ID, DISH_NAME, DISH_FOLDER_PATH, MERCHANT_UUID FROM DISH d, MERCHANT_PROFILE mp where d.MERCHANT_UUID=mp.MERCHANT_UUID AND mp.SHOP_NAME = ?";
+		Connection con = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		
+		con = DBUtil.createConnection();
+		
+		try {
+			pst = con.prepareStatement(sql);
+			pst.setString(1, shopName);
+			pst.executeUpdate();
+			
+			while(rs.next()) 
+			{
+				Dish dish = new Dish();
+				dish.setDishId(rs.getLong("DISH_ID"));
+				dish.setDishName(rs.getString("DISH_NAME"));
+				dish.setDishFolderPath(rs.getString("DISH_FOLDER_PATH"));
+				dish.setMerchantUuid(rs.getLong("MERCHANT_UUID"));
+				dishes.add(dish);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{
+			DBUtil.free(con, pst, rs);
+		}
+		
+		return dishes;
+	}
 
 	
 }
