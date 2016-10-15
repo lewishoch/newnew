@@ -13,6 +13,10 @@ public class DishManagerImpl implements DishManager {
 	public Dish loadDish(long dishUuid) {
 		return dao.loadDish(dishUuid);
 	}
+	
+	public Dish loadDish(String dishName, long merchantId) {
+		return dao.loadDish(dishName, merchantId);
+	}
 
 	public boolean addDish(Dish dish) {
 		return dao.addDish(dish);
@@ -26,8 +30,12 @@ public class DishManagerImpl implements DishManager {
 		return dao.deleteDish(dishUuid);
 	}
 
-	public List<Dish> findAllDishes(long merchantUuid) {
-		return dao.findAllDishes(merchantUuid);
+	public List<Dish> findAllDishes() {
+		return dao.findAllDishes();
+	}
+	
+	public List<Dish> findDishesByMerchantUuid(long merchantUuid) {
+		return dao.findDishesByMerchantUuid(merchantUuid);
 	}
 
 }

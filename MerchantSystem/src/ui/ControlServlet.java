@@ -47,7 +47,7 @@ public class ControlServlet extends HttpServlet {
 				if(merchantAccount.getStatus()==0){
 					// put...
 					System.out.println("control");
-					List<Dish> dishes = dm.findAllDishes(merchantAccount.getUuid());
+					List<Dish> dishes = dm.findDishesByMerchantUuid(merchantProfile.getUuid());
 					request.setAttribute("dishes", dishes);
 					// redirect to control.jsp
 					request.getRequestDispatcher("control.jsp").forward(request,response);
