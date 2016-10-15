@@ -16,7 +16,7 @@
 </form>
 </div>
 	<div id="signup">
-	<form action="signUp" method="post">
+	<form action="signUp" method="post" enctype="multipart/form-data">
 	<div id="account_info">
 		<label>Account</label></br>
 		<label>User Name: </label><input type="text" name="uname"/></br>

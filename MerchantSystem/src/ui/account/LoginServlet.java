@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import po.Merchant;
-import service.MerchantManager;
-import service.impl.MerchantManagerImpl;
+import po.MerchantAccount;
+import service.MerchantAccountManager;
+import service.impl.MerchantAccountManagerImpl;
 
 /**
  * Servlet implementation class LoginServlet
  */
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private MerchantManager mm = new MerchantManagerImpl();
+	private MerchantAccountManager mm = new MerchantAccountManagerImpl();
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -27,17 +27,19 @@ public class LoginServlet extends HttpServlet {
 		String uname = (String)request.getParameter("uname");
 		String password = (String)request.getParameter("password");
 		
-		Merchant merchant = mm.loadMerchant(uname);
-		
+		MerchantAccount merchantAccount = mm.loadMerchantAccount(uname);
+		if(merchantAccount==null) System.out.println("null");
 		// check if valid
-		if(merchant!=null && merchant.getPsd().equals(password)){
-			sen.setAttribute("id", merchant.getUuid());
-			request.getRequestDispatcher("control.jsp").forward(request,response);
+		if(merchantAccount!=null && merchantAccount.getPsd().equals(password)){
+			sen.setAttribute("merchantAccount", merchantAccount);
+			System.out.println("success");
+			response.sendRedirect("control");
 		}
 		else{
 			// else
+			System.out.println("fail");
 			request.setAttribute("loginMsg", "Wrong user name or password.");
-			request.getRequestDispatcher("index.jsp").forward(request,response);
+			response.sendRedirect("index.jsp");
 		}
 	}
 }

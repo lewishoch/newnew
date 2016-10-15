@@ -5,18 +5,31 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import jms.producer.JMSProducer;
+import jms.producer.impl.PtpProducer;
+import service.MerchantProfileManager;
+import service.impl.MerchantProfileManagerImpl;
 
 /**
  * Servlet implementation class UpdateProfileServlet
  */
 public class UpdateProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private final MerchantProfileManager mpm = new MerchantProfileManagerImpl();
+	private final JMSProducer jmsProjecter = PtpProducer.getInstance();
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		HttpSession sen = request.getSession(false);
+		
+		if(sen!=null){
+			
+			
+		}
+		else
+			response.sendRedirect("index.jsp");
 	}
 
 }

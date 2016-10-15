@@ -22,7 +22,7 @@ public class LogoutServlet extends HttpServlet {
 		if (session != null)
 		    session.invalidate();
 		
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		response.sendRedirect("index.jsp");
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

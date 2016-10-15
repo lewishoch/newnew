@@ -8,14 +8,9 @@
 <title>Merchant System</title>
 </head>
 <body>
-<div id="account_control">
-	<form action="logout" method="post">
-		<label>Welcome, ${account.name}!</label>
-		<input type="submit" value="Logout"/>
-	</form>
-</div>
+<jsp:include page="account.jsp" />
 <div id="content">
-	<label>Your current status is: ${account.status }.</label>
+	<label>Your current status is: ${merchantAccount.status }.</label>
 </div>
 </body>
 </html>
