@@ -10,7 +10,7 @@
 <body>
 <jsp:include page="account.jsp" />
 <div id="content">
-	<label>Your current status is: ${merchantAccount.status }.</label>
+	<label>Your current status is: ${status }.</label>
 </div>
 </body>
 </html>
