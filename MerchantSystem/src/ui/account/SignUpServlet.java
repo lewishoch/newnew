@@ -1,12 +1,19 @@
 package ui.account;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.jms.JMSException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import po.MerchantAccount;
 import po.MerchantProfile;
@@ -52,7 +59,7 @@ public class SignUpServlet extends HttpServlet {
 			String address = (String)request.getParameter("address");
 			String telno = (String)request.getParameter("telno");
 			// read upload file here
-			// String path = uploadFile();
+			uploadFile(request);
 
 			System.out.println(mname);
 			System.out.println(age);
@@ -118,7 +125,37 @@ public class SignUpServlet extends HttpServlet {
 	}
 	
 	// do upload and return path
-	private String uploadFile(){
+	private String uploadFile(HttpServletRequest request){
+		
+		String path=this.getServletContext().getRealPath("/temp");
+		File f=new File(path);
+		
+		DiskFileItemFactory factory=new DiskFileItemFactory(102,f );
+		
+		ServletFileUpload upload=new ServletFileUpload();
+		upload.setFileItemFactory(factory);
+		
+		List<FileItem> fis=null;
+		try {
+			fis= upload.parseRequest(request);
+		} catch (FileUploadException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for(FileItem fi:fis){
+			
+			if(fi.isFormField()){
+				System.out.println(fi.getFieldName() +"......."+fi.getString());
+			}
+			else{
+//				InputStream in= fi.getInputStream();
+//				byte[] bs=new byte[in.available()];
+//				in.read(bs);
+				//fi.write(file);
+				System.out.println(fi.getSize());
+			}
+		}
+		
 		return "";
 	}
 }
