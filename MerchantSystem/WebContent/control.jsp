@@ -31,7 +31,7 @@
 				<td>${merchantProfile.sName}</td>
 				<td>${merchantProfile.sAddr}</td>
 				<td>${merchantProfile.sTel}</td>
-				<td><img src="/MerchantSystem/img/logo/lewis.jpg" alt="pic" ></td>
+				<td><img src="${merchantProfile.sLogoPath}" alt="shopLogo"  height="100"  ></td>
 				<td><a class =  "btn btn-success" href = "editProfile?muuid=${merchantProfile.uuid}">Edit</a></td>
 			</tr>
 		
