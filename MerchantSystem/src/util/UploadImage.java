@@ -68,12 +68,15 @@ public class UploadImage {
 	{
 		File folder = new File(fileFolderPath);
 		File[] listOfFiles = folder.listFiles();
-
+		System.out.println(fileFolderPath);
+		if(listOfFiles != null){
 		    for (int i = 0; i < listOfFiles.length; i++) {
 		      if (listOfFiles[i].isFile()) {
 		    	  listOfFiles[i].delete();
 		      } 
 		    }
+		    folder.delete();
+		}
 	}
 	
 	public static ArrayList<String> getdishPath(ServletContext servletContext, String fileFolderPath)

@@ -24,6 +24,7 @@ public class InsertDishServlet extends HttpServlet {
 			long merchantId = Long.parseLong(request.getParameter("mid"));
 			request.setAttribute("mid", merchantId);
 			request.getRequestDispatcher("addDishForm.jsp").forward(request, response);
+			
 		}
 		else
 			response.sendRedirect("logout");
