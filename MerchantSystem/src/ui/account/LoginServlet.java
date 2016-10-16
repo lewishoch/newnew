@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet {
 			System.out.println("fail");
 			request.setAttribute("msgType", "errorMsg");
 			request.setAttribute("Msg", "Wrong user name or password.");
-			response.sendRedirect("index.jsp");
+			request.getRequestDispatcher("index.jsp").forward(request, response);;
 		}
 	}
 }

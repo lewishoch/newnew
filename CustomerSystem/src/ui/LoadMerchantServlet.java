@@ -2,8 +2,10 @@ package ui;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +19,7 @@ import dao.DishDao;
 import dao.MerchantProfileDao;
 import dao.impl.DishDaoImpl;
 import dao.impl.MerchantProfileDaoImpl;
+import dto.DishDTO;
 
 /**
  * Servlet implementation class ShowMerchantServlet
@@ -30,25 +33,50 @@ public class LoadMerchantServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String merchantName = request.getParameter("sName");
-		//System.out.println(merchantName);
-		long uuid = (Long)request.getAttribute("merchantUuid");
-		//long uuid = Long.parseLong(request.getParameter("merchantUuid"));
-		if(request.getAttribute("merchantUuid") == null){
-			System.out.println("hello");
-		}
-		System.out.println(request.getAttribute("merchantUuid")); 
-		System.out.println(uuid);
-		//MerchantProfile mpId = md.loadMerchantProfile(uuid);
-		MerchantProfile mp = md.loadMerchantProfile(merchantName);
-		List<Dish> d = dd.findDishesByMerchantUuid(uuid);
+
+		long uuid = Long.parseLong((String) request.getParameter("uuid"));
+		MerchantProfile mp = md.loadMerchantProfile(uuid);
 		
-		//System.out.println(mp);
-		//System.out.println(mpId);
+		List<Dish> dishes = dd.findDishesByMerchantUuid(uuid);
+		List<DishDTO> dishDTO = new ArrayList<DishDTO>();
+		
+		for(Dish d : dishes)
+		{
+			DishDTO temp = new DishDTO();
+			List<String> filePaths = getdishPath(this.getServletContext(),d.getDishFolderPath());
+			temp.setDishId(d.getDishId());
+			temp.setDishName(d.getDishName());
+			temp.setDishPath(filePaths);
+			dishDTO.add(temp);
+		}
 		request.setAttribute("merchant", mp);
-		request.setAttribute("dish", d);
-		//request.setAttribute("merchant", mpId);
+		request.setAttribute("dishes", dishDTO);
+		
+		
 		request.getRequestDispatcher("MerchantInfo.jsp").forward(request, response);
 		
+		
+	}
+	
+	private ArrayList<String> getdishPath(ServletContext servletContext, String fileFolderPath)
+	{	
+		String str = servletContext.getRealPath("");
+		str = str.replace("\\CustomerSystem", "\\MerchantSystem");
+		str += fileFolderPath;
+		
+		
+		ArrayList<String> result = new ArrayList<String>();
+		String a  = servletContext.getContextPath();
+		File folder = new File(str);
+		File[] listOfFiles = folder.listFiles();
+		if(listOfFiles != null){
+		    for (int i = 0; i < listOfFiles.length; i++) {
+		      if (listOfFiles[i].isFile()) {
+		    	  result.add("/MerchantSystem"+ fileFolderPath + "/"+listOfFiles[i].getName());
+		      } 
+		    }
+		}
+		return result;
 		
 	}
 

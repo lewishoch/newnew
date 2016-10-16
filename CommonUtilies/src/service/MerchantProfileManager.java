@@ -1,5 +1,7 @@
 package service;
 
+import java.util.List;
+
 import po.MerchantProfile;
 
 public interface MerchantProfileManager {
@@ -7,4 +9,5 @@ public interface MerchantProfileManager {
 	public boolean updateMerchant(MerchantProfile mp);
 	public MerchantProfile loadMerchantProfile(String merchantName);
 	public MerchantProfile loadMerchantProfile(long uuid);
+	public List<MerchantProfile> findAllMerchantProfiles();
 }
