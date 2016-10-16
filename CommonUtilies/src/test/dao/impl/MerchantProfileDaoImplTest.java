@@ -1,5 +1,7 @@
 package test.dao.impl;
 
+import java.util.List;
+
 import org.junit.Test;
 
 import po.MerchantProfile;
@@ -58,6 +60,15 @@ public class MerchantProfileDaoImplTest {
 		System.out.println(mp.getCreDt());
 		System.out.println(mp.getLastModDt());
 		System.out.println(mp.getmAccountUuid());
+	}
+	
+	@Test
+	public void testFindAll()
+	{
+		List<MerchantProfile> mps = mpd.findAllMerchantProfiles();
+		for (MerchantProfile mp: mps) {
+			System.out.println(mp.getUuid()+"......"+mp.getmName()+"......"+mp.getmAge()+"......"+mp.getmGender()+"......"+mp.getsName()+"......"+mp.getsAddr()+"......"+mp.getsTel()+"......"+mp.getsLogoPath()+"......"+mp.getCreDt()+"......"+mp.getLastModDt()+"......"+mp.getmAccountUuid());
+		}
 	}
 	
 	@Test
