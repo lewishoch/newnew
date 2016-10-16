@@ -8,6 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Merchant System</title>
 <link rel="stylesheet" type="text/css" href="css/msgBox.css">
+<link rel="stylesheet" type="text/css" href="css/tab.css">
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -19,46 +20,57 @@
 </head>
 <body>
 <jsp:include page="account.jsp" />
-<div id="content">
-	<div id="shop">
-
-		<h1>Your Profile</h1>
-		<table class="table table-striped">
-			<tr><th>Merchant Name</th><th>Merchant Gender</th><th>Merchant Age</th><th>Shop Name</th><th>Shop Address</th><th>Shop Tel Number</th><th>Shop Logo</th><th>Edit</th></tr>
-			<tr>
-				<td>${merchantProfile.mName}</td>
-				<td>${merchantProfile.mGender}</td>
-				<td>${merchantProfile.mAge}</td>
-				<td>${merchantProfile.sName}</td>
-				<td>${merchantProfile.sAddr}</td>
-				<td>${merchantProfile.sTel}</td>
-				<td><img src="${merchantProfile.sLogoPath}" alt="shopLogo"  height="100"  ></td>
-				<td><a class =  "btn btn-success" href = "editProfile?muuid=${merchantProfile.uuid}">Edit</a></td>
-			</tr>
-		
-		</table>
-
-	</div>
-	
-	<div id="dish">
-		<h1>Your Dishes</h1>
-		<table class="table table-striped">
-			<tr><th>Dish Name</th><th>Dish Photo</th><th>Delete</th><th>Edit</th></tr>
-			<c:forEach var="d" items="${dishes}">
+<div class="tabs">
+    <!-- Radio button and lable for #tab-content1 -->
+    <input type="radio" class="radioTab" name="tabs" id="tab1" checked >
+    <label for="tab1">
+        <i class="fa fa-html5"></i><span>Shop Profile</span>
+    </label>
+    <!-- Radio button and lable for #tab-content2 -->
+    <input type="radio" class="radioTab" name="tabs" id="tab2">
+    <label for="tab2">
+        <i class="fa fa-css3"></i><span>Dish Profile</span>
+    </label>
+    
+    <div id="tab-content1" class="tab-content">
+	    <div id="shop">
+			<h1>Your Profile</h1>
+			<table class="table table-striped">
+				<tr><th>Merchant Name</th><th>Merchant Gender</th><th>Merchant Age</th><th>Shop Name</th><th>Shop Address</th><th>Shop Tel Number</th><th>Shop Logo</th><th>Edit</th></tr>
 				<tr>
-					<td>
-						<a href="showDish?id=${d.dishId}">${d.dishName}</a>
-					</td>
-					<td>
-						<img src=${d.dishFolderPath} alt=${d.dishName} width=200 height=200/>
-					</td>
-					<td><a class="btn btn-primary" href="deleteDish?dishId=${d.dishId}">Delete</a></td>
-					<td><a class="btn btn-success" href="editDish?dishId=${d.dishId}">Edit</a></td>
+					<td>${merchantProfile.mName}</td>
+					<td>${merchantProfile.mGender}</td>
+					<td>${merchantProfile.mAge}</td>
+					<td>${merchantProfile.sName}</td>
+					<td>${merchantProfile.sAddr}</td>
+					<td>${merchantProfile.sTel}</td>
+					<td><img src="${merchantProfile.sLogoPath}" alt="shopLogo"  height="100"  ></td>
+					<td><a class =  "btn btn-success" href = "editProfile?muuid=${merchantProfile.uuid}">Edit</a></td>
 				</tr>
-			</c:forEach>
-		</table>
-		<a class="btn btn-success" href="insertDish?mid=${merchantProfile.uuid}">Add New Dish</a>
-	</div>
+			</table>
+		</div>
+    </div>
+    <div id="tab-content2" class="tab-content">
+	    <div id="dish">
+			<h1>Your Dishes</h1>
+			<table class="table table-striped">
+				<tr><th>Dish Name</th><th>Dish Photo</th><th>Delete</th><th>Edit</th></tr>
+				<c:forEach var="d" items="${dishes}">
+					<tr>
+						<td>
+							<a href="showDish?id=${d.dishId}">${d.dishName}</a>
+						</td>
+						<td>
+							<img src=${d.dishFolderPath} alt=${d.dishName} width=200 height=200/>
+						</td>
+						<td><a class="btn btn-primary" href="deleteDish?dishId=${d.dishId}">Delete</a></td>
+						<td><a class="btn btn-success" href="editDish?dishId=${d.dishId}">Edit</a></td>
+					</tr>
+				</c:forEach>
+			</table>
+			<a class="btn btn-success" href="insertDish?mid=${merchantProfile.uuid}">Add New Dish</a>
+		</div>
+    </div>
 </div>
 <div id="${msgType }" class="centre">
 ${msg }
