@@ -9,6 +9,7 @@ import java.util.List;
 
 import dao.MerchantDao;
 import po.Merchant;
+import po.MerchantProfile;
 import util.DBUtil;
 
 public class MerchantDaoImpl implements MerchantDao {
@@ -97,7 +98,7 @@ public class MerchantDaoImpl implements MerchantDao {
 	
 
 
-	public Merchant loadMerchant(String userName) {
+	public Merchant loadMerchant(MerchantProfile mp) {
 		Merchant m = null;
 		String sql = "select uuid, status, user_name un, password psd, created_dt_gmt cre_dt, last_modified_dt_gmt last_mod_dt from merch_account where user_name=?";
 		Connection con = null;
@@ -107,7 +108,7 @@ public class MerchantDaoImpl implements MerchantDao {
 		con = DBUtil.createConnection();
 		try {
 			pst = con.prepareStatement(sql);
-			pst.setString(1, userName);
+			pst.setString(1, mp.getsName());
 			rs = pst.executeQuery();
 			
 			if (rs.next()) {
@@ -168,5 +169,8 @@ public class MerchantDaoImpl implements MerchantDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+
 
 }
