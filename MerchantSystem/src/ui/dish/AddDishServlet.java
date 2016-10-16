@@ -64,8 +64,8 @@ public class AddDishServlet extends HttpServlet {
 					}
 				}
 
-				long mid = 13;//Long.parseLong((String)map.get("mid"));
-				String dname = "B";//(String)map.get("dname");
+				long mid = Long.parseLong((String)map.get("mid"));
+				String dname = (String)map.get("dname");
 				String dpath = "/img/dish/"+mid + "_" + dname;
 				
 				for(FileItem fi:fis)
