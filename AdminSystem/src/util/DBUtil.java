@@ -17,7 +17,6 @@ public class DBUtil {
 	static {
 		ds = new BasicDataSource();
 		
-		//ds.setMaxActive(2);
 		ds.setUrl(db_url);
 		ds.setDriverClassName(driver_classname);
 		ds.setUsername(userName);

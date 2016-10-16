@@ -165,6 +165,44 @@ public class DishDaoImpl implements DishDao {
 		return dishes;
 	}
 	
+	public List<Dish> findDishesByMerchantUuid(long merchantUuid) {
+		List<Dish> dishes = new ArrayList<Dish>();
+		
+		String sql = "SELECT DISH_ID, DISH_NAME, DISH_FOLDER_PATH, CREATED_DT_GMT, LAST_MODIFIED_DT_GMT, MERCHANT_UUID FROM DISH WHERE MERCHANT_UUID = ?";
+		Connection con = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		
+		con = DBUtil.createConnection();
+		
+		try {
+			pst = con.prepareStatement(sql);
+			pst.setLong(1, merchantUuid);
+			rs = pst.executeQuery();
+			
+			while(rs.next()) 
+			{
+				Dish dish = new Dish();
+				dish.setDishId(rs.getLong("DISH_ID"));
+				dish.setDishName(rs.getString("DISH_NAME"));
+				dish.setDishFolderPath(rs.getString("DISH_FOLDER_PATH"));
+				dish.setCreatedDtGmt(new Date(rs.getTimestamp("CREATED_DT_GMT").getTime()));
+				dish.setLastModifiedDtGmt(new Date(rs.getTimestamp("LAST_MODIFIED_DT_GMT").getTime()));
+				dish.setMerchantUuid(rs.getLong("MERCHANT_UUID"));
+				dishes.add(dish);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{
+			DBUtil.free(con, pst, rs);
+		}
+		
+		return dishes;
+	}
+	
 	public List<Dish> findAllDishesforShop(String shopName) {
 		List<Dish> dishes = new ArrayList<Dish>();
 		

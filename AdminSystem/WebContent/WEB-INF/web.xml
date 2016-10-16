@@ -31,22 +31,62 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>acceptMerchantServlet</display-name>
-    <servlet-name>acceptMerchantServlet</servlet-name>
-    <servlet-class>ui.acceptMerchantServlet</servlet-class>
+    <display-name>AcceptMerchantServlet</display-name>
+    <servlet-name>AcceptMerchantServlet</servlet-name>
+    <servlet-class>ui.AcceptMerchantServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>acceptMerchantServlet</servlet-name>
+    <servlet-name>AcceptMerchantServlet</servlet-name>
     <url-pattern>/acceptMerchant</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>rejectMerchantServlet</display-name>
-    <servlet-name>rejectMerchantServlet</servlet-name>
-    <servlet-class>ui.rejectMerchantServlet</servlet-class>
+    <display-name>RejectMerchantServlet</display-name>
+    <servlet-name>RejectMerchantServlet</servlet-name>
+    <servlet-class>ui.RejectMerchantServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>rejectMerchantServlet</servlet-name>
+    <servlet-name>RejectMerchantServlet</servlet-name>
     <url-pattern>/rejectMerchant</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ListAllMerchantsServlet</display-name>
+    <servlet-name>ListAllMerchantsServlet</servlet-name>
+    <servlet-class>ui.ListAllMerchantsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListAllMerchantsServlet</servlet-name>
+    <url-pattern>/listAllMerchants</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FreezeMerchantServlet</display-name>
+    <servlet-name>FreezeMerchantServlet</servlet-name>
+    <servlet-class>ui.FreezeMerchantServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FreezeMerchantServlet</servlet-name>
+    <url-pattern>/freezeMerchant</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UnfreezeMerchantServlet</display-name>
+    <servlet-name>UnfreezeMerchantServlet</servlet-name>
+    <servlet-class>ui.UnfreezeMerchantServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UnfreezeMerchantServlet</servlet-name>
+    <url-pattern>/unfreezeMerchant</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LoginServlet</display-name>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>ui.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/login</url-pattern>
   </servlet-mapping>
 </web-app>

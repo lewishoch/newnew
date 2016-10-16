@@ -75,6 +75,17 @@ public class PtpConsumer implements JMSConsumer {
 		con=factory.createConnection();
 		con.start();
 		
+		sen = con.createSession(false,Session.AUTO_ACKNOWLEDGE);
+		consumer = sen.createConsumer(queue);
+		consumer.setMessageListener(new MessageListener(){
+			//callback
+			@Override
+			public void onMessage(Message arg0) {
+				
+				
+			}
+		});
+		
 		return "";
 		
 	}
