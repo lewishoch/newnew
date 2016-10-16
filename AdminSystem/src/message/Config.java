@@ -17,12 +17,10 @@ import jms.consumer.impl.PtpConsumer;
 
 @WebListener
 public class Config implements ServletContextListener {
-	public static int detecterForRefresh = 0;
+
 	
     public void contextInitialized(ServletContextEvent event) {
         // Do your thing during webapp's startup.
-//    	System.out.println("hahaha");
-    	
     	
 		JMSConsumer cons = new PtpConsumer();
 		try {

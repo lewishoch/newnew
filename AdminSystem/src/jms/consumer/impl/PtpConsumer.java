@@ -17,6 +17,7 @@ import javax.jms.MessageListener;
 import javax.jms.MessageProducer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.command.ActiveMQQueue;
@@ -89,9 +90,15 @@ public class PtpConsumer implements JMSConsumer {
 			//callback
 			@Override
 			public void onMessage(Message arg0) {
-				
-				System.out.println("Refresh? " + Config.detecterForRefresh);
-				
+//				HttpServletRequest request = null;
+//				String uri = request.getScheme() + "://" +   // "http" + "://
+//			             request.getServerName() +       // "myhost"
+//			             ":" +                           // ":"
+//			             request.getServerPort() +       // "8080"
+//			             request.getRequestURI() +       // "/people"
+//			             "?" +                           // "?"
+//			             request.getQueryString();       // "lastname=Fox&age=30"
+//				System.out.println(uri);
 //				URL gwtServlet = null;
 //				try {
 //				    gwtServlet = new URL("http://localhost:8080/AdminSystem/listPendingMerchant");
