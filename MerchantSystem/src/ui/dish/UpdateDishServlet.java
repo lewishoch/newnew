@@ -60,35 +60,47 @@ public class UpdateDishServlet extends HttpServlet {
 				long mid = Long.parseLong((String)map.get("mid"));
 				long did = Long.parseLong((String)map.get("did"));
 				String dname = (String)map.get("dname");
-				
 				String oldDName = (String)map.get("oldDName");
-				String dpath = this.getServletContext().getRealPath("/img/dish/"+mid + "_" + oldDName);
-				String savePath = "/img/dish/"+mid + "_" + dname;
-				//delete image
-				UploadImage.deleteImage(dpath);
 				
-				for(FileItem fi:fis)
-				{
-					if(!fi.isFormField() && !fi.getName().isEmpty())
+				if (dm.loadDish(dname, mid) != null) {
+					System.out.println("exist");
+					request.setAttribute("msgType", "errorType");
+					request.setAttribute("msg", "The dish name exists in your shop already.");
+					request.getRequestDispatcher("updateDishForm.jsp").forward(request, response);
+				}
+				else {
+				
+					
+					String dpath = this.getServletContext().getRealPath("/img/dish/"+mid + "_" + oldDName);
+					String savePath = "/img/dish/"+mid + "_" + dname;
+					//delete image
+					UploadImage.deleteImage(dpath);
+					
+					for(FileItem fi:fis)
 					{
-						UploadImage.uploadDishImage(fi,this.getServletContext().getRealPath("/img/dish/"+mid + "_" + dname));
-					}	
+						if(!fi.isFormField() && !fi.getName().isEmpty())
+						{
+							UploadImage.uploadDishImage(fi,this.getServletContext().getRealPath("/img/dish/"+mid + "_" + dname));
+						}	
+					}
+					
+					Dish d = new Dish();
+					d.setMerchantUuid(mid);
+					d.setDishId(did);
+					d.setDishName(dname);
+					d.setDishFolderPath(savePath);
+					
+					if(dm.updateDish(d)){
+						request.setAttribute("msgType", "succMsg");
+						request.setAttribute("msg", "Record has been updated.");
+					}
+					else{
+						request.setAttribute("msgType", "errorMsg");
+						request.setAttribute("msg", "Failed to update the record.");
+					}
 				}
 				
-				Dish d = new Dish();
-				d.setMerchantUuid(mid);
-				d.setDishId(did);
-				d.setDishName(dname);
-				d.setDishFolderPath(savePath);
 				
-				if(dm.updateDish(d)){
-					request.setAttribute("msgType", "succMsg");
-					request.setAttribute("msg", "Record has been updated.");
-				}
-				else{
-					request.setAttribute("msgType", "errorMsg");
-					request.setAttribute("msg", "Failed to update the record.");
-				}
 				request.getRequestDispatcher("control").forward(request, response);
 
 				
@@ -97,6 +109,7 @@ public class UpdateDishServlet extends HttpServlet {
 			{
 				e.printStackTrace();
 			}
+
 		}
 		else
 			response.sendRedirect("logout");

@@ -27,7 +27,6 @@ public class EditDishServlet extends HttpServlet {
 		HttpSession sen = request.getSession(false);
 		
 		if(SessionLogin.sessionLogin(sen)){
-		
 			long dishId = Long.parseLong(request.getParameter("dishId"));
 			Dish d = dm.loadDish(dishId);
 			request.setAttribute("d", d);
