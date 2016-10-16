@@ -104,4 +104,14 @@
     <servlet-name>ShowHomeServlet</servlet-name>
     <url-pattern>/showHome</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>sendMqMsg</display-name>
+    <servlet-name>sendMqMsg</servlet-name>
+    <servlet-class>test.sendMqMsg</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>sendMqMsg</servlet-name>
+    <url-pattern>/mq</url-pattern>
+  </servlet-mapping>
 </web-app>
