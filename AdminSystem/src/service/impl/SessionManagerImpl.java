@@ -11,14 +11,13 @@ public class SessionManagerImpl implements SessionManager {
 		HttpSession sen = request.getSession(false);
 		boolean isLogin = false;
 		if (sen != null && sen.getAttribute("isLogin") != null )
-			isLogin = (boolean)sen.getAttribute("isLogin");
+			isLogin = (Boolean)sen.getAttribute("isLogin");
 		if(sen == null || !request.isRequestedSessionIdValid() || isLogin == false)
 			return false;
 		else
 			return true;
 	}
 
-	@Override
 	public void endSession(HttpServletRequest request) {
 		if(request.getSession() != null)
 			request.getSession().invalidate();
