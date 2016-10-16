@@ -50,7 +50,9 @@
 						<a href="showDish?id=${d.dishId}">${d.dishName}</a>
 					</td>
 					<td>
-						<img src=${d.dishFolderPath} alt=${d.dishName} width=200 height=200/>
+					<c:forEach var="p" items="${d.dishPath}">
+						<img src=${p} alt="" height="100"/>
+					</c:forEach>
 					</td>
 					<td><a class="btn btn-primary" href="deleteDish?dishId=${d.dishId}">Delete</a></td>
 					<td><a class="btn btn-success" href="editDish?dishId=${d.dishId}">Edit</a></td>

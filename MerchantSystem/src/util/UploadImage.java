@@ -76,17 +76,16 @@ public class UploadImage {
 		    }
 	}
 	
-	public static ArrayList<String> getdishPath(String fileFolderPath)
+	public static ArrayList<String> getdishPath(ServletContext servletContext, String fileFolderPath)
 	{
 		ArrayList<String> result = new ArrayList<String>();
 		
-		File folder = new File(fileFolderPath);
+		File folder = new File(servletContext.getRealPath(fileFolderPath));
 		File[] listOfFiles = folder.listFiles();
 
 		    for (int i = 0; i < listOfFiles.length; i++) {
 		      if (listOfFiles[i].isFile()) {
-		    	  result.add(listOfFiles[i].getName());
-		    	  System.out.println(listOfFiles[i].getName());
+		    	  result.add(servletContext.getContextPath()+ fileFolderPath + "/"+listOfFiles[i].getName());
 		      } 
 		    }
 		return result;
