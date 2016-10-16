@@ -62,15 +62,12 @@ public class UpdateDishServlet extends HttpServlet {
 				String dname = (String)map.get("dname");
 				String oldDName = (String)map.get("oldDName");
 				
-				if (dm.loadDish(dname, mid) != null) {
-					System.out.println("exist");
+				if (dm.loadDish(dname, mid) == null) {
+					System.out.println("error: edit dish not exist");
 					request.setAttribute("msgType", "errorType");
-					request.setAttribute("msg", "The dish name exists in your shop already.");
-					request.getRequestDispatcher("updateDishForm.jsp").forward(request, response);
+					request.setAttribute("msg", "The dish name is not exists in your shop.");
 				}
 				else {
-				
-					
 					String dpath = this.getServletContext().getRealPath("/img/dish/"+mid + "_" + oldDName);
 					String savePath = "/img/dish/"+mid + "_" + dname;
 					//delete image

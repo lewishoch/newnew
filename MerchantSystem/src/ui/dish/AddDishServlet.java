@@ -49,6 +49,7 @@ public class AddDishServlet extends HttpServlet {
 			upload.setFileItemFactory(factory);
 			
 			List<FileItem> fis=null;
+			System.out.println("try");
 			try {
 				// file will store in temp folder first
 				fis = upload.parseRequest(request);
@@ -63,47 +64,48 @@ public class AddDishServlet extends HttpServlet {
 					    map.put(fieldname, fieldvalue);	
 					}
 				}
-
+				System.out.println("before mid");
 				long mid = Long.parseLong((String)map.get("mid"));
 				String dname = (String)map.get("dname");
 				String dpath = "/img/dish/"+mid + "_" + dname;
-				
-				for(FileItem fi:fis)
-				{
-					if(!fi.isFormField() && !fi.getName().isEmpty())
-					{
-						UploadImage.uploadDishImage(fi,this.getServletContext().getRealPath("/img/dish/"+mid + "_" + dname));
-					}	
-				}
-
+				System.out.println("after mid");
 				if (dm.loadDish(dname, mid) != null) {
 					System.out.println("exist");
 					request.setAttribute("msgType", "errorType");
 					request.setAttribute("msg", "The dish name exists in your shop already.");
-					request.getRequestDispatcher("addDishForm.jsp").forward(request, response);
 				}
 				else {
+					System.out.println("not exist");
+					for(FileItem fi:fis)
+						if(!fi.isFormField() && !fi.getName().isEmpty())
+							UploadImage.uploadDishImage(fi,this.getServletContext().getRealPath("/img/dish/"+mid + "_" + dname));
+					
+					System.out.println("before op");
 					Dish d = new Dish();
 					d.setMerchantUuid(mid);
 					d.setDishName(dname);
 					d.setDishFolderPath(dpath);
-					
+					System.out.println("after po");
 					if (dm.addDish(d)) {
-						request.getRequestDispatcher("control").forward(request, response);
+						System.out.println("succ");
+						request.setAttribute("msgType", "succType");
+						request.setAttribute("msg", "Dish is added successfully.");
 					}
 					else {
+						System.out.println("fail");
 						request.setAttribute("msgType", "errorType");
 						request.setAttribute("msg", "Problem with database! Please try later.");
-						request.getRequestDispatcher("addDishForm.jsp").forward(request, response);
 					}
 				}
+				System.out.println("to control");
+				request.getRequestDispatcher("control").forward(request, response);
 			}
 			catch (Exception e) 
 			{
 				e.printStackTrace();
 				request.setAttribute("msgType", "errorType");
 				request.setAttribute("msg", "Unexpected problem happen! Please try later.");
-				request.getRequestDispatcher("addDishForm.jsp").forward(request, response);
+				request.getRequestDispatcher("control").forward(request, response);
 			}
 			
 		}
