@@ -49,7 +49,7 @@ span {
 	<input type="hidden" name="did" value="${d.dishId}"/>
 	<input type="hidden" name="oldDName" value="${d.dishName}"/>
 	<span>Dish Name</span>
-	<input type="text" name="dname" maxlength="30" value="${d.dishName}" class="form-control" required/><br/>
+	<input type="text" name="dname" maxlength="30" value="${d.dishName}" class="form-control" readonly required/><br/>
 	<span>Dish Photo</span></br>
 	<span>Upload Dish Image</span>
 	<input type="file" name="dishImage1" pattern=".+(.jpg|.png|.gif|.jepg)" required/><br/>

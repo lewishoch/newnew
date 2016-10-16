@@ -40,9 +40,8 @@ public class ControlServlet extends HttpServlet {
 
 		if(SessionLogin.sessionLogin(sen)){
 			try{
-				String merchant_name = ((MerchantAccount)sen.getAttribute("merchantAccount")).getUname();
 				Long uuid = (Long)sen.getAttribute("uuid"); // account uuid
-				MerchantAccount merchantAccount = mm.loadMerchantAccount(merchant_name);
+				MerchantAccount merchantAccount = mm.loadMerchantAccount(uuid);
 				MerchantProfile merchantProfile = mpm.loadMerchantProfileByAccountUuid(uuid);
 				
 				request.setAttribute("merchantProfile", merchantProfile);
