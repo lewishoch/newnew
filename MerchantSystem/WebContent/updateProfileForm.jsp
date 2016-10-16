@@ -34,6 +34,7 @@ span {
 </style>
 </head>
 <body id="bg">
+<jsp:include page="account.jsp" />
 <div class="tabs">
     <!-- Radio button and lable for #tab-content1 -->
     <input type="radio" class="radioTab" name="tabs" id="tab1" checked >
@@ -45,7 +46,7 @@ span {
 	<input type="hidden" name="uuid" value="${merchantProfile.uuid}" class="form-control"/>
 	<input type="hidden" name="mAccountUuid" value="${merchantProfile.mAccountUuid}" class="form-control"/>
 	<input type="hidden" name="shopLogoPath" value="${merchantProfile.sLogoPath}" class="form-control"/>
-	<span>Merchant Name</span> <input type="text" name="mName" value="${merchantProfile.mName}" class="form-control" readonly><br/>
+	<span>Merchant Name</span> <input type="text" name="mName" value="${merchantProfile.mName}" class="form-control" readonly>
 	<span>Merchant Gender</span> <input type="text" name="mGender" maxlength="30" value="${merchantProfile.mGender}" class="form-control" readonly/><br/>
 	<span>Merchant Age</span> <input type="text" name="mAge" value="${merchantProfile.mAge}"class="form-control"  readonly><br/>
 	<span>Shop Name</span> <input type="text" name="sName" maxlength="30" value="${merchantProfile.sName}" class="form-control" readonly/><br/>

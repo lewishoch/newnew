@@ -52,8 +52,7 @@ span {
     
     <div id="tab-content1" class="tab-content">
     	<div id="shop">
-	
-			<h1>Your Profile</h1>
+			<h3>Your Profile</h3>
 			<table class="table table-striped">
 				<tr><th>Merchant Name</th><th>Merchant Gender</th><th>Merchant Age</th><th>Shop Name</th><th>Shop Address</th><th>Shop Tel Number</th><th>Shop Logo</th><th>Edit</th></tr>
 				<tr>
@@ -74,7 +73,7 @@ span {
     
     <div id="tab-content2" class="tab-content">
 	    <div id="dish">
-			<h1>Your Dishes</h1>
+			<h3>Your Dishes</h3>
 			<table class="table table-striped">
 				<tr><th>Dish Name</th><th>Dish Photo</th><th>Delete</th><th>Edit</th></tr>
 				<c:forEach var="d" items="${dishes}">

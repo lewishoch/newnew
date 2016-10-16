@@ -15,17 +15,18 @@
 <style>
 #account_control {
 	float: right;
-	padding-top: 15px;
-    padding-right: 15%;
+    margin-right: 15%;
+    margin-top: 15px;
+    width: 80%;
 }
 </style>
 <title></title>
 </head>
 <body>
 <div id="account_control">
-	<form action="logout" method="post">
-		<label>Welcome, ${merchantAccount.uname}!</label>
-		<input type="submit" value="Logout"/>
+	<form action="logout" method="post" class="form-group">
+		<label>Welcome, ${merchantAccount.uname}!</label><span>      </span>
+		<input type="submit" value="Logout" class="btn btn-warning"/>
 	</form>
 </div>
 </br>

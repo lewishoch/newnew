@@ -54,8 +54,8 @@ span {
 			<span>User Name </span><input type="text" name="uname" class="form-control" placeholder="User Name" required/></br>
 			<span>Password </span><input type="password" name="password" class="form-control" placeholder="Password" required/></br>
 			</br></br>
-			<input type="submit" value="Sign In" class="btn btn-default"/>
-			<input type="reset" class="btn btn-default" value="Reset"/>
+			<input type="submit" value="Sign In" class="btn btn-primary"/>
+			<input type="reset" class="btn btn-default" value="Reset" class="btn btn-warning"/>
 			</fieldset>
 		</form>
     </div> <!-- #tab-content1 -->
@@ -83,8 +83,8 @@ span {
 			</div>
 			</br></br>
 			<div id="signup_submit">
-				<input type="submit" value="Sign Up" class="btn btn-default"/>
-				<input type="reset" class="btn btn-default" value="Reset"/>
+				<input type="submit" value="Sign Up" class="btn btn-success"/>
+				<input type="reset" class="btn btn-default" value="Reset" class="btn btn-warning"/>
 			</div>
 			</fieldset>
 		</form>

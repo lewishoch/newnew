@@ -35,6 +35,7 @@ span {
 </style>
 </head>
 <body id="bg">
+<jsp:include page="account.jsp" />
 <div class="tabs">
     <!-- Radio button and lable for #tab-content1 -->
     <input type="radio" class="radioTab" name="tabs" id="tab1" checked >
