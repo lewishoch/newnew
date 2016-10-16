@@ -119,7 +119,7 @@ public class MerchantAccountDaoImpl implements MerchantAccountDao {
 				ms.add(m);
 			}
 			
-			System.out.println(ms.size());
+//			System.out.println(ms.size());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
