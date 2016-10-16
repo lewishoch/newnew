@@ -30,4 +30,7 @@ public class MerchantProfileManagerImpl implements MerchantProfileManager{
 		return dao.findAllMerchantProfiles();
 	}
 	
+	public MerchantProfile loadMerchantProfileByAccountUuid(long accountUuid){
+		return dao.loadMerchantProfileByAccountUuid(accountUuid);
+	}
 }

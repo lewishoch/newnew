@@ -41,17 +41,22 @@ public class ControlServlet extends HttpServlet {
 		if(SessionLogin.sessionLogin(sen)){
 			try{
 				String merchant_name = ((MerchantAccount)sen.getAttribute("merchantAccount")).getUname();
+				Long uuid = (Long)sen.getAttribute("uuid"); // account uuid
 				MerchantAccount merchantAccount = mm.loadMerchantAccount(merchant_name);
-				MerchantProfile merchantProfile = mpm.loadMerchantProfile(merchant_name);
+				MerchantProfile merchantProfile = mpm.loadMerchantProfileByAccountUuid(uuid);
 				
 				request.setAttribute("merchantProfile", merchantProfile);
 				
-				System.out.println("--");
 				
 				// check merchant is accpeted
 				if(merchantAccount.getStatus()==0){
 					// put...
 					System.out.println("control");
+					System.out.println("dm: "+dm);
+					System.out.println("uuid: "+uuid);
+					System.out.println("merchantProfile: "+merchantProfile);
+					System.out.println("merchantProfile uuid: "+merchantProfile.getUuid());
+					
 					List<Dish> dishes = dm.findDishesByMerchantUuid(merchantProfile.getUuid());
 					
 					List<DishDTO> dishDTO = new ArrayList<DishDTO>();

@@ -36,7 +36,7 @@ public class MerchantAccountDaoImpl implements MerchantAccountDao {
 	}
 
 	public boolean updateMerchant(MerchantAccount m) {
-		String sql = "update merch_account set status=?, user_name=?, password=?, created_dt_gmt=?, last_modified_dt_gmt=? where account_uuid=?";
+		String sql = "update merch_account set status=?, user_name=?, password=?, last_modified_dt_gmt=systimestamp where account_uuid=?";
 		Connection con = null;
 		PreparedStatement pst = null;
 		
@@ -46,9 +46,7 @@ public class MerchantAccountDaoImpl implements MerchantAccountDao {
 			pst.setInt(1, m.getStatus());
 			pst.setString(2, m.getUname());
 			pst.setString(3, m.getPsd());
-			pst.setDate(4, new java.sql.Date(m.getCreDt().getTime()));
-			pst.setDate(5, new java.sql.Date(m.getLastModDt().getTime()));
-			pst.setLong(6, m.getUuid());
+			pst.setLong(4, m.getUuid());
 			pst.executeUpdate();
 			return true;
 		} catch (SQLException e) {
