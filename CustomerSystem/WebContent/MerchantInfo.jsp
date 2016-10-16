@@ -30,16 +30,20 @@
 	
 </ul>
 <h1>Dish Information</h1>
-<table class="table table-striped">
-	<tbody>
-		<c:forEach var="d" items="${dish}">
-			<tr>
-			<td>Dish ID:${d.dishId }</td>
-			<td>Dish Name:${d.dishName }</td>
-			<td>Photo here</td>
-			</tr>
-		</c:forEach>
-	</tbody>
-</table>
+			<table class="table table-striped">
+				<tr><th>Dish Name</th><th>Dish Photo</th></tr>
+				<c:forEach var="d" items="${dishes}">
+					<tr>
+						<td>
+							${d.dishName}
+						</td>
+						<td>
+							<c:forEach var="p" items="${d.dishPath}">
+								<img src=${p} alt="" height="100"/>
+							</c:forEach>
+						</td>
+					</tr>
+				</c:forEach>
+			</table>
 </body>
 </html>
