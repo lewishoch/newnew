@@ -27,7 +27,9 @@ public class ShowHomeServlet extends HttpServlet {
 		else{
 			List<MerchantAccount> mal = mam.listMerchAccountsByStatus(AccountStatusProtocol.PENDING);
 			request.setAttribute("size", mal.size());
+//			System.out.println(mal.size());
 			request.getRequestDispatcher("index.jsp").forward(request, response);
+//			response.sendRedirect("index.jsp");
 		}
 	}
 

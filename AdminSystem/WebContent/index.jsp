@@ -50,17 +50,17 @@ span {
     </label>
     
     <div id="tab-content1" class="tab-content">
-		<div class="list-group" style="width:400px">
+		<div class="list-group">
 		<a class="list-group-item" href="listPendingMerchant">
-			Accept / Reject Merchant Request 
+			Pending Merchant Requests 
 			<span class="badge">${size}</span>
 		</a>
 		</div>
 	</div>
 	<div id="tab-content2" class="tab-content">
-		<div class="list-group" style="width:400px">
+		<div class="list-group">
 		<a class="list-group-item" href="listAllMerchants">
-			Freeze / Unfreeze Merchant Account
+			Accepted Merchant Accounts
 			<span class="badge"></span>
 		</a>
 		</div>

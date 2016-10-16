@@ -82,7 +82,7 @@ public class PtpConsumer implements JMSConsumer {
 			@Override
 			public void onMessage(Message arg0) {
 				
-				
+				//??? how can i refresh listPendingMerchant page here?
 			}
 		});
 		
