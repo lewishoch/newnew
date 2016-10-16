@@ -19,7 +19,7 @@
 <div class="list-group" style="width:400px">
 <a class="list-group-item" href="listPendingMerchant">
 	Accept / Reject Merchant Request 
-	<span class="badge">1</span>
+	<span class="badge">${size}</span>
 </a>
 <a class="list-group-item" href="listAllMerchants">Freeze / Unfreeze Merchant Account</a>
 </div>

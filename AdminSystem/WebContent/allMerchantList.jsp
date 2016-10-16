@@ -15,7 +15,7 @@
 </head>
 <body>
 <h1>Accepted Merchants</h1>
-<a href="index.jsp">back to home</a>
+<a href="showHome">back to home</a>
 <br /><br />
 <table class="table table-striped">
 	<tr><th>Merchant ID</th><th>Merchant Name</th><th>Merchant Status</th><th>Freeze Operation</th><th>Unfreeze Operation</th></tr>

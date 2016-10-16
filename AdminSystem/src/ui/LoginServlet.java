@@ -24,7 +24,7 @@ public class LoginServlet extends HttpServlet {
 			sen.setAttribute("isLogin", true);
 			sen.setAttribute("name", adminName);
 			request.setAttribute("name", adminName);
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("showHome");
 		}
 		else{
 			System.out.println("fail");

@@ -99,4 +99,14 @@
     <servlet-name>LogoutServlet</servlet-name>
     <url-pattern>/logout</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ShowHomeServlet</display-name>
+    <servlet-name>ShowHomeServlet</servlet-name>
+    <servlet-class>ui.ShowHomeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowHomeServlet</servlet-name>
+    <url-pattern>/showHome</url-pattern>
+  </servlet-mapping>
 </web-app>
