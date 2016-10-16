@@ -10,4 +10,5 @@ public interface MerchantProfileManager {
 	public MerchantProfile loadMerchantProfile(String merchantName);
 	public MerchantProfile loadMerchantProfile(long uuid);
 	public List<MerchantProfile> findAllMerchantProfiles();
+	public MerchantProfile loadMerchantProfileByAccountUuid(long accountUuid);
 }

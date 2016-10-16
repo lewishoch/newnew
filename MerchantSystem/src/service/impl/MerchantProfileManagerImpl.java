@@ -1,5 +1,7 @@
 package service.impl;
 
+import java.util.List;
+
 import dao.MerchantProfileDao;
 import dao.impl.MerchantProfileDaoImpl;
 import po.MerchantProfile;
@@ -24,5 +26,11 @@ public class MerchantProfileManagerImpl implements MerchantProfileManager{
 		return dao.loadMerchantProfile(uuid);
 	}
 	
+	public MerchantProfile loadMerchantProfileByAccountUuid(long accountUuid){
+		return dao.loadMerchantProfileByAccountUuid(accountUuid);
+	}
 	
+	public List<MerchantProfile> findAllMerchantProfiles(){
+		return dao.findAllMerchantProfiles();
+	}
 }
