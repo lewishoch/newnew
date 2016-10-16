@@ -16,51 +16,68 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" type="text/css" href="css/tab.css">
 </head>
 <body>
 <jsp:include page="account.jsp" />
-<div id="content">
-	<div id="shop">
-
-		<h1>Your Profile</h1>
-		<table class="table table-striped">
-			<tr><th>Merchant Name</th><th>Merchant Gender</th><th>Merchant Age</th><th>Shop Name</th><th>Shop Address</th><th>Shop Tel Number</th><th>Shop Logo</th><th>Edit</th></tr>
-			<tr>
-				<td>${merchantProfile.mName}</td>
-				<td>${merchantProfile.mGender}</td>
-				<td>${merchantProfile.mAge}</td>
-				<td>${merchantProfile.sName}</td>
-				<td>${merchantProfile.sAddr}</td>
-				<td>${merchantProfile.sTel}</td>
-				<td><img src="${merchantProfile.sLogoPath}" alt="shopLogo"  height="100"  ></td>
-				<td><a class =  "btn btn-success" href = "editProfile?muuid=${merchantProfile.uuid}">Edit</a></td>
-			</tr>
-		
-		</table>
-
-	</div>
+<div class="tabs">
+    <!-- Radio button and lable for #tab-content1 -->
+    <input type="radio" class="radioTab" name="tabs" id="tab1" checked >
+    <label for="tab1">
+        <i class="fa fa-html5"></i><span>Shop Profile</span>
+    </label>
+    <!-- Radio button and lable for #tab-content2 -->
+    <input type="radio" class="radioTab" name="tabs" id="tab2">
+    <label for="tab2">
+        <i class="fa fa-css3"></i><span>Dish Profile</span>
+    </label>
+    
+    <div id="tab-content1" class="tab-content">
+    	<div id="shop">
 	
-	<div id="dish">
-		<h1>Your Dishes</h1>
-		<table class="table table-striped">
-			<tr><th>Dish Name</th><th>Dish Photo</th><th>Delete</th><th>Edit</th></tr>
-			<c:forEach var="d" items="${dishes}">
+			<h1>Your Profile</h1>
+			<table class="table table-striped">
+				<tr><th>Merchant Name</th><th>Merchant Gender</th><th>Merchant Age</th><th>Shop Name</th><th>Shop Address</th><th>Shop Tel Number</th><th>Shop Logo</th><th>Edit</th></tr>
 				<tr>
-					<td>
-						<a href="showDish?id=${d.dishId}">${d.dishName}</a>
-					</td>
-					<td>
-					<c:forEach var="p" items="${d.dishPath}">
-						<img src=${p} alt="" height="100"/>
-					</c:forEach>
-					</td>
-					<td><a class="btn btn-primary" href="deleteDish?dishId=${d.dishId}">Delete</a></td>
-					<td><a class="btn btn-success" href="editDish?dishId=${d.dishId}">Edit</a></td>
+					<td>${merchantProfile.mName}</td>
+					<td>${merchantProfile.mGender}</td>
+					<td>${merchantProfile.mAge}</td>
+					<td>${merchantProfile.sName}</td>
+					<td>${merchantProfile.sAddr}</td>
+					<td>${merchantProfile.sTel}</td>
+					<td><img src="${merchantProfile.sLogoPath}" alt="shopLogo"  height="100"  ></td>
+					<td><a class =  "btn btn-success" href = "editProfile?muuid=${merchantProfile.uuid}">Edit</a></td>
 				</tr>
-			</c:forEach>
-		</table>
-		<a class="btn btn-success" href="insertDish?mid=${merchantProfile.uuid}">Add New Dish</a>
-	</div>
+			
+			</table>
+	
+		</div>
+    </div>
+    
+    <div id="tab-content2" class="tab-content">
+	    <div id="dish">
+			<h1>Your Dishes</h1>
+			<table class="table table-striped">
+				<tr><th>Dish Name</th><th>Dish Photo</th><th>Delete</th><th>Edit</th></tr>
+				<c:forEach var="d" items="${dishes}">
+					<tr>
+						<td>
+							<a href="showDish?id=${d.dishId}">${d.dishName}</a>
+						</td>
+						<td>
+						<c:forEach var="p" items="${d.dishPath}">
+							<img src=${p} alt="" height="100"/>
+						</c:forEach>
+						</td>
+						<td><a class="btn btn-primary" href="deleteDish?dishId=${d.dishId}">Delete</a></td>
+						<td><a class="btn btn-success" href="editDish?dishId=${d.dishId}">Edit</a></td>
+					</tr>
+				</c:forEach>
+			</table>
+			<a class="btn btn-success" href="insertDish?mid=${merchantProfile.uuid}">Add New Dish</a>
+		</div>
+    </div>
 </div>
 <div id="${msgType }" class="centre">
 ${msg }
