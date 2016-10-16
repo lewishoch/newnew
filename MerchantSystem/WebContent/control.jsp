@@ -18,8 +18,25 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <link rel="stylesheet" type="text/css" href="css/tab.css">
+<style>
+#bg {
+	background: #1bc1b3;
+}
+h5 {
+	color: #000;
+	display: inline;
+}
+form {
+	margin: 0 10%;
+}
+span {
+	margin: 2px 10px;
+	font-size: 15px;
+	font-weight: bold;
+}
+</style>
 </head>
-<body>
+<body id="bg">
 <jsp:include page="account.jsp" />
 <div class="tabs">
     <!-- Radio button and lable for #tab-content1 -->
