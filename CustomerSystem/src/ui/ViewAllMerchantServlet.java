@@ -30,7 +30,7 @@ public class ViewAllMerchantServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		List<MerchantProfile> mp =  md.loadAllMerchantProfile(0);
+		List<MerchantProfile> mp =  md.findAllMerchantProfiles();
 		request.setAttribute("merchant", mp);
 		//System.out.println(mp.size());
 		request.getRequestDispatcher("viewMerchant.jsp").forward(request, response);

@@ -30,23 +30,14 @@ public class LoadMerchantServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String merchantName = request.getParameter("sName");
-		//System.out.println(merchantName);
-		long uuid = (Long)request.getAttribute("merchantUuid");
-		//long uuid = Long.parseLong(request.getParameter("merchantUuid"));
-		if(request.getAttribute("merchantUuid") == null){
-			System.out.println("hello");
-		}
-		System.out.println(request.getAttribute("merchantUuid")); 
-		System.out.println(uuid);
-		//MerchantProfile mpId = md.loadMerchantProfile(uuid);
-		MerchantProfile mp = md.loadMerchantProfile(merchantName);
-		List<Dish> d = dd.findDishesByMerchantUuid(uuid);
+
+		long uuid = Long.parseLong((String) request.getParameter("uuid"));
+		MerchantProfile mp = md.loadMerchantProfile(uuid);
 		
-		//System.out.println(mp);
-		//System.out.println(mpId);
+		List<Dish> d = dd.findDishesByMerchantUuid(uuid);
 		request.setAttribute("merchant", mp);
 		request.setAttribute("dish", d);
-		//request.setAttribute("merchant", mpId);
+		
 		request.getRequestDispatcher("MerchantInfo.jsp").forward(request, response);
 		
 		

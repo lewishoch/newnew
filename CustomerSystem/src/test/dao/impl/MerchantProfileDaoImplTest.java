@@ -38,7 +38,7 @@ public class MerchantProfileDaoImplTest {
 		mp.setsAddr("testTestAddr");
 		mp.setsTel("13579");
 		mp.setLastModDt(date);
-		mpd.updateMerchant(mp);
+		mpd.updateMerchantProfile(mp);
 		MerchantProfile mp1 = mpd.loadMerchantProfile(3);
 		System.out.println(mp.getmName());
 		System.out.println(mp1.getmName());
@@ -64,7 +64,7 @@ public class MerchantProfileDaoImplTest {
 
 	@Test
 	public void testLoadAllMerchantProfile() {
-		List<MerchantProfile> m = mpd.loadAllMerchantProfile(0);
+		List<MerchantProfile> m = mpd.findAllMerchantProfiles();
 		Assert.assertTrue(!m.isEmpty());
 		
 		for (MerchantProfile mp: m){
