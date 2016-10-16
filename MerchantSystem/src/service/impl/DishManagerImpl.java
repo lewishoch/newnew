@@ -26,8 +26,11 @@ public class DishManagerImpl implements DishManager {
 		return dao.deleteDish(dishUuid);
 	}
 
-	public List<Dish> findAllDishes(long merchantUuid) {
-		return dao.findAllDishes(merchantUuid);
+	public List<Dish> findAllDishes() {
+		return dao.findAllDishes();
 	}
 
+	public List<Dish> findDishesByMerchantUuid(long merchantUuid) {
+		return dao.findDishesByMerchantUuid(merchantUuid);
+	}
 }

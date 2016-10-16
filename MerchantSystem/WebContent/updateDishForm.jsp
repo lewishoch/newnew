@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix = "fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -12,10 +14,18 @@
 	<input type="hidden" name="mid" value="${d.merchantUuid}"/><br/>
 	<input type="hidden" name="did" value="${d.dishId}"/><br/>
 	Dish Name: <br/>
-	<input type="text" name="dname" maxlength="30" value="${d.dishName}"/><br/>
+	<input type="text" name="dname" maxlength="30" value="${d.dishName}" required/><br/>
 	Dish Photo: <br/>
+	Upload Dish Image: <br/>
+	<input type="file" name="dishImage1" pattern=".+(.jpg|.png|.gif|.jepg)" required/><br/>
+	<input type="file" name="dishImage2" pattern=".+(.jpg|.png|.gif|.jepg)" /><br/>
+	
+	
 	
 	<input type="submit" value="Update Dish"/>
 </form>
+<div id="${msgType }" class="centre">
+${msg }
+</div>
 </body>
 </html>

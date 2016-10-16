@@ -3,10 +3,13 @@ package util;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import javax.servlet.ServletContext;
 
 import org.apache.commons.fileupload.FileItem;
+
+import com.sun.xml.bind.v2.schemagen.xmlschema.List;
 
 public class UploadImage {
 	public static String uploadLogo(FileItem fi, String userName, ServletContext servletContext)throws Exception
@@ -71,6 +74,23 @@ public class UploadImage {
 		    	  listOfFiles[i].delete();
 		      } 
 		    }
+	}
+	
+	public static ArrayList<String> getdishPath(ServletContext servletContext, String fileFolderPath)
+	{
+		ArrayList<String> result = new ArrayList<String>();
+		
+		File folder = new File(servletContext.getRealPath(fileFolderPath));
+		File[] listOfFiles = folder.listFiles();
+		if(listOfFiles != null){
+		    for (int i = 0; i < listOfFiles.length; i++) {
+		      if (listOfFiles[i].isFile()) {
+		    	  result.add(servletContext.getContextPath()+ fileFolderPath + "/"+listOfFiles[i].getName());
+		      } 
+		    }
+		}
+		return result;
+		
 	}
 
 

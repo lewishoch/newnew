@@ -1,7 +1,10 @@
 package ui;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dto.DishDTO;
 import po.Dish;
 import po.MerchantAccount;
 import po.MerchantProfile;
@@ -19,6 +23,7 @@ import service.impl.DishManagerImpl;
 import service.impl.MerchantAccountManagerImpl;
 import service.impl.MerchantProfileManagerImpl;
 import ui.common.SessionLogin;
+import util.UploadImage;
 import protocol.AccountStatusProtocol;
 
 /**
@@ -47,8 +52,20 @@ public class ControlServlet extends HttpServlet {
 				if(merchantAccount.getStatus()==0){
 					// put...
 					System.out.println("control");
-					List<Dish> dishes = dm.findAllDishes(merchantAccount.getUuid());
-					request.setAttribute("dishes", dishes);
+					List<Dish> dishes = dm.findDishesByMerchantUuid(merchantProfile.getUuid());
+					
+					List<DishDTO> dishDTO = new ArrayList<DishDTO>();
+					for(Dish d : dishes)
+					{
+						DishDTO temp = new DishDTO();
+						List<String> filePaths = UploadImage.getdishPath(this.getServletContext(),d.getDishFolderPath());
+						temp.setDishId(d.getDishId());
+						temp.setDishName(d.getDishName());
+						temp.setDishPath(filePaths);
+						dishDTO.add(temp);
+					}
+					request.setAttribute("dishes", dishDTO);
+					
 					// redirect to control.jsp
 					request.getRequestDispatcher("control.jsp").forward(request,response);
 				}
