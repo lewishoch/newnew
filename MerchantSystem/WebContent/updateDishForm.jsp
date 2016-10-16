@@ -17,8 +17,8 @@
 	
 	<input type="submit" value="Update Dish"/>
 </form>
-<div id="${msgType }" class="centre">
-${msg }
+<div id="${msgType}" class="centre">
+${msg}
 </div>
 </body>
 </html>

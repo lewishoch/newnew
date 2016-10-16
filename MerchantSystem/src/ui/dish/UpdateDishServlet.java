@@ -27,21 +27,31 @@ public class UpdateDishServlet extends HttpServlet {
 			String dname = request.getParameter("dname");
 			String dpath = "/test";//request.getParameter("dpath");
 			
-			Dish d = new Dish();
-			d.setMerchantUuid(mid);
-			d.setDishId(did);
-			d.setDishName(dname);
-			d.setDishFolderPath(dpath);
+			if (dm.loadDish(dname, mid) != null) {
+				System.out.println("exist");
+				request.setAttribute("msgType", "errorType");
+				request.setAttribute("msg", "The dish name exists in your shop already.");
+				request.getRequestDispatcher("updateDishForm.jsp").forward(request, response);
+			}
+			else {
 			
-			if(dm.updateDish(d)){
-				request.setAttribute("msgType", "succMsg");
-				request.setAttribute("msg", "Record has been updated.");
+				Dish d = new Dish();
+				d.setMerchantUuid(mid);
+				d.setDishId(did);
+				d.setDishName(dname);
+				d.setDishFolderPath(dpath);
+				
+				if(dm.updateDish(d)){
+					request.setAttribute("msgType", "succMsg");
+					request.setAttribute("msg", "Record has been updated.");
+				}
+				else{
+					request.setAttribute("msgType", "errorMsg");
+					request.setAttribute("msg", "Failed to update the record.");
+				}
+				request.getRequestDispatcher("control").forward(request, response);
+			
 			}
-			else{
-				request.setAttribute("msgType", "errorMsg");
-				request.setAttribute("msg", "Failed to update the record.");
-			}
-			request.getRequestDispatcher("control").forward(request, response);
 
 		}
 		else

@@ -64,8 +64,8 @@ public class AddDishServlet extends HttpServlet {
 					}
 				}
 
-				long mid = Long.parseLong((String)map.get("mid"));
-				String dname = (String)map.get("dname");
+				long mid = 13;//Long.parseLong((String)map.get("mid"));
+				String dname = "B";//(String)map.get("dname");
 				String dpath = "/img/dish/"+mid + "_" + dname;
 				
 				for(FileItem fi:fis)
@@ -76,22 +76,36 @@ public class AddDishServlet extends HttpServlet {
 					}	
 				}
 
-
-			
-				Dish d = new Dish();
-				d.setMerchantUuid(mid);
-				d.setDishName(dname);
-				d.setDishFolderPath(dpath);
-				dm.addDish(d);
-				
+				if (dm.loadDish(dname, mid) != null) {
+					System.out.println("exist");
+					request.setAttribute("msgType", "errorType");
+					request.setAttribute("msg", "The dish name exists in your shop already.");
+					request.getRequestDispatcher("addDishForm.jsp").forward(request, response);
+				}
+				else {
+					Dish d = new Dish();
+					d.setMerchantUuid(mid);
+					d.setDishName(dname);
+					d.setDishFolderPath(dpath);
+					
+					if (dm.addDish(d)) {
+						request.getRequestDispatcher("control").forward(request, response);
+					}
+					else {
+						request.setAttribute("msgType", "errorType");
+						request.setAttribute("msg", "Problem with database! Please try later.");
+						request.getRequestDispatcher("addDishForm.jsp").forward(request, response);
+					}
+				}
 			}
 			catch (Exception e) 
 			{
 				e.printStackTrace();
-			
+				request.setAttribute("msgType", "errorType");
+				request.setAttribute("msg", "Unexpected problem happen! Please try later.");
+				request.getRequestDispatcher("addDishForm.jsp").forward(request, response);
 			}
-					
-			request.getRequestDispatcher("control").forward(request, response);
+			
 		}
 		else
 			response.sendRedirect("logout");
