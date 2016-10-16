@@ -19,7 +19,7 @@
 </head>
 <body>
 <h1>Pending Requests</h1>
-<a href="index.html">back to home</a>
+<a href="index.jsp">back to home</a>
 <br /><br />
 <table class="table table-striped">
 	<tr><th>Merchant ID</th><th>Merchant Name</th><th>Merchant Status</th><th>Accept Operation</th><th>Reject Operation</th></tr>
