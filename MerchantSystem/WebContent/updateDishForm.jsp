@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix = "fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +16,11 @@
 	Dish Name: <br/>
 	<input type="text" name="dname" maxlength="30" value="${d.dishName}" required/><br/>
 	Dish Photo: <br/>
+	Upload Dish Image: <br/>
+	<input type="file" name="dishImage1" pattern=".+(.jpg|.png|.gif|.jepg)" required/><br/>
+	<input type="file" name="dishImage2" pattern=".+(.jpg|.png|.gif|.jepg)" /><br/>
+	
+	
 	
 	<input type="submit" value="Update Dish"/>
 </form>
