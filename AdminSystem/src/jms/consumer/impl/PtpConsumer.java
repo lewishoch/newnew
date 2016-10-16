@@ -1,5 +1,10 @@
 package jms.consumer.impl;
 
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Date;
 
 import javax.jms.Connection;
@@ -15,15 +20,18 @@ import javax.jms.TextMessage;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.command.ActiveMQQueue;
+import org.omg.CORBA.portable.InputStream;
 
 import jms.consumer.JMSConsumer;
+import message.Config;
+import ui.ShowHomeServlet;
 
 public class PtpConsumer implements JMSConsumer {
 	private String queueName;
 	private String destination;
 	private static PtpConsumer instance = new PtpConsumer();
 	
-	private PtpConsumer(){
+	public PtpConsumer(){
 		// read properties
 		queueName = "Merchant_Q001";
 		destination = "failover://tcp://10.222.57.12:61616";
@@ -82,6 +90,22 @@ public class PtpConsumer implements JMSConsumer {
 			@Override
 			public void onMessage(Message arg0) {
 				
+				System.out.println("Refresh? " + Config.detecterForRefresh);
+				
+//				URL gwtServlet = null;
+//				try {
+//				    gwtServlet = new URL("http://localhost:8080/AdminSystem/listPendingMerchant");
+//				    HttpURLConnection servletConnection = (HttpURLConnection) gwtServlet.openConnection();
+//				    InputStream response = (InputStream) servletConnection.getInputStream();
+//				
+//				} catch (MalformedURLException e) {
+//				    // TODO Auto-generated catch block
+//				    e.printStackTrace();
+//				} catch (IOException e) {
+//				    // TODO Auto-generated catch block
+//				    e.printStackTrace();
+//				}
+				//response.setHeader("Refresh", "0; URL=/listPendingMerchant.jsp");
 				//??? how can i refresh listPendingMerchant page here?
 			}
 		});
