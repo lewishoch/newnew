@@ -6,6 +6,7 @@ import po.Dish;
 
 public interface DishManager {
 	public Dish loadDish(long dishUuid);
+	public Dish loadDish(String dishName, long merchantId);
 	public boolean addDish(Dish dish);
 	public boolean updateDish(Dish dish);
 	public boolean deleteDish(long dishUuid);

@@ -13,6 +13,10 @@ public class DishManagerImpl implements DishManager {
 	public Dish loadDish(long dishUuid) {
 		return dao.loadDish(dishUuid);
 	}
+	
+	public Dish loadDish(String dishName, long merchantId){
+		return dao.loadDish(dishName, merchantId);
+	}
 
 	public boolean addDish(Dish dish) {
 		return dao.addDish(dish);
