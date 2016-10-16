@@ -10,9 +10,10 @@
 </head>
 <body>
 <h1>Update Dish Information</h1>
-<form action="updateDish" method="post">
+<form action="updateDish" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="mid" value="${d.merchantUuid}"/><br/>
 	<input type="hidden" name="did" value="${d.dishId}"/><br/>
+	<input type="hidden" name="oldDName" value="${d.dishName}"/><br/>
 	Dish Name: <br/>
 	<input type="text" name="dname" maxlength="30" value="${d.dishName}" required/><br/>
 	Dish Photo: <br/>
