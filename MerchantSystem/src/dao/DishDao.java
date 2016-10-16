@@ -12,5 +12,4 @@ public interface DishDao {
 	public boolean deleteDish(long dishUuid);
 	public List<Dish> findAllDishes();
 	public List<Dish> findDishesByMerchantUuid(long merchantUuid);
-	public List<Dish> findAllDishesforShop(String shopName);
 }

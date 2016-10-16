@@ -82,12 +82,13 @@ public class UploadImage {
 		
 		File folder = new File(servletContext.getRealPath(fileFolderPath));
 		File[] listOfFiles = folder.listFiles();
-
+		if(listOfFiles != null){
 		    for (int i = 0; i < listOfFiles.length; i++) {
 		      if (listOfFiles[i].isFile()) {
 		    	  result.add(servletContext.getContextPath()+ fileFolderPath + "/"+listOfFiles[i].getName());
 		      } 
 		    }
+		}
 		return result;
 		
 	}
