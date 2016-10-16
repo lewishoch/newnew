@@ -46,7 +46,7 @@ public class SignUpServlet extends HttpServlet {
 		
 		MerchantProfile merchantProfile = null;
 		MerchantAccount merchantAccount = null;
-
+		String uname = "";
 		Map map = new HashMap();
 		
 		String path = this.getServletContext().getRealPath("/temp/img/logo");
@@ -75,7 +75,7 @@ public class SignUpServlet extends HttpServlet {
 			}
 			
 			// checking existing 
-			String uname = (String) map.get("uname");
+			uname = (String) map.get("uname");
 			String mname = (String)map.get("mname");
 			
 			merchantAccount = mm.loadMerchantAccount(uname);
@@ -120,6 +120,8 @@ public class SignUpServlet extends HttpServlet {
 		if(isSuccess){
 			try{
 				mm.addMerchant(merchantAccount);
+				Long uuid = (Long)mm.loadMerchantAccount(uname).getUuid();
+				merchantProfile.setmAccountUuid(uuid);
 				mpm.addMerchantProfile(merchantProfile);
 				jmsProducer.sendMsg();
 				request.setAttribute("msgType", "succMsg");
