@@ -41,7 +41,7 @@ public class LoginServlet extends HttpServlet {
 			// else
 			System.out.println("fail");
 			request.setAttribute("msgType", "errorMsg");
-			request.setAttribute("Msg", "Wrong user name or password.");
+			request.setAttribute("msg", "Wrong user name or password.");
 			request.getRequestDispatcher("index.jsp").forward(request, response);;
 		}
 	}

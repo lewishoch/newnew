@@ -106,16 +106,12 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>ListenMessageServlet</display-name>
-    <servlet-name>ListenMessageServlet</servlet-name>
-    <servlet-class>message.ListenMessageServlet</servlet-class>
-    <load-on-startup>0</load-on-startup>
+    <display-name>sendMqMsg</display-name>
+    <servlet-name>sendMqMsg</servlet-name>
+    <servlet-class>test.sendMqMsg</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>ListenMessageServlet</servlet-name>
-    <url-pattern>/listenMessage</url-pattern>
+    <servlet-name>sendMqMsg</servlet-name>
+    <url-pattern>/mq</url-pattern>
   </servlet-mapping>
-  <listener>
-    <listener-class>message.Config</listener-class>
-</listener>
 </web-app>
