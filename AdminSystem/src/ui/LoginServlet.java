@@ -17,9 +17,10 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		String adminName = request.getParameter("adminName");
+		String adminPassword = request.getParameter("adminPassword");
 		
 		AdminAccount aa = aam.loadAdminAccount(adminName);
-		if(aa != null){
+		if(aa != null && aa.getPassword().equals(adminPassword)){
 			HttpSession sen = request.getSession(true);
 			sen.setAttribute("isLogin", true);
 			sen.setAttribute("name", adminName);
@@ -28,8 +29,9 @@ public class LoginServlet extends HttpServlet {
 		}
 		else{
 			System.out.println("fail");
-			response.getWriter().write("Invalid name");
-//			response.sendRedirect("login.jsp");			
+			request.setAttribute("msgType", "errorMsg");
+			request.setAttribute("msg", "Invalid username or password.");
+			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
 	}
 

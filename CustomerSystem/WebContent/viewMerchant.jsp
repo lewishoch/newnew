@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="css/msgBox.css">
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -14,11 +15,36 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<title>All Merchants Information</title>
+
+<link rel="stylesheet" type="text/css" href="css/tab.css">
+<style>
+#bg {
+	background: #1bc1b3;
+}
+h5 {
+	color: #000;
+	display: inline;
+}
+form {
+	margin: 0 10%;
+}
+span {
+	margin: 2px 10px;
+	font-size: 15px;
+	font-weight: bold;
+}
+</style>
 </head>
-<body>
+<body id="bg">
+<div class="tabs">
+    <!-- Radio button and lable for #tab-content1 -->
+    <input type="radio" class="radioTab" name="tabs" id="tab1" checked >
+    <label for="tab1">
+        <i class="fa fa-html5"></i><span>Shop Profile</span>
+    </label>
+    
+    <div id="tab-content1" class="tab-content">
 <h1>All Merchants Information</h1>
-<div>
 <table class="table table-striped">
 	<tbody>
 		<tr>
@@ -48,6 +74,6 @@
 		
 	</tbody>
 </table>
-</div>
+</div></div>
 </body>
 </html>
