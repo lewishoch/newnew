@@ -54,8 +54,8 @@ span {
 	<c:forEach var="m" items="${maList}">
 		<tr>
 			<td>${m.uuid }</td>
-			<td><a href="showMerchant?uuid=${m.uuid}" >${m.uname }</a></td>			
-			<td>${m.status}</td>
+			<td><a href="showMerchant?uuid=${m.uuid}&parent=listAllMerchants" >${m.uname }</a></td>			
+			<td>${m.status==0? "Accepted":"Frozen"}</td>
 			<td><a href="freezeMerchant?uuid=${m.uuid }" class="btn btn-primary ${m.status==0? '':'disabled' }">Freeze</a></td>
 			<td><a href="unfreezeMerchant?uuid=${m.uuid }" class="btn btn-default ${m.status==3? '':'disabled' }">Unfreeze</a></td>
 		</tr>

@@ -24,10 +24,12 @@ public class ShowMerchantServlet extends HttpServlet {
 			response.sendRedirect("login.jsp");
 		else{
 			long account_uuid = Long.parseLong(request.getParameter("uuid"));
+			String parentPage = request.getParameter("parent");
 			
 			MerchantProfile mp = mpm.loadMerchProfileByAccountUuid(account_uuid);
 	//		System.out.println(mp.getsName());
 			request.setAttribute("mp", mp);
+			request.setAttribute("parentPage", parentPage);
 			request.getRequestDispatcher("merchantInfo.jsp").forward(request, response);
 		}
 	}

@@ -53,15 +53,15 @@ span {
 		<div class="list-group">
 		<a class="list-group-item" href="listPendingMerchant">
 			Pending Merchant Requests 
-			<span class="badge">${size}</span>
+			<span class="badge">${size1}</span>
 		</a>
 		</div>
 	</div>
 	<div id="tab-content2" class="tab-content">
 		<div class="list-group">
 		<a class="list-group-item" href="listAllMerchants">
-			Accepted Merchant Accounts
-			<span class="badge"></span>
+			Existing Merchant Accounts
+			<span class="badge">${size2}</span>
 		</a>
 		</div>
 	</div>
