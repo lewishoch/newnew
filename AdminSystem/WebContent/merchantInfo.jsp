@@ -56,6 +56,7 @@ span {
 <th>Shop Name</th>
 <th>Shop Address</th>
 <th>Shop Tel. No</th>
+<th>Shop Logo</th>
 <th>Created Date</th>
 </tr>
 
@@ -66,6 +67,7 @@ span {
 <td>${mp.sName }</td>
 <td>${mp.sAddr }</td>
 <td>${mp.sTel }</td>
+<td><img src="localhost:8080/${mp.sLogoPath }"></td>
 <td>${mp.creDt }</td>
 </tr>
 </table>
