@@ -57,7 +57,6 @@ span {
 		<th>Merchant Name</th>
 		<th>Merchant Age</th>
 		<th>Merchant Gender</th>
-		<th>Merchant Gender</th>
 		<th>Shop Name</th>
 		<th>Shop Address</th>
 		<th>Shop Tel Number</th>

@@ -71,7 +71,7 @@ public class LoadMerchantServlet extends HttpServlet {
 		if(listOfFiles != null){
 		    for (int i = 0; i < listOfFiles.length; i++) {
 		      if (listOfFiles[i].isFile()) {
-		    	  result.add("/MerchantSystem"+ fileFolderPath + "/"+listOfFiles[i].getName());
+		    	  result.add("http://localhost:8081/MerchantSystem/"+ fileFolderPath + "/"+listOfFiles[i].getName());
 		      } 
 		    }
 		}
