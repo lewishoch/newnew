@@ -28,12 +28,14 @@ public class ListAllMerchantsServlet extends HttpServlet {
 		if(!sm.isSessionValid(request))
 			response.sendRedirect("login.jsp");
 		else{
+			String parentPage = request.getParameter("parent");
 			List<MerchantAccount> maAcceptedList = mam.listMerchAccountsByStatus(AccountStatusProtocol.ACCEPTED);
 			List<MerchantAccount> maFrozenList = mam.listMerchAccountsByStatus(AccountStatusProtocol.FROZON);
 			List<MerchantAccount> maList = new ArrayList<MerchantAccount>();
 			maList.addAll(maAcceptedList);
 			maList.addAll(maFrozenList);
 			request.setAttribute("maList", maList);
+			request.setAttribute("parentPage", parentPage);
 			request.getRequestDispatcher("allMerchantList.jsp").forward(request, response);
 		}
 	}

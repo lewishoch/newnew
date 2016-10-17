@@ -55,7 +55,7 @@ span {
 	<c:forEach var="m" items="${maList}">
 		<tr>
 			<td>${m.uuid }</td>
-			<td><a href="showMerchant?uuid=${m.uuid}" >${m.uname }</a></td>			
+			<td><a href="showMerchant?uuid=${m.uuid}&parent=listPendingMerchant" >${m.uname }</a></td>			
 			<td>Pending</td>
 			<td><a href="acceptMerchant?uuid=${m.uuid }" class="btn btn-success">Accept</a></td>
 			<td><a href="rejectMerchant?uuid=${m.uuid }" class="btn btn-danger">Reject</a></td>
