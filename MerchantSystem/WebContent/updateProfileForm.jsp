@@ -34,6 +34,7 @@ span {
 </style>
 </head>
 <body id="bg">
+<jsp:include page="session.jsp" />
 <jsp:include page="account.jsp" />
 <div class="tabs">
     <!-- Radio button and lable for #tab-content1 -->
