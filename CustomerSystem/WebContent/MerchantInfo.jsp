@@ -57,6 +57,7 @@ span {
 		<th>Merchant Name</th>
 		<th>Merchant Age</th>
 		<th>Merchant Gender</th>
+		<th>Shop Logo</th>
 		<th>Shop Name</th>
 		<th>Shop Address</th>
 		<th>Shop Tel Number</th>
@@ -66,6 +67,7 @@ span {
 	<td>${merchant.mName }</td>
 	<td>${merchant.mAge }</td>
 	<td>${merchant.mGender }</td>
+	<td><img src="localhost:8080/${merchant.sLogoPath }" /></td>
 	<td>${merchant.sName }</td>
 	<td>${merchant.sAddr }</td>
 	<td>${merchant.sTel }</td>

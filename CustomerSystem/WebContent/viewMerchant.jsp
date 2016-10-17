@@ -57,6 +57,8 @@ span {
 			-->
 			
 			<!-- Shop Information -->
+			
+			<th>Shop Logo</th>
 			<th>Shop Name</th>
 			<th>Shop Tel</th>
 			<th>Shop Address</th>
@@ -65,6 +67,7 @@ span {
 		<c:forEach var="m" items="${merchant}">
 		<tr>
 		 <!--  <td><a href="loadMerchant?uuid=${m.uuid}" >${m.sName}</a></td>-->
+		<td><img src="localhost:8080/${m.sLogoPath }" /></td>
 		<td><a href="loadMerchant?uuid=${m.uuid}" >${m.sName}</a></td>
 		<td>${m.sTel}</td>
 		<td>${m.sAddr}</td>
