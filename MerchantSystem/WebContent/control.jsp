@@ -37,6 +37,7 @@ span {
 </style>
 </head>
 <body id="bg">
+<jsp:include page="session.jsp" />
 <jsp:include page="account.jsp" />
 <div class="tabs">
     <!-- Radio button and lable for #tab-content1 -->
@@ -79,7 +80,7 @@ span {
 				<c:forEach var="d" items="${dishes}">
 					<tr>
 						<td>
-							<a href="showDish?id=${d.dishId}">${d.dishName}</a>
+							<span>${d.dishName}</span>
 						</td>
 						<td>
 						<c:forEach var="p" items="${d.dishPath}">
