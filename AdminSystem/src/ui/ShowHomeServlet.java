@@ -25,9 +25,12 @@ public class ShowHomeServlet extends HttpServlet {
 		if(!sm.isSessionValid(request))
 			response.sendRedirect("login.jsp");
 		else{
-			List<MerchantAccount> mal = mam.listMerchAccountsByStatus(AccountStatusProtocol.PENDING);
-			request.setAttribute("size", mal.size());
+			List<MerchantAccount> mal1 = mam.listMerchAccountsByStatus(AccountStatusProtocol.PENDING);
+			request.setAttribute("size1", mal1.size());
 //			System.out.println(mal.size());
+			List<MerchantAccount> mal2 = mam.listMerchAccountsByStatus(AccountStatusProtocol.ACCEPTED);
+			List<MerchantAccount> mal3 = mam.listMerchAccountsByStatus(AccountStatusProtocol.REJECTED);
+			request.setAttribute("size2", mal2.size()+mal3.size());
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 //			response.sendRedirect("index.jsp");
 		}

@@ -45,7 +45,8 @@ span {
     
     <div id="tab-content1" class="tab-content">
 <h3>Merchant Information</h3>
-<a href="listPendingMerchant">back to pending</a>
+<a href="${parentPage}">back</a>
+<br />
 <table class="table table-striped">
 <tr>
 <th>Merchant Name</th>

@@ -20,6 +20,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import po.MerchantAccount;
 import po.MerchantProfile;
+import protocol.AccountStatusProtocol;
 import service.MerchantAccountManager;
 import service.MerchantProfileManager;
 import service.impl.MerchantAccountManagerImpl;
@@ -88,6 +89,7 @@ public class SignUpServlet extends HttpServlet {
 				merchantAccount = new MerchantAccount();
 				merchantAccount.setUname(uname);
 				merchantAccount.setPsd((String)map.get("password"));
+				merchantAccount.setStatus(AccountStatusProtocol.PENDING);
 				
 				// merchant profile
 				merchantProfile = new MerchantProfile();
@@ -120,6 +122,7 @@ public class SignUpServlet extends HttpServlet {
 		if(isSuccess){
 			try{
 				mm.addMerchant(merchantAccount);
+				// uname must have value
 				Long uuid = (Long)mm.loadMerchantAccount(uname).getUuid();
 				merchantProfile.setmAccountUuid(uuid);
 				mpm.addMerchantProfile(merchantProfile);
