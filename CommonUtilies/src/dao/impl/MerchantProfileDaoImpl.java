@@ -224,5 +224,48 @@ public class MerchantProfileDaoImpl implements MerchantProfileDao {
 		
 		return merchantProfiles;
 	}
+	
+	public List<MerchantProfile> findAllMerchantProfilesByStatus(int status) {
+		List<MerchantProfile> merchantProfiles = new ArrayList<MerchantProfile>();
+		
+		String sql = "select merchant_uuid, merch_name, merch_age, merch_gender, shop_name, shop_addr, shop_tel_no, shop_logo_path, merchant_profile.created_dt_gmt cre_dt, merchant_profile.last_modified_dt_gmt last_mod_dt, merchant_profile.account_uuid from merchant_profile, MERCH_ACCOUNT where merchant_profile.account_uuid = MERCH_ACCOUNT.account_uuid and MERCH_ACCOUNT.status =? ";
+		Connection con = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		
+		con = DBUtil.createConnection();
+		
+		try {
+			pst = con.prepareStatement(sql);
+			pst.setInt(1, status);
+			rs = pst.executeQuery();
+			
+			while(rs.next()) 
+			{
+				MerchantProfile mp = new MerchantProfile();
+				mp.setUuid(rs.getLong("merchant_uuid"));
+				mp.setmName(rs.getString("merch_name"));
+				mp.setmAge(rs.getInt("merch_age"));
+				mp.setmGender(rs.getString("merch_gender"));
+				mp.setsName(rs.getString("shop_name"));
+				mp.setsAddr(rs.getString("shop_addr"));
+				mp.setsTel(rs.getString("shop_tel_no"));
+				mp.setsLogoPath(rs.getString("shop_logo_path"));
+				mp.setCreDt(new Date(rs.getTimestamp("cre_dt").getTime()));
+				mp.setLastModDt(new Date(rs.getTimestamp("last_mod_dt").getTime()));
+				mp.setmAccountUuid(rs.getLong("account_uuid"));
+				merchantProfiles.add(mp);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{
+			DBUtil.free(con, pst, rs);
+		}
+		
+		return merchantProfiles;
+	}
 
 }

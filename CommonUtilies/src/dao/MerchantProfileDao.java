@@ -11,4 +11,5 @@ public interface MerchantProfileDao {
 	public MerchantProfile loadMerchantProfile(long uuid);
 	public MerchantProfile loadMerchantProfileByAccountUuid(long accountUuid);
 	public List<MerchantProfile> findAllMerchantProfiles();
+	public List<MerchantProfile> findAllMerchantProfilesByStatus(int status);
 }

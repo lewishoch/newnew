@@ -15,7 +15,7 @@ public class MerchantAccountDaoImplTest {
 	@Test
 	public void testLoadByName()
 	{
-		MerchantAccount m = mad.loadMerchant("steve");
+		MerchantAccount m = mad.loadMerchant("Test");
 		System.out.println(m.getUuid());
 		System.out.println(m.getStatus());
 		System.out.println(m.getUname());
@@ -27,7 +27,7 @@ public class MerchantAccountDaoImplTest {
 	@Test
 	public void testLoadById()
 	{
-		MerchantAccount m = mad.loadMerchant(28);
+		MerchantAccount m = mad.loadMerchant(1);
 		System.out.println(m.getUuid());
 		System.out.println(m.getStatus());
 		System.out.println(m.getUname());
@@ -49,7 +49,7 @@ public class MerchantAccountDaoImplTest {
 	@Test
 	public void testUpdate()
 	{
-		MerchantAccount m = mad.loadMerchant(28);
+		MerchantAccount m = mad.loadMerchant(1);
 		m.setStatus(0);
 		m.setUname("Test Update2");
 		m.setPsd("Test Update2");

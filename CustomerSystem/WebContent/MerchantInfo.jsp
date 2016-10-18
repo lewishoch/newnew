@@ -67,7 +67,7 @@ span {
 	<td>${merchant.mName }</td>
 	<td>${merchant.mAge }</td>
 	<td>${merchant.mGender }</td>
-	<td><img src="localhost:8080/${merchant.sLogoPath }" /></td>
+	<td><img src="http://localhost:8081${merchant.sLogoPath }" width="100" /></td>
 	<td>${merchant.sName }</td>
 	<td>${merchant.sAddr }</td>
 	<td>${merchant.sTel }</td>

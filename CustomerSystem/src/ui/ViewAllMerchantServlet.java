@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import po.MerchantProfile;
+import protocol.AccountStatusProtocol;
 import dao.MerchantProfileDao;
 import dao.impl.MerchantProfileDaoImpl;
 
@@ -30,7 +31,7 @@ public class ViewAllMerchantServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		List<MerchantProfile> mp =  md.findAllMerchantProfiles();
+		List<MerchantProfile> mp =  md.findAllMerchantProfilesByStatus(AccountStatusProtocol.ACCEPTED);
 		request.setAttribute("merchant", mp);
 		//System.out.println(mp.size());
 		request.getRequestDispatcher("viewMerchant.jsp").forward(request, response);

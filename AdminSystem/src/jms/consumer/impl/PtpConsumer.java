@@ -88,7 +88,6 @@ public class PtpConsumer implements JMSConsumer {
 		consumer = sen.createConsumer(queue);
 		consumer.setMessageListener(new MessageListener(){
 			//callback
-			@Override
 			public void onMessage(Message arg0) {
 //				HttpServletRequest request = null;
 //				String uri = request.getScheme() + "://" +   // "http" + "://

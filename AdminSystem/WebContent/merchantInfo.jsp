@@ -67,7 +67,7 @@ span {
 <td>${mp.sName }</td>
 <td>${mp.sAddr }</td>
 <td>${mp.sTel }</td>
-<td><img src="localhost:8080/${mp.sLogoPath }"></td>
+<td><img src="localhost:8081/${mp.sLogoPath }"></td>
 <td>${mp.creDt }</td>
 </tr>
 </table>
